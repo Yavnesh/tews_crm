@@ -15,4 +15,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tews_crm.settings')
 
 application = get_wsgi_application()
 
-app = application
+# app = application
