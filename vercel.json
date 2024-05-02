@@ -2,7 +2,7 @@
     "builds": [{
         "src": "tews_crm/wsgi.py",
         "use": "@vercel/python",
-        "config": { "maxLambdasize": "15mb", "runtime": "python3.11" }
+        "config": { "maxLambdasize": "15mb", "runtime": "python3.12" }
     },
     {
         "src": "build_files.sh",
