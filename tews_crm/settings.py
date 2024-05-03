@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-k@#pib9$j)va($^d643wcpn2-#!in&1i!s0p8kzpy&b9^mxklb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', 'now.sh', 'localhost', 'leapcell.io']
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', 'now.sh', 'localhost', 'leapcell.io', '*']
 
 
 # Application definition
@@ -141,8 +141,16 @@ REST_FRAMEWORK = {
 
 # Celery configuration
 # Celery configuration using Redis broker and backend
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Adjust port if needed
-CELERY_RESULT_BACKEND = 'django-db'
+
+#local server
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Adjust port if needed
+# CELERY_RESULT_BACKEND = 'django-db'
+
+# for docker server
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+
+
 # CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'  # Separate database for task results
 
 # # postgresql

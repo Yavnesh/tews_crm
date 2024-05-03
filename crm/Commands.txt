@@ -23,23 +23,20 @@
 ### Dependencies 
 
 virtualenv
-Django
-redis
 celery
-selenium
-beautifulsoup4
-google-generativeai
-pillow
-django-celery-results
+Django
 django-celery-beat
-webdriver-manager
-tweepy
-pytrends
-GNews
-newspaper3k
-lxml_html_clean
-horde-sdk
+django-celery-results
 djangorestframework
+GNews
+google-generativeai
+horde-sdk
+lxml_html_clean
+newspaper3k
+pillow
+pytrends
+redis
+tweepy
 
 To get all the requirements 
 
