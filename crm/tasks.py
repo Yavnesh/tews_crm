@@ -2,10 +2,10 @@ from celery import shared_task
 # from django.db import models
 from crm.models import Scrape, Post, TwitterPost, Trending
 from crm.function_gemini import generate_image_prompt, generate_content_info, generate_content
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import re, random, string, os, tweepy
