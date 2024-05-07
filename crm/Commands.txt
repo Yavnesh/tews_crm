@@ -425,7 +425,7 @@ lsof: Stands for "list open files." It is a command-line utility that lists info
 
 4. sudo docker version
 
-5. sudo docker pull <image name>
+5. sudo docker pull nginx
 
 6. sudo curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 
@@ -434,3 +434,7 @@ lsof: Stands for "list open files." It is a command-line utility that lists info
 8. sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 9. docker-compose version
+
+10. git clone repo url
+
+11. 
