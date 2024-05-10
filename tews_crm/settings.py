@@ -1,5 +1,6 @@
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +15,7 @@ SECRET_KEY = 'django-insecure-k@#pib9$j)va($^d643wcpn2-#!in&1i!s0p8kzpy&b9^mxklb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', 'now.sh', 'localhost', 'leapcell.io', '*']
 
 
 # Application definition
@@ -74,6 +75,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'CESSzRbLJgwBZosfpMxufjsyjuauUXHb',
+#         'HOST': 'roundhouse.proxy.rlwy.net',
+#         'PORT': '39774',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -111,6 +123,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -124,8 +141,16 @@ REST_FRAMEWORK = {
 
 # Celery configuration
 # Celery configuration using Redis broker and backend
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Adjust port if needed
-CELERY_RESULT_BACKEND = 'django-db'
+
+#local server
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Adjust port if needed
+# CELERY_RESULT_BACKEND = 'django-db'
+
+# for docker server
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+
+
 # CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'  # Separate database for task results
 
 # # postgresql
