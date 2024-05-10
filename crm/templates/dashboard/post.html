@@ -148,13 +148,14 @@
           </div>
   
           <div class="table-responsive px-2">
-            <table class="display" id="urlTable">
+            <table class="display" id="PostTable">
               <thead class="thead-light">
                 <tr>
+                  <th>ID</th>
                   <th>Title</th>
-                  <th>Post Status</th>
-                  <!-- <th>URL 2</th>
-                  <th>URL 3</th> -->
+                  <th>Status</th>
+                  <!-- <th>URL 2</th> -->
+                  <th>Category</th>
                   <th>Date</th>
                   <th>Author</th>
                 </tr>
@@ -162,12 +163,14 @@
               <tbody>
                 {% for url in all_posts %}
                 <tr>
+                  <td class="text-sm font-weight-normal">{{ url.id }}</td>
                   <td class="text-sm font-weight-normal">
                     <button class="btn btn-outline-info btn-md view-postbutton" style="margin: 0px; padding: 0px; border: 0"
                       id="{{ url.id }}" data-value="{{ url.id }}">
                       {{ url.title}}
                     </button>
                   </td>
+                  <td class="text-sm font-weight-normal">{{ url.category }}</td>
                   <td class="text-sm font-weight-normal">{{ url.status }}</td>
                   <td class="text-sm font-weight-normal">{{ url.created_at|date:"d M Y" }}</td>
                   <td class="text-sm font-weight-normal">{{ url.author }}</td>
@@ -205,6 +208,15 @@
   {% endblock %}
   {% block script %}
   <script>
+    $(document).ready(function () {
+
+      var table = $("#PostTable").DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        select: true
+      });
+    });
 
   </script>
   <script type="text/javascript">

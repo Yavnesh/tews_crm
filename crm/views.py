@@ -3,8 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 # from rest_framework.decorators import api_view
 from crm.models import Scrape, Post, Trending
 from django.http import JsonResponse
-# from crm.tasks import regenerate_content_info_task, regenerate_content_task, regenerate_image_prompt_task, regenerate_image_task
-
+from crm.tasks import regenerate_content_task, regenerate_image_task, fetch_trends_realtime_task
+import requests
 # Create your views here.
 @csrf_exempt
 def crm_dashboard(request):
@@ -43,7 +43,7 @@ def view_post(request):
 def topics(request):
     #View function for rendering URL page.
     all_trending = Trending.objects.all()
-    context = {'title': 'Topics',"all_trending": all_trending}
+    context = {'title': 'Topic',"all_trending": all_trending}
     return render(request, "dashboard/topic.html", context)
 
 @csrf_exempt
@@ -60,41 +60,28 @@ def posts(request):
     context = {'title': 'Posts',"all_posts": all_posts}
     return render(request, "dashboard/post.html", context)
 
-# @csrf_exempt
-# def regenerate_info(request):
-#     if request.method == 'POST':
-#         id_value = request.POST.get('value')
-#         id_value = request.POST.get('id')   
-#         regenerate_content_info_task.apply_async(args=[id_value])
-#         all_posts = Post.objects.get(post_id=id_value)
-#         context = {'title': 'Index', 'success': "this is success", 'all_posts': all_posts}
-#         return render(request, "dashboard/viewpost.html", context)
 
-# @csrf_exempt
-# def regenerate_content(request):
-#     if request.method == 'POST':
-#         id_value = request.POST.get('value')  
-#         regenerate_content_task.apply_async(args=[id_value])
-#         all_posts = Post.objects.get(post_id=id_value)
-#         context = {'title': 'Index', 'success': "this is success", 'all_posts': all_posts}
-#         return render(request, "dashboard/viewpost.html", context)
+@csrf_exempt
+def regenerate_content(request):
+    if request.method == 'POST':
+        id_value = request.POST.get('value')  
+        regenerate_content_task.apply_async(args=[id_value])
+        all_posts = Post.objects.get(post_id=id_value)
+        context = {'title': 'Index', 'success': "this is success", 'all_posts': all_posts}
+        return render(request, "dashboard/viewpost.html", context)
 
-# @csrf_exempt
-# def regenerate_image_prompt(request):
-#     if request.method == 'POST':
-#         id_value = request.POST.get('value')
-#         regenerate_image_prompt_task.apply_async(args=[id_value])
-#         all_posts = Post.objects.get(post_id=id_value)
-#         context = {'title': 'Index', 'success': "this is success", 'all_posts': all_posts}
-#         return render(request, "dashboard/viewpost.html", context)
+@csrf_exempt
+def regenerate_image(request):
+    if request.method == 'POST':
+        id_value = request.POST.get('value')
+        print(id_value,"id76767676")
+        regenerate_image_task.apply_async(args=[id_value])
+        all_posts = Post.objects.get(post_id=id_value)
+        context = {'title': 'Index', 'success': "this is success", 'all_posts': all_posts}
+    return render(request, "dashboard/viewpost.html", context)
 
-# @csrf_exempt
-# def regenerate_image(request):
-#     if request.method == 'POST':
-#         id_value = request.POST.get('value')
-#         print(id_value,"id76767676")
-#         regenerate_image_task.apply_async(args=[id_value])
-#         all_posts = Post.objects.get(post_id=id_value)
-#         context = {'title': 'Index', 'success': "this is success", 'all_posts': all_posts}
-#     return render(request, "dashboard/viewpost.html", context)
+@csrf_exempt
+def trend(request):
+    fetch_trends_realtime_task.apply_async()
+    return render(request, "dashboard/index.html")
 

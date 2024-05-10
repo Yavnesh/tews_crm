@@ -147,29 +147,31 @@
             </div>
           </div>
           <div class="card-body table-responsive px-2">
-            <table class="display" id="urlTable">
+            <table class="display" id="ScrapeTable">
               <thead class="thead-light">
                 <tr>
+                  <th>ID</th>
                   <th>Title</th>
                   <th>Status</th>
                   <!-- <th>URL 2</th>
                   <th>URL 3</th> -->
-                  <th>Category</th>
-                  <th>Sub Category</th>
+                  <!-- <th>Category</th>
+                  <th>Sub Category</th> -->
                 </tr>
               </thead>
               <tbody>
                 {% for url in all_scraped %}
                 <tr>
+                  <td class="text-sm font-weight-normal">{{ url.trending_id }}</td>
                   <td class="text-sm font-weight-normal">
                     <button class="btn btn-outline-info btn-md view-button" style="margin: 0px; padding: 0px; border: 0"
                       id="{{ url.id }}" data-value="{{ url.id }}">
-                      {{ url.title }}
+                      {{ url.title|truncatechars:150 }}
                     </button>
                   </td>
                   <td class="text-sm font-weight-normal">{{ url.status }}</td>
-                  <td class="text-sm font-weight-normal">{{ url.category }}</td>
-                  <td class="text-sm font-weight-normal">{{ url.sub_category }}</td>
+                  <!-- <td class="text-sm font-weight-normal">{{ url.category }}</td>
+                  <td class="text-sm font-weight-normal">{{ url.sub_category }}</td> -->
                 </tr>
 
 
@@ -188,6 +190,15 @@
   {% endblock %}
   {% block script %}
   <script>
+    $(document).ready(function () {
+
+      var table = $("#ScrapeTable").DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        select: true
+      });
+    });
 
   </script>
   <script type="text/javascript">

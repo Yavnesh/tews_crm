@@ -132,16 +132,22 @@ Payment successfully completed
   <div class="card z-index-0">
     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
     <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Scrape {{ all_scraped.id }}</h4>
+    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Scrape : {{ all_scraped.id }}</h4>
     <p class="text-white font-weight-bolder text-center mt-2 mb-0">{{ all_scraped.category }} &nbsp; {{ all_scraped.sub_category }}</p>
     </div>
     </div>
     <div class="card-body">
-      <p class="h4">{{ all_scraped.title }}</p>
+      <h4>Title : </h4>
+      <p class="h6">{{ all_scraped.title }}</p>
       <hr class="dark horizontal">
-      <p class="h5">{{ all_scraped.sub_title }}</p>
-      <hr class="dark horizontal">
+      <h4>Content : </h4>
       <p class="h6">{{ all_scraped.content }}</p>
+      <hr class="dark horizontal">
+      <h4>Url : </h4>
+      <p class="h6">{{ all_scraped.url }}</p>
+      <hr class="dark horizontal">
+      <h4>Images : </h4>
+      <p class="h6">{{ all_scraped.images }}</p>
     </div>
     </div>
  

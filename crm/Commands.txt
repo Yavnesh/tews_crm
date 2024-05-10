@@ -22,17 +22,14 @@
 
 ### Dependencies 
 
-virtualenv
+
 Django
 redis
 celery
-selenium
-beautifulsoup4
 google-generativeai
 pillow
 django-celery-results
 django-celery-beat
-webdriver-manager
 tweepy
 pytrends
 GNews
