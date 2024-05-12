@@ -410,7 +410,7 @@ Deploying to oracle compute instance - https://www.youtube.com/watch?v=Kw0RHDkps
 
 ######################################################################
 
-1. open powershell > ssh -i c:/Users/yavne/Downloads/ssh-key.key ubuntu@150.230.238.104
+1. open powershell > ssh -i c:/Users/yavne/Downloads/ssh-key.key ubuntu@129.154.245.226
 
 2. sudo apt-get install nano cron rsyslog logrotate lsof 
 nano: A simple, easy-to-use text editor for the command line, often used for editing configuration files and scripts.
@@ -437,4 +437,6 @@ lsof: Stands for "list open files." It is a command-line utility that lists info
 
 10. git clone repo url
 
-11. 
+11. cd repo
+
+12. sudo docker-compose up --build
