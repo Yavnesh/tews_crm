@@ -147,34 +147,35 @@
     <p class="text-white font-weight-bolder text-center mt-2 mb-0">{{ all_posts.category }} &nbsp; {{ all_posts.subcategory }}</p>
     <p class="text-white font-weight-bolder text-center mt-2 mb-0">{{ all_posts.tags }}</p>
     <p class="text-white font-weight-bolder text-center mt-2 mb-0">{{ all_posts.author }}</p>
-    <button class="btn btn-outline-info btn-md regenerate_info" style="margin: 0px; padding: 0px; border: 0" id="{{ all_posts.post_id }}" data-value="{{ all_posts.post_id }}">
-      ReGenerate Info
-    </button>
-    <button class="btn btn-outline-info btn-md regenerate_content" style="margin: 0px; padding: 0px; border: 0" id="{{ all_posts.post_id }}" data-value="{{ all_posts.post_id }}">
+    <hr class="dark horizontal">
+    <div class="text-center">
+      <button type="button" class="btn btn-sm bg-gradient-primary mb-0 regenerate_content" id="{{ all_posts.post_id }}" data-value="{{ all_posts.post_id }}">
       ReGenerate Content
       <i class="bi bi-download"></i>
-    </button>
-    <button class="btn btn-outline-info btn-md regenerate_image_prompt" style="margin: 0px; padding: 0px; border: 0" id="{{ all_posts.post_id }}" data-value="{{ all_posts.post_id }}">
-      ReGenerate Image Prompt
-      <i class="bi bi-download"></i>
-    </button>
-    <button class="btn btn-outline-info btn-md regenerate_image" style="margin: 0px; padding: 0px; border: 0" id="{{ all_posts.post_id }}" data-value="{{ all_posts.post_id }}">
-      ReGenerate Image
-      <i class="bi bi-download"></i>
-    </button>
+      </button>
+      <button type="button" class="btn btn-sm bg-gradient-primary mb-0 regenerate_image" id="{{ all_posts.post_id }}" data-value="{{ all_posts.post_id }}">
+        ReGenerate Image
+        <i class="bi bi-download"></i>
+      </button>
+    </div>
     </div>
     </div>
     <div class="card-body">
-      <img class="w-50" src="{% static all_posts.image_path %}" alt="image sun">
+      <img class="w-50" src="{% static all_posts.image_crm %}" alt="image sun">
       <hr class="dark horizontal">
-      <p class="h4">{{ all_posts.title }}</p>
+      <h4>Title : </h4>
+      <p class="h6">Title : {{ all_posts.title }}</p>
       <hr class="dark horizontal">
-      <p class="h5">{{ all_posts.subtitle }}</p>
+      <h4>Sub Title : </h4>
+      <p class="h6">{{ all_posts.subtitle }}</p>
       <hr class="dark horizontal">
+      <h4>Content : </h4>
       <p class="h6">{{ all_posts.content }}</p>
       <hr class="dark horizontal">
+      <h4>Conclusion : </h4>
       <p class="h6">{{ all_posts.conclusion }}</p>
       <hr class="dark horizontal">
+      <h4>Image Prompt : </h4>
       <p class="h6">{{ all_posts.image_prompt }}</p>
     </div>
     </div>
@@ -194,34 +195,9 @@
   </script>
   <script type="text/javascript">
     $(document).ready(function () {
-      $('.regenerate_info').click(function(event){
-          console.log("<------scrape-button clicked -------->");
-          event.preventDefault();
-
-        var buttonId = $(this).data('value');
-        console.log("<------scrape-button buttonId -------->",buttonId);
-          var formData = new FormData();
-          formData.append("value", buttonId)
-        $.ajax({
-                type: 'POST',
-                url: '/regenerate_info/',
-                data: formData, // Send the ID of the button in the POST request
-                cache: false,
-                processData: false, // essential
-                contentType: false, // essential, application/pdf doesn't work.
-
-                success: function (data, status, xhr) {
-                  $('regenerate_info').prop('disabled', true);
-                },
-                complete: function () {
-                  // Hide 
-                },
-            });
-        
-      });
       
       $('.regenerate_content').click(function(event){
-          console.log("<------scrape-button clicked -------->");
+          console.log("<------regenerate_content-button clicked -------->");
           event.preventDefault();
 
         var buttonId = $(this).data('value');
@@ -238,32 +214,6 @@
 
                 success: function (data, status, xhr) {
                   $('regenerate_content').prop('disabled', true);
-                },
-                complete: function () {
-                  // Hide 
-                },
-            });
-        
-      });
-      
-      $('.regenerate_image_prompt').click(function(event){
-          console.log("<------scrape-button clicked -------->");
-          event.preventDefault();
-
-        var buttonId = $(this).data('value');
-        console.log("<------scrape-button buttonId -------->",buttonId);
-          var formData = new FormData();
-          formData.append("value", buttonId)
-        $.ajax({
-                type: 'POST',
-                url: '/regenerate_image_prompt/',
-                data: formData, // Send the ID of the button in the POST request
-                cache: false,
-                processData: false, // essential
-                contentType: false, // essential, application/pdf doesn't work.
-
-                success: function (data, status, xhr) {
-                  $('regenerate_image_prompt').prop('disabled', true);
                 },
                 complete: function () {
                   // Hide 
@@ -297,8 +247,7 @@
             });
         
       });
-      
-
+    
     });
   </script>
 

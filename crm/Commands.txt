@@ -22,11 +22,28 @@
 
 ### Dependencies 
 
+<<<<<<< HEAD
+
+Django
+redis
+celery
+google-generativeai
+pillow
+django-celery-results
+django-celery-beat
+tweepy
+pytrends
+GNews
+newspaper3k
+lxml_html_clean
+horde-sdk
+=======
 virtualenv
 celery
 Django
 django-celery-beat
 django-celery-results
+>>>>>>> a55045b19bcb3b0aab445ace4de9311cdcc32269
 djangorestframework
 GNews
 google-generativeai

@@ -1,6 +1,6 @@
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
-
+import re
 
 genai.configure(api_key="AIzaSyDUvhzuC5-xrgN1pVXc9knhGlv30sLlw34")
 model = genai.GenerativeModel('gemini-pro')
@@ -35,8 +35,6 @@ def generate_image_prompt(merged_content):
         'parts': [prompt_one]}
     ]
     response = model.generate_content(messages, safety_settings = safety_setting)
-
-    print("response.text--prompt one---------", response.text)
 
     messages.append({'role':'model',
                     'parts':[response.text]})
@@ -151,13 +149,12 @@ def generate_image_prompt(merged_content):
     messages.append({'role':'model',
                     'parts':[response.text]})
 
-    print("response.text--prompt two---------", response.text)
 
     prompt_three = """
 
         Now can you rate and rank these image prompts.
         Target Audience: The target audience is of US location and the target audience loves to read articles and blog posts and are compelled to open a article by looking at the image.
-        Style Preference: I have a preferred artistic style cartoon and animation.
+        Style Preference: I have a preferred artistic style Digital art with cartoon and animation representation which looks like real.
             """
 
     messages.append({'role':'user',
@@ -168,7 +165,6 @@ def generate_image_prompt(merged_content):
     messages.append({'role':'model',
                     'parts':[response.text]})
 
-    print("response.text--prompt three---------", response.text)
 
     prompt_four = """
 
@@ -186,14 +182,12 @@ def generate_image_prompt(merged_content):
     messages.append({'role':'model',
                     'parts':[response.text]})
 
-    print("response.text--prompt four---------", response.text)
 
     if response.candidates:
         pre_post_content = response.candidates[0].content.parts[0].text
     else:
         pre_post_content = ""
 
-    print("pre_post_content---------------", pre_post_content)
     return pre_post_content
 
 def generate_content_info(merged_content):
@@ -212,25 +206,158 @@ def generate_content_info(merged_content):
                 """.format(merged_content)
 
     prompt_content_response = model.generate_content(post_prompt, safety_settings=safety_setting)
-    # print("prompt_content_response------------------------------", prompt_content_response)
+
     if prompt_content_response.candidates:
         pre_post_content = prompt_content_response.candidates[0].content.parts[0].text
     else:
         pre_post_content = ""
-    # print("pre_post_content----------->", pre_post_content)
     
     return pre_post_content
 
-def generate_content(merged_content,category):
-    for item in category:
-        category = item
-    author_profile, author_name =  select_author(category)
+def generate_content_cta(merged_content):
+    post_prompt = """
     
+            Article Content: {}
+
+            Prompt:
+            Please create 3 survey question related to the article topic.
+            Your question should be clear, concise, and relevant to the content discussed in the article.
+            Consider asking about readers' opinions, preferences, experiences, or knowledge related to the topic.
+            You can also provide multiple-choice options, true/false statements, yes/no questions.
+            Dont give options as Other 
+            
+            Give output in this format:(Follow Strictly)
+            **Question of survey 1**
+            Question 1
+            A) Options A
+            B) Options B
+            C) Options C
+            D) Options D
+            E) Options E
+
+            **Question of survey 2**
+            Question 2
+            A) Options A
+            B) Options B
+            C) Options C
+            D) Options D
+            E) Options E
+
+            **Question of survey 3**
+            Question 3
+            A) Options A
+            B) Options B
+            C) Options C
+            D) Options D
+            E) Options E
+
+            Example:
+            1. "Based on the article's discussion of sustainable energy solutions, what is your opinion on the most effective renewable energy source for residential use?"
+            A) Solar
+            B) Wind
+            C) Hydroelectric
+            D) Geothermal
+            E) Other (Please specify)
+
+            2. "After reading about the benefits of remote work in the article, do you believe remote work will become more prevalent in the future?"
+            A) Yes
+            B) No
+
+            3. "Which statement best describes your opinion on the importance of mental health awareness, as discussed in the article?"
+            A) True: Mental health awareness is crucial for overall well-being.
+            B) False: Mental health awareness is not a significant concern.
+
+            4. "Are you currently implementing any of the strategies mentioned in the article for improving work-life balance?"
+            A) Yes
+            B) No
+
+            5. "Do you agree with the article's perspective on the impact of social media on mental health?"
+            A) Agree
+            B) Disagree        
+                """.format(merged_content)
+
+    prompt_content_response = model.generate_content(post_prompt, safety_settings=safety_setting)
+
+    if prompt_content_response.candidates:
+        pre_post_content = prompt_content_response.candidates[0].content.parts[0].text
+    else:
+        pre_post_content = ""
+    
+    # print("survey question", pre_post_content)
+        # Split the survey input into individual questions
+    questions = pre_post_content.split("**Question of survey ")[1:]
+
+    # Initialize lists to store questions and options
+    questions_list = []
+    options_list = []
+
+    # Process each question and extract the question and options
+    for question in questions:
+        # Split the question into question text and options
+        question_split = question.split("\n")
+        options = [option.strip() for option in question_split[1:] if option.strip()]
+        
+        # Append the question and options to the respective lists
+        
+        options_list.append(options)
+    questions_list = options_list
+    # print("questions_list",questions_list)
+    return questions_list
+
+def generate_meta_info(related_topics,related_query,content):
+    
+    post_prompt = """
+
+            Generate compelling meta descriptions for an article page using the following inputs:
+
+            Article Content: {}
+            Related Queries: {} Aim to incorporate these queries naturally into the meta descriptions to address potential reader interests.
+            Related Topics: {} Use these topics to frame the meta descriptions in a way that resonates with broader themes or discussions surrounding the topic.
+            
+            Instructions:
+
+            Craft concise and engaging meta descriptions (approximately 150-300 characters) that captivate readers' attention and inspire curiosity.
+            Incorporate elements from the article content, related queries, and related topics to provide valuable insights and attract clicks.
+            Aim to address potential reader interests, answer questions, and highlight the article's relevance and value.
+            Example Inputs:
+
+            Article Content:[Insert article summary or excerpt here]
+            Related Queries:[Query 1,Query 2,Query 3,...]
+            Related Topics: [Topic 1,Topic 2,Topic 3,...]
+
+            Example Output (Meta Descriptions):
+
+            "Discover the latest insights on [Topic 1] and [Topic 2]. Explore key questions such as [Query 1] and [Query 2] in our comprehensive article."
+            "Uncover expert analysis and tips for navigating [Topic 3] trends. Get answers to common questions like [Query 3] and more."
+            "Dive into the world of [Topic 1] with our in-depth article. Learn about [Topic 2] and explore related topics, including [Related Topic]."
+            
+            Give only one output and make sure it is 250 characters.
+
+        """.format(content,related_topics,related_query)
+
+    prompt_content_response = model.generate_content(post_prompt, safety_settings=safety_setting)
+
+    if prompt_content_response.candidates:
+        pre_post_content = prompt_content_response.candidates[0].content.parts[0].text
+    else:
+        pre_post_content = ""
+    # print("pre_post_content---------------", pre_post_content)
+
+    return pre_post_content
+
+
+
+def generate_content(Topic,merged_content,related_topics,related_query,category):
+    
+    for item in category:
+        author_name =  select_author(item)
+
     prompt_one = """
     {}
-    Analyze the above content to make a new blog post! 
-    Tell me what all you analysed about the content.
-        """.format(merged_content)
+    Analyze the above content  
+    Tell me who is the [Target Audience]
+    Give me an Outline: [Provide a basic outline with section headings]
+        """.format(merged_content[0])
 
     messages = [
         {'role':'user',
@@ -238,35 +365,35 @@ def generate_content(merged_content,category):
     ]
     response = model.generate_content(messages, safety_settings = safety_setting)
 
-    print("response.text--prompt one---------", response.text)
+    # print("response.text--prompt one---------", response.text)
 
     messages.append({'role':'model',
                     'parts':[response.text]})
 
     prompt_two = """
-    {}
-    This is an author profile. The author is an expert at writing structured blogs as per his/her personality and charcterstics. The Author uses below format to Structure any blog must be. 1. Craft a Compelling Title/Headline: Introduces the main idea of the article 2. Create an Introduction: Tells the reader what the article will be about 3. Body: Goes in-depth about the topic of the article. Use Transition Words 4. Conclusion: Wraps up the main ideas. Author has given an example also about how to structure a blog post. Example Heading : the heading goes here Introduction : here goes introduction Body: Here goes body content Conclusion: Here goes conclusion 
 
-    The Author uses below format to Structure any blog must be. 
-            1. Craft a Compelling Title/Headline: Introduces the main idea of the article
-            2. Create an Introduction: Tells the reader what the article will be about
-            3. Body: Goes in-depth about the topic of the article. Use Transition Words
-            4. Conclusion: Wraps up the main ideas.
-        Author has given an example also about how to structure a blog post.
-        Example
-            Heading : the heading goes here
-            Introduction : here goes introduction 
-            Body: Here goes body content
-            Conclusion: Here goes conclusion 
+        Highly Detailed Prompt for Generative Model Article Writing
 
-    Here are some additional points that could be included in the profile, depending on the author's preferences:
+        Target Topic: {}
+        Content: {}
+        Related Topics: {}
+        Related Queries: {}
+        Target Keywords: [List of relevant keywords, by analyzing Related Topics and Related Queries]
+        Writing Style: Mix of Formal, Conversational and Humorous with a {} touch
+        Outline: From previous prompt response
+        Target Audience : From previous prompt response
+        Strict Note - Target Word Count: 1200 Words
 
-    Writing style: Is the author known for a specific writing style, such as informative, humorous, or conversational?
-    Target audience: Who are the author's ideal readers?
-    Topics of expertise: Does the author have specific areas of knowledge they write about most often?
-    Call to action: Does the author typically include a call to action in their blog posts, such as encouraging readers to subscribe or share their content?
+        Generate a well-structured and informative article targeting [Target Audience] on the topic of [Your Topic]. Leverage the provided content as a foundation and seamlessly integrate it to address the listed related topics and answer the related queries. Optimize the article for the provided target keywords while maintaining a natural language flow and reader engagement.
 
-            """.format(author_profile)
+        Here are some additional details for the generative model to consider:
+
+        Headline: Craft a creative and attention-grabbing headline that accurately reflects the article's content.
+        Introduction: Write a compelling introduction using the chosen writing style to hook the reader and provide a brief overview of the main points.
+        Body: Structure Follow the provided outline, ensuring a clear and logical flow between sections.
+        Conclusion: Summarize your key points and leave a lasting impression. Consider including a call to action (CTA) in conclusion itself.
+        
+            """.format(Topic,merged_content,related_topics,related_query,category)
 
     messages.append({'role':'user',
                     'parts':[prompt_two]})
@@ -276,18 +403,24 @@ def generate_content(merged_content,category):
     messages.append({'role':'model',
                     'parts':[response.text]})
 
-    print("response.text--prompt two---------", response.text)
 
     prompt_three = """
+        For the above generated article do the following 
 
-        Now you have the analysis of the content and the author information.
-        Understand the below text and write this content as the Author as per the struture and author profile given.
-        Change the words completely around, make it as it's very different and not the same.
-        Remove all the credits and authors information from the given content and also, arrange the the content in a way that it does not look like a work of AI.
-        Also, add some more depth and make it fun as it is going on my blog.
-        Give me result in 4 parts - heading, intro, body, conclusion.
-        Keep in mind the content should comply with the safety guidelines of the generative model 
-        Follow Strictly : More than 1000 words
+        1. I can see that the words limit is less than 1000 words. Please add some more content to make it more than 1000 words.
+
+        2. Proofreading: While the model will generate the content, it's recommended to proofread the final article for any grammatical e-rrors or awkward phrasing.
+
+        3. Remove all the credits and authors information from the given content and also, make it look like a work of Human.
+
+        4. If any additional details are there from previous output then if they are relavant then add that to the article in body section
+
+        5. Give me result in 4 parts - heading, intro, body, conclusion.
+        Follow this Format
+        Heading : the heading goes here 
+        Introduction : here goes introduction 
+        Body: Here goes body content 
+        Conclusion: Here goes conclusion 
             """
 
     messages.append({'role':'user',
@@ -297,105 +430,106 @@ def generate_content(merged_content,category):
 
     messages.append({'role':'model',
                     'parts':[response.text]})
-
-    print("response.text--prompt three---------", response.text)
-
-    prompt_four = """
-
-        I can see that the words limit is less than 1000 words. Please add some more content to make it more than 1000 words.
-            """
-
-    messages.append({'role':'user',
-                    'parts':[prompt_four]})
-
-    response = model.generate_content(messages, safety_settings = safety_setting)
-
-    messages.append({'role':'model',
-                    'parts':[response.text]})
-
-    print("response.text--prompt four---------", response.text)
-
+    
     if response.candidates:
         pre_post_content = response.candidates[0].content.parts[0].text
     else:
         pre_post_content = ""
 
-    print("pre_post_content---------------", pre_post_content)
-
     return pre_post_content, author_name
 
 def select_author(category):
+    
     if category == "Technology":
-        author = """**Name:** Tech Titan Tessa  
-                    **Place:** Silicon Valley  
-                    **Profile:** Hey there, I'm Tech Titan Tessa, your go-to guru for all things tech! Hailing from the innovation hub of Silicon Valley, I've got my finger on the pulse of the latest gadgets, gizmos, and breakthroughs in the world of technology. Whether it's dissecting the newest smartphone release or diving deep into the realms of artificial intelligence, I'm here to decode the digital landscape and keep you ahead of the curve.
-                """
-        return author, "Tessa"
+        return "tessa@tewsletter.com"
     elif category == "Entertainment":
-        author = """**Name:** Entertainment Extraordinaire Ethan  
-                    **Place:** Hollywood  
-                    **Profile:** Lights, camera, action! I'm Ethan, your Entertainment Extraordinaire straight from the heart of Hollywood. With exclusive access to the glitz and glamour of the entertainment industry, I've got the inside scoop on all your favorite celebrities, movies, and TV shows. From red carpet premieres to behind-the-scenes drama, join me for a front-row seat to the world of entertainment!
-                """
-        return author, "Ethan"
+        return "ethan@tewsletter.com"
     elif category == "Automobile":
-        author = """**Name:** Auto Aficionado Alex  
-                    **Place:** Detroit  
-                    **Profile:** Vroom vroom, it's Auto Aficionado Alex here, revving up from the Motor City! As a connoisseur of all things automotive, I'm here to steer you through the fast-paced world of cars, trucks, and everything on wheels. From the latest models to cutting-edge technology, buckle up and join me for a thrilling ride down the highway of automotive news!
-                """
-        return author, "Alex"
+        return "alex@tewsletter.com"
     elif category == "Finance":
-        author = """**Name:** Financial Whiz Monica  
-                    **Place:** Wall Street  
-                    **Profile:** Welcome to the financial frontier with yours truly, Financial Whiz Monica, reporting live from Wall Street! With a keen eye for market trends and a knack for navigating the complexities of finance, I'm here to guide you through the ever-changing landscape of money matters. From stock market fluctuations to personal finance tips, let's make sense of the numbers together!
-                """
-        return author, "Monica"
+        return "monica@tewsletter.com"
     elif category == "Health":
-        author = """**Name:** Health Maven Hank  
-                    **Place:** Health Hub  
-                    **Profile:** Hey there, I'm Health Maven Hank, your trusted source for all things wellness! Nestled in the heart of the Health Hub, I've got the latest scoop on fitness trends, medical breakthroughs, and everything in between. Whether you're looking to boost your immune system or stay in tip-top shape, join me on a journey to optimal health and vitality!
-                """
-        return author, "Hank"
+        return "hank@tewsletter.com"
     elif category == "Fashion":
-        author = """**Name:** Fashionista Fiona  
-                    **Place:** Fashion Capital  
-                    **Profile:** Strike a pose, darlings! It's Fashionista Fiona here, bringing you the hottest trends from the fashion capital of the world. With a flair for style and an eye for couture, I'm your ultimate guide to the runway, the red carpet, and beyond. From haute couture to street style chic, let's explore the ever-evolving world of fashion together!
-                """
-        return author, "Fiona"
+        return "fiona@tewsletter.com"
     elif category == "Food":
-        author = """**Name:** Culinary Connoisseur Carlos  
-                    **Place:** Foodie Haven  
-                    **Profile:** Buen provecho, amigos! I'm Culinary Connoisseur Carlos, your taste bud tour guide through the flavorful world of food. From mouth-watering recipes to culinary adventures from around the globe, join me as we savor the sights, smells, and tastes of gastronomic delight. Whether you're a seasoned chef or a kitchen newbie, let's spice things up together!
-                """
-        return author, "Carlos"
+        return "carlos@tewsletter.com"
     elif category == "Travel":
-        author = """**Name:** Travel Guru Gabby  
-                    **Place:** Wanderlust World  
-                    **Profile:** Bon voyage, fellow explorers! I'm Travel Guru Gabby, your passport to adventure in the wanderlust world. With a thirst for discovery and a love for new horizons, I'm here to whisk you away on unforgettable journeys to far-flung destinations. From hidden gems to bucket-list must-sees, pack your bags and join me for a whirlwind tour of the globe!
-                """
-        return author, "Gabby"
+        return "gabby@tewsletter.com"
     elif category == "Environment":
-        author = """**Name:** Environmental Advocate Eva  
-                    **Place:** Eco Oasis  
-                    **Profile:** Hello, eco-warriors! I'm Environmental Advocate Eva, your voice for planet Earth in the green oasis. With a passion for sustainability and a dedication to preserving our precious natural resources, I'm here to shed light on environmental issues and inspire positive change. From eco-friendly innovations to conservation efforts, let's join forces to protect our planet for future generations!
-                """
-        return author, "Eva"
+        return "eva@tewsletter.com"
     elif category == "Sports":
-        author = """**Name:** Sports Savant Sam  
-                    **Place:** Sports Central  
-                    **Profile:** Play ball! I'm Sports Savant Sam, your MVP for all things sports in the heart of Sports Central. Whether it's touchdowns or home runs, slam dunks or birdies, I've got the play-by-play coverage and in-depth analysis to keep you on the edge of your seat. So grab your jersey and join me for a front-row seat to the thrilling world of athletics!
-                """
-        return author, "Sam"
+        return "sam@tewsletter.com"
     elif category == "Politics":
-        author = """**Name:** Political Pundit Pamela  
-                    **Place:** Washington D.C.  
-                    **Profile:** As a seasoned political analyst based in the heart of the nation's capital, I bring you the latest insights and commentary on the ever-changing landscape of American politics. From Capitol Hill to the campaign trail, join me as we navigate the complexities of government, elections, and policy-making.
-                """
-        return author, "Pamela"
+        return "pamela@tewsletter.com"
     else:
-        author = """**Name:** Worldly Wanderer William  
-                    **Place:** Anywhere and Everywhere  
-                    **Profile:** Exploring the wonders of the world, one adventure at a time. From remote villages to bustling metropolises, join me on a journey of discovery and cultural immersion. Let's uncover hidden gems, experience diverse cuisines, and embrace the beauty of our planet.
-                """
-        return author, "William"
+        return "william@tewsletter.com"
 
+def split_text(text, start_word, end_word):
+    # Define the regular expression pattern
+    if end_word is not None:
+        pattern = re.compile(f'{re.escape(start_word)}(.*?){re.escape(end_word)}', re.DOTALL)
+    else:
+        pattern = re.compile(f'{re.escape(start_word)}(.*?)$', re.DOTALL)
+
+    # Search for the text between the start and end words
+    match = pattern.search(text)
+    # print("extracted_text,,,,,,,,,,,,,,,,,,extracted_text")
+    if match:
+        # Get the text between the start and end words
+        extracted_text = match.group(1).strip()
+        # print("extracted_text,,,,,,,,,,,,,,,,,",extracted_text)
+        if start_word == "Tags":
+            items = [item.strip().replace(":", "").replace("*", "").replace("#", "") for item in extracted_text.split(',')]
+            tags = []
+            for item in items:
+                if item:
+                    tags.append(item)
+            return tags
+        elif start_word == "Tweet":
+            items = extracted_text.strip().replace(":", "").replace("*", "").replace("-", "")
+            return items
+        else:
+            final_result = []
+            text1 = extracted_text.splitlines(False)
+            for t in text1:
+                result = clean_text(t)
+                if result != "":
+                    # Add non-empty result to the final result
+                    final_result.append(result)
+            return final_result
+    else:
+        return None
+    
+def clean_text(text):
+    # Split the text into words
+
+    words = re.findall(r'\b\w+\b', text)
+    
+    # Find the index of the first word
+    start_index = next((i for i, word in enumerate(words) if word.strip()), None)
+    
+    # Find the index of the last word
+    end_index = next((len(words) - 1 - i for i, word in enumerate(reversed(words)) if word.strip()), None)
+    
+        # Check if start_index and end_index are None
+    if start_index is None or end_index is None:
+        return ""
+    
+    # Extract the substring between the first and last words
+    result = ' '.join(words[start_index:end_index + 1]).strip()
+    
+    # Check if result is None
+    if result is None:
+        return ""
+
+
+    # Extract the substring between the first and last words
+    result = ' '.join(words[start_index:end_index + 1]).strip()
+    
+    if text.strip().endswith("."):
+        # Add a full stop after the last word
+        result += "."
+    
+    return result
 

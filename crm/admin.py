@@ -7,12 +7,12 @@ class ScrapeAdmin(admin.ModelAdmin):
     list_per_page = 50
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'post_id', 'category', 'title')
+    list_display = ('id', 'post_id', 'category', 'subcategory','author', 'status', 'title')
     search_fields = ('title', 'category')
     list_per_page = 50
 
 class TwitterPostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'content', 'status')
+    list_display = ('id', 'post_id', 'content', 'status')
     search_fields = ('content', 'status')
     list_per_page = 50
 

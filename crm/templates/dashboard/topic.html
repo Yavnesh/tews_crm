@@ -141,9 +141,11 @@
       <div class="col-12">
         <div class="card">
 
-          <div class="card-header">
-            <h5 class="mb-0">Trending Data</h5>
-            <!-- <p class="text-sm mb-0"></p> -->
+          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+              <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Topics</h4>
+              <p class="text-white font-weight-bolder text-center mt-2 mb-0">List of all Topics</p>
+            </div>
           </div>
           <div class="table-responsive px-2">
             <table class="display" id="TopicTable">
@@ -201,8 +203,16 @@
 </div> -->
   {% endblock %}
   {% block script %}
-  <script>
+  <script type="text/javascript">
+    $(document).ready(function () {
 
+      var table = $("#TopicTable").DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        select: true
+      });
+    });
   </script>
   <script type="text/javascript">
     $(document).ready(function () {
