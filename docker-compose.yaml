@@ -24,6 +24,16 @@ services:
     depends_on:
       - django
       - redis
+  celery_beat:
+    build: .
+    # command: celery worker --app=tews_crm --loglevel=info
+    command: celery -A tews_crm beat -l INFO
+    volumes:
+      - .:/usr/src/app/
+    depends_on:
+      - django
+      - redis
+      - celery
   pgdb:
     image: postgres
     container_name: pgdb
