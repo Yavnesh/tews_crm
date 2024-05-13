@@ -33,60 +33,60 @@ schedule, created = IntervalSchedule.objects.get_or_create(every=100, period=Int
 
 #Schedule the periodic task programmatically
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'generate_content_info_task_periodic',
-    task = 'crm.tasks.generate_content_info_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'generate_content_info_task_periodic',
+#     task = 'crm.tasks.generate_content_info_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'generate_content_task_periodic',
-    task = 'crm.tasks.generate_content_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'generate_content_task_periodic',
+#     task = 'crm.tasks.generate_content_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'generate_meta_info_task_periodic',
-    task = 'crm.tasks.generate_meta_info_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'generate_meta_info_task_periodic',
+#     task = 'crm.tasks.generate_meta_info_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'generate_image_prompt_task_periodic',
-    task = 'crm.tasks.generate_image_prompt_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'generate_image_prompt_task_periodic',
+#     task = 'crm.tasks.generate_image_prompt_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'generate_twitter_post_task_periodic',
-    task = 'crm.tasks.generate_twitter_post_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'generate_twitter_post_task_periodic',
+#     task = 'crm.tasks.generate_twitter_post_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'fetch_api_website_task_periodic',
-    task = 'crm.tasks.fetch_api_website',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'fetch_api_website_task_periodic',
+#     task = 'crm.tasks.fetch_api_website',
+# )
 
-########################### Twitter Tasks ######################################################
+# ########################### Twitter Tasks ######################################################
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'publish_twitter_post_task_periodic',
-    task = 'crm.tasks.publish_twitter_post_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'publish_twitter_post_task_periodic',
+#     task = 'crm.tasks.publish_twitter_post_task',
+# )
 
-########################### Horde Tasks ######################################################
+# ########################### Horde Tasks ######################################################
 
-# #Create scrape_url Task every 10 min
-schedule1, created1 = IntervalSchedule.objects.get_or_create(every=360, period=IntervalSchedule.SECONDS )
+# # #Create scrape_url Task every 10 min
+# schedule1, created1 = IntervalSchedule.objects.get_or_create(every=360, period=IntervalSchedule.SECONDS )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule1,
-    name = 'generate_image_task_periodic',
-    task = 'crm.tasks.generate_image_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule1,
+#     name = 'generate_image_task_periodic',
+#     task = 'crm.tasks.generate_image_task',
+# )
 
 ########################### PyTrend Tasks ######################################################
 # # #Create scrape_url Task every 30 min

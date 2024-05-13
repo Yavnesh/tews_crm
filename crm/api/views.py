@@ -4,7 +4,7 @@ from crm.api.serializers import PostSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
-
+import json
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
@@ -31,4 +31,5 @@ class PostGetAPI(ListAPIView):
     def get(self, request, format = None):
         postapi = Post.objects.filter(status='Draft')
         serializer = PostSerializer(postapi, many = True)
-        return Response(serializer.data)
+        data_list = list(serializer.data)
+        return Response(data_list)
