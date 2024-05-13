@@ -9,7 +9,7 @@ from newspaper import Config, Article, Source
 ########################################## GNews Function Starts #####################################################
 
 google_news = GNews()
-json_resp = google_news.get_news("Japanese yen dollar")
+json_resp = google_news.get_news("Colorado Avalanche")
 i=0
 items = 0
 title = []
