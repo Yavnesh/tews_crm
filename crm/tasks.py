@@ -130,15 +130,21 @@ safety_setting={
 ################################## Task Functions ####################################
 @shared_task
 def fetch_trends_task():
+    i=0
     print("Fetch Trends Task Started")
     try:
+        print("check 1------------------------")
         # connect to google
         pytrends = TrendReq(hl='en-US', tz=360)
+        print("check 2------------------------")
         TrendingList = pytrends.trending_searches(pn='united_states')
+        print("check 3------------------------")
         trending_list = TrendingList.values.tolist()
+        print("check 4------------------------", trending_list)
         topic_list = [item for sublist in trending_list for item in sublist]
         
         for item in topic_list:
+            print("for 1------------------------")
             if not Trending.objects.filter(topic = item):
                 i = i + 1
                 pytrends.build_payload([item], cat=0, timeframe='today 5-y', geo='US', gprop='')
@@ -148,7 +154,7 @@ def fetch_trends_task():
 
                 related_topics_rising, related_topics_top = get_related_topic(related_topics,item)
                 related_queries_rising, related_queries_top = get_related_query(related_query,item)
-                
+                print("saving to table 1------------------------",related_topics, "***********************", related_query, "***********************",related_topics_rising, "***********************",related_queries_rising)
                 trending_object = Trending(topic = item,
                                         related_topics_rising = json.dumps(related_topics_rising),
                                         related_topics_top = json.dumps(related_topics_top),
@@ -156,6 +162,7 @@ def fetch_trends_task():
                                         related_query_top = json.dumps(related_queries_top),
                                         status = "Saved")
                 trending_object.save()
+                print("save complete")
                 if i >= 5:
                     break
         print("Fetch Trends Task Ended")
@@ -178,6 +185,7 @@ def fetch_trends_realtime_task():
         for item in topic_list:
             print("item", item)
             for t in item:
+                print("for 2----------------------")
                 if not Trending.objects.filter(topic = item):
                     i = i+1
                     pytrends.build_payload([t], cat=0, timeframe='now 1-d', geo='US', gprop='')
@@ -187,7 +195,7 @@ def fetch_trends_realtime_task():
 
                     related_topics_rising, related_topics_top = get_related_topic(related_topics,t)
                     related_queries_rising, related_queries_top = get_related_query(related_query,t)
-                    
+                    print("saving to table 1------------------------",related_topics, "***********************", related_query, "***********************",related_topics_rising, "***********************",related_queries_rising)
                     trending_object = Trending(topic = t,
                                             related_topics_rising = json.dumps(related_topics_rising),
                                             related_topics_top = json.dumps(related_topics_top),
@@ -195,6 +203,7 @@ def fetch_trends_realtime_task():
                                             related_query_top = json.dumps(related_queries_top),
                                             status = "Saved")
                     trending_object.save()
+                    print("save complete")
             if i >= 10:
                 break
         print("Fetch Trends Real Time Task Ended")

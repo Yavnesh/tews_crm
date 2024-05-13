@@ -10,10 +10,10 @@ services:
     environment:
       - DEBUG=1
       - DJANGO_ALLOWED_HOSTS= *
+      - DATABASE_URL=sqlite:////usr/src/app/db.sqlite3
       - CELERY_BROKER=redis://redis:6379/0
       - CELERY_BACKEND=redis://redis:6379/0
     depends_on:
-      - pgdb
       - redis
   celery:
     build: .
@@ -34,15 +34,15 @@ services:
       - django
       - redis
       - celery
-  pgdb:
-    image: postgres
-    container_name: pgdb
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    volumes:
-      - pgdata:/var/lib/postgresql/data/
+  # pgdb:
+  #   image: postgres
+  #   container_name: pgdb
+  #   environment:
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data/
   redis:
     image: "redis:alpine"
 volumes:
