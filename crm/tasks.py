@@ -107,7 +107,7 @@ PeriodicTask.objects.get_or_create(
 PeriodicTask.objects.get_or_create(
     interval = schedule3,
     name = 'fetch_trends_realtime_task_periodic',
-    task = 'crm.tasks.fetch_trends_task',
+    task = 'crm.tasks.fetch_trends_realtime_task',
 )
 
 ########################### GNews Tasks ######################################################
