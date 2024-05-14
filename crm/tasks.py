@@ -235,7 +235,7 @@ def fetch_article_data_task():
     try:
         if Trending.objects.filter(status = "Saved").exists():
             trending_object = Trending.objects.filter(status = "Saved").order_by('id').first()
-            logger.warning("Get first item of Trending with status Saved",trending_object)
+            logger.warning(f'Get first item of Trending with status Saved,trending_object')
             if not Scrape.objects.filter(trending_id = trending_object.id).exists():
                 google_news = GNews()
                 json_resp = google_news.get_news(trending_object.topic)
