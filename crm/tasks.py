@@ -169,7 +169,7 @@ def fetch_trends_task():
                                         related_query_top = json.dumps(related_queries_top),
                                         source = "Daily Trends", status = "Saved")
                 trending_object.save()
-                logger.warning("Table Saved for topic - %i", item)
+                logger.warning(f'Table Saved for topic {item}')
                 if i > 2:
                     logger.warning(f'For Loop Topic List Count - {i}')
                     break
@@ -217,9 +217,9 @@ def fetch_trends_realtime_task():
                                             related_query_top = json.dumps(related_queries_top),
                                             source = "Real Time Trends", status = "Saved")
                     trending_object.save()
-                    logger.warning("Table Saved for topic %i", t)
+                    logger.warning(f'Table Saved for topic {t}')
             if i > 3:
-                logger.warning('For Loop Topic List Count {i}')
+                logger.warning(f'For Loop Topic List Count {i}')
                 break
         logger.warning("Fetch Trends Real Time Task Ended")
         return None
@@ -274,13 +274,13 @@ def fetch_article_data_task():
                             
                             items = items + 1
                             if items == 5:
-                                logger.warning("For loop status break", items)
+                                logger.warning(f'For loop status break {items}')
                                 break
 
                         except Exception as e:
-                            logger.warning("Article Parse exception", e)
+                            logger.warning(f'Article Parse exception {e}')
                     except Exception as e:
-                        logger.warning("Article Download exception", e)
+                        logger.warning(f'Article Download exception {e}')
 
                 title = json.dumps(title)
                 content = json.dumps(text)
@@ -309,7 +309,7 @@ def fetch_article_data_task():
         return None
 
     except Exception as e:
-        logger.warning("Fetch Article Data exception", e)
+        logger.warning(f'Fetch Article Data exception {e}')
         return None
 
 @logger.catch
@@ -337,7 +337,7 @@ def generate_meta_info_task():
         return None
 
     except Exception as e:
-        logger.warning("Generate Meta Task Ended", e)
+        logger.warning(f'Generate Meta Task Exception {e}')
         return None
 
 @logger.catch
@@ -385,7 +385,7 @@ def generate_content_info_task():
         return None
     except Exception as e:
     #     # Handle any exceptions that may occur
-        logger.warning("Generate Content Info Task Exception", e)
+        logger.warning(f'Generate Content Info Task Exception {e}')
         return None
 
 @logger.catch
@@ -427,7 +427,7 @@ def generate_content_task():
             logger.warning("Generate Content Task Ended")
             return None
     except Exception as e:
-        logger.warning("Generate Content Task Exception", e)
+        logger.warning(f'Generate Content Task Exception {e}')
         return None
 
 @logger.catch
@@ -449,7 +449,7 @@ def generate_image_prompt_task():
             logger.warning("Generate Image Prompt Task Completed")
             return None
     except Exception as e:
-        logger.warning("Generate Image Prompt Task Exception", e)
+        logger.warning(f'Generate Image Prompt Task Exception {e}')
         return None
 
 @logger.catch
@@ -480,7 +480,7 @@ def generate_image_task():
             return None
     except Exception as e:
     #     # Handle any exceptions that may occur
-        logger.warning("Generate Image Task Exception", e)
+        logger.warning(f'Generate Image Task Exception {e}')
         return None
 
 @logger.catch
@@ -509,7 +509,7 @@ def fetch_api_website():
         else:
             logger.warning(f"API hit failed with status code {response.status_code}")
     except Exception as e:
-        logger.warning("API hit successful! Exception", e)
+        logger.warning(f'API hit successful! Exception {e}')
 
 
 ################################## Regenrate Task Functions ####################################
@@ -566,7 +566,7 @@ def regenerate_content_task(id):
         return None
     except Exception as e:
     #     # Handle any exceptions that may occur
-        logger.warning("Regenerate Content Task Working", e)
+        logger.warning(f'Regenerate Content Task Working {e}')
         return None
      
 @logger.catch
@@ -604,7 +604,7 @@ def regenerate_image_task(id):
         return None
     except Exception as e:
     #     # Handle any exceptions that may occur
-        logger.warning("Regenerate Image Task Execution", e)
+        logger.warning(f'Regenerate Image Task Exception {e}')
         return None
 
 ################################## Functions ####################################
@@ -624,7 +624,7 @@ def get_related_query(related, data):
             related_top.extend(related[data]['top']['query'])
    
     except Exception as e:
-        logger.warning("Get Related Query Exception", e)
+        logger.warning(f'Get Related Query Exception {e}')
         pass  # Skip if any error occurs
     
     return related_rising,related_top  
@@ -643,7 +643,7 @@ def get_related_topic(related, data):
             related_top.extend(related[data]['top']['topic_title'])
    
     except Exception as e:
-        logger.warning("Get Related Topic Exception", e)
+        logger.warning(f'Get Related Topic Exception {e}')
         pass  # Skip if any error occurs
     
     return related_rising,related_top  
@@ -676,7 +676,7 @@ def generate_twitter_post_task():
             return None
     except Exception as e:
     #     # Handle any exceptions that may occur
-        logger.warning("Generate_twitter_post Exception", e)
+        logger.warning(f'Generate_twitter_post Exception {e}')
         return None
 
 @logger.catch
@@ -702,7 +702,7 @@ def publish_twitter_post_task():
             return None
     except Exception as e:
     #     # Handle any exceptions that may occur
-        logger.warning("Generate_twitter_post Exception", e)
+        logger.warning(f'Generate_twitter_post Exception {e}')
         return None
 
 @logger.catch
