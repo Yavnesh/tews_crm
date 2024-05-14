@@ -29,7 +29,8 @@ from newspaper import Config
 
 ##############  Loguru  #######################
 from loguru import logger
-logger.add("file_{time}.log",level="TRACE", rotation="10 MB")
+# logger.add("file_{time}.log",level="TRACE", rotation="10 MB")
+logger.add("logs/testing.log",level="TRACE", rotation="10 MB")
 ########################### Gemini Tasks ######################################################
 # #Create scrape_url Task every 1 min
 schedule, created = IntervalSchedule.objects.get_or_create(every=100, period=IntervalSchedule.SECONDS )
@@ -140,7 +141,7 @@ def fetch_trends_task():
 
     try:
         # connect to google
-        pytrends = TrendReq(hl='en-US', tz=360)
+        pytrends = TrendReq(hl='en-US', tz=360) #, timeout=(10,25), proxies=['https://181.143.106.162:52151', 'https://198.168.189.54:80', 'https://112.78.170.250:8080', 'https://186.96.50.113:999', 'https://148.244.210.141:999', 'https://146.190.101.222:3128', 'https://45.188.164.3:999', 'https://31.43.158.108:8888', 'https://187.251.102.50:999', 'https://117.54.114.102:80', 'https://124.106.150.231:8282', 'https://81.163.56.104:23500',], retries=2, backoff_factor=0.1, requests_args={'verify':False})
         logger.warning("Connected pytrends")
         
         TrendingList = pytrends.trending_searches(pn='united_states')
@@ -168,15 +169,15 @@ def fetch_trends_task():
                                         related_query_top = json.dumps(related_queries_top),
                                         source = "Daily Trends", status = "Saved")
                 trending_object.save()
-                logger.warning("Table Saved for topic", item)
-                if i >= 5:
-                    logger.warning("For Loop Topic List Count", i)
+                logger.warning("Table Saved for topic - %i", item)
+                if i > 2:
+                    logger.warning(f'For Loop Topic List Count - {i}')
                     break
         logger.warning("Fetch Trends Task Ended")
         return None
 
     except Exception as e:
-        logger.warning("Fetch Trends Try Block Exception", e)
+        logger.warning(f'Fetch Trends Try Block Exception - {e}')
         return None
 
 @logger.catch
@@ -185,9 +186,11 @@ def fetch_trends_realtime_task():
     logger.warning("Fetch Trends Real Time Task Started")
     try:
         # connect to google
-        pytrends = TrendReq(hl='en-US', tz=360)
+        pytrends = TrendReq(hl='en-US', tz=360) #, timeout=(10,25), proxies=['https://181.143.106.162:52151', 'https://198.168.189.54:80', 'https://112.78.170.250:8080', 'https://186.96.50.113:999', 'https://148.244.210.141:999', 'https://146.190.101.222:3128', 'https://45.188.164.3:999', 'https://31.43.158.108:8888', 'https://187.251.102.50:999', 'https://117.54.114.102:80', 'https://124.106.150.231:8282', 'https://81.163.56.104:23500',], retries=2, backoff_factor=0.1, requests_args={'verify':False})
         logger.warning("Connected pytrends")
         
+
+
         TrendingList = pytrends.realtime_trending_searches(pn='US')
         topic_list = TrendingList['entityNames'].tolist()
         logger.warning("View Trending List",topic_list)
@@ -214,15 +217,15 @@ def fetch_trends_realtime_task():
                                             related_query_top = json.dumps(related_queries_top),
                                             source = "Real Time Trends", status = "Saved")
                     trending_object.save()
-                    logger.warning("Table Saved for topic", t)
-            if i >= 10:
-                logger.warning("For Loop Topic List Count", i)
+                    logger.warning("Table Saved for topic %i", t)
+            if i > 3:
+                logger.warning('For Loop Topic List Count {i}')
                 break
         logger.warning("Fetch Trends Real Time Task Ended")
         return None
 
     except Exception as e:
-        logger.warning("Fetch Trends Try Block Exception", e)
+        logger.warning(f'Fetch Trends Try Block Exception - {e}')
         return None
 
 @logger.catch

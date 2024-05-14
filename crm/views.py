@@ -86,6 +86,11 @@ def regenerate_image(request):
 
 @csrf_exempt
 def trend(request):
-    fetch_trends_realtime_task.apply_async()
-    return render(request, "dashboard/index.html")
+    with open('logs/testing.log', 'r') as file:
+        log_data = file.read()
+
+    # Pass log data to template
+    return render(request, 'dashboard/viewlogs.html', {'log_data': log_data})
+#     fetch_trends_realtime_task.apply_async()
+    # return render(request, "dashboard/index.html")
 
