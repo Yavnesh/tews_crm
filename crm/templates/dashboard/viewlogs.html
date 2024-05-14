@@ -136,7 +136,7 @@ Payment successfully completed
     </div>
     </div>
     <div class="card-body">
-      {% for line in log_data.split('\n') %}
+      {% for line in log_data|linebreaks %}
       <p class="h4">{{ line }}</p>
         {% endfor %}
       

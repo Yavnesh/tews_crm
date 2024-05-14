@@ -1,0 +1,35 @@
+2024-05-15 00:20:31.966 | WARNING  | crm.tasks:generate_content_info_task:346 - Generate Content Info Task Started
+2024-05-15 00:20:32.095 | WARNING  | crm.tasks:generate_content_info_task:384 - Generate Content Info Task Ended
+2024-05-15 00:20:32.106 | WARNING  | crm.tasks:generate_content_task:394 - Generate Content Task Started
+2024-05-15 00:20:32.131 | WARNING  | crm.tasks:generate_meta_info_task:318 - Generate Meta Task Started
+2024-05-15 00:20:32.145 | WARNING  | crm.tasks:generate_image_prompt_task:436 - Generate Image Prompt Task Started
+2024-05-15 00:20:32.172 | WARNING  | crm.tasks:generate_meta_info_task:336 - Generate Meta Task Ended
+2024-05-15 00:20:32.191 | WARNING  | crm.tasks:fetch_api_website:489 - API hit Website Started
+2024-05-15 00:20:32.222 | WARNING  | crm.tasks:generate_image_task:458 - Generate Image Task Started
+2024-05-15 00:20:32.250 | WARNING  | crm.tasks:generate_image_task:462 - Generate Image Task Working
+2024-05-15 00:20:32.257 | WARNING  | crm.tasks:fetch_trends_task:140 - Fetch Trends Task Started
+2024-05-15 00:20:32.259 | WARNING  | crm.tasks:fetch_article_data_task:234 - Fetch Article Data Task Started
+2024-05-15 00:20:32.285 | WARNING  | crm.tasks:fetch_article_data_task:308 - Fetch Article Data Task Completed
+2024-05-15 00:20:33.036 | WARNING  | crm.tasks:fetch_trends_task:145 - Connected pytrends
+2024-05-15 00:20:33.834 | WARNING  | crm.tasks:fetch_trends_task:149 - View Trending List
+2024-05-15 00:20:33.838 | WARNING  | crm.tasks:fetch_trends_task:154 - For Loop Topic List
+2024-05-15 00:20:37.411 | WARNING  | crm.tasks:fetch_api_website:498 - API hit successful!
+2024-05-15 00:20:37.430 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.437 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.443 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.447 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.453 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.457 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.461 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.465 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.469 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.474 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.478 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.483 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.488 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.492 | WARNING  | crm.tasks:fetch_api_website:508 - API post does not exist
+2024-05-15 00:20:37.551 | WARNING  | crm.tasks:fetch_api_website:506 - API Table Saved
+2024-05-15 00:20:38.336 | WARNING  | crm.tasks:fetch_trends_task:172 - Table Saved for topic Dallas Stars
+2024-05-15 00:20:38.337 | WARNING  | crm.tasks:fetch_trends_task:154 - For Loop Topic List
+2024-05-15 00:20:42.495 | WARNING  | crm.tasks:fetch_trends_task:180 - Fetch Trends Try Block Exception - The request failed: Google returned a response with code 429
+2024-05-15 00:22:46.713 | WARNING  | crm.tasks:generate_image_task:483 - Generate Image Task Exception cannot unpack non-iterable NoneType object
