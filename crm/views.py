@@ -5,11 +5,15 @@ from crm.models import Scrape, Post, Trending
 from django.http import JsonResponse
 from crm.tasks import regenerate_content_task, regenerate_image_task, fetch_trends_realtime_task
 import requests
+##############  Loguru  #######################
+from loguru import logger
+logger.add("logs/file_{time}.log",level="TRACE", rotation="10 MB")
 # Create your views here.
 @csrf_exempt
 def crm_dashboard(request):
     # View function for rendering CRM dashboard.
     context = {'title': 'Index', 'success': "this is success"}
+    logger.warning("THis is jaust a check ")
     return render(request, "dashboard/index.html", context)
 
 @csrf_exempt

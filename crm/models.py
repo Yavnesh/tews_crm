@@ -36,6 +36,7 @@ class Trending(models.Model):
     related_topics_top = models.TextField(default='none')
     related_query_rising = models.TextField(default='none')
     related_query_top = models.TextField(default='none')
+    source = models.CharField(max_length=50, default='none')
     status = models.CharField(max_length=50, default='none')
     created_at = models.DateTimeField(auto_now_add=True)
 

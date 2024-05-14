@@ -46,4 +46,4 @@ services:
   redis:
     image: "redis:alpine"
 volumes:
-  pgdata:
+  db_data:
