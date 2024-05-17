@@ -345,9 +345,108 @@ def generate_meta_info(related_topics,related_query,content):
 
     return pre_post_content
 
+def generate_short_content(content):
+    
+    post_prompt = """
+            {}
+            Go through the above content and Create an article for me which i can post on my blog 
+        """.format(content)
+
+    prompt_content_response = model.generate_content(post_prompt, safety_settings=safety_setting)
+
+    if prompt_content_response.candidates:
+        pre_post_content = prompt_content_response.candidates[0].content.parts[0].text
+    else:
+        pre_post_content = ""
+    # print("pre_post_content---------------", pre_post_content)
+
+    return pre_post_content
+
+def generate_trend_topics(content,keyword):
+    
+    post_prompt = """
+            Input:
+
+Content: {}
+Keyword: {}
+
+Number of Outputs:
+40 (10 Rising Related Queries, 10 Rising Related Queries, 10 Rising Related Topics, 10 Top Related Topics)
+
+Output Categories:
+
+Rising Related Queries (10): Formulate 50 related queries that are currently experiencing a rise in search volume and are highly relevant to the provided content and keyword. Rank these and pick first 10.
+
+Top Related Queries (10): Formulate 50 related queries that have consistently high search volume and are highly relevant to the provided content and keyword. Rank these and pick first 10.
+
+Rising Related Topics (10): Identify 50 related topics that are currently experiencing a rise in interest and are directly connected to the provided content's main theme. Rank these and pick first 10.
+
+Top Related Topics (10): Identify 50 established, high-volume related topics that directly enhance user understanding of the provided content. Rank these and pick first 10.
 
 
-def generate_content(Topic,merged_content,related_topics,related_query,category):
+Additional Considerations:
+
+Prioritize long-tail keywords within the queries when possible.
+Consider incorporating location-specific elements if applicable to the target audience.
+Be mindful of seasonal trends that might influence user search patterns.
+Focus on generating clear, concise, and grammatically correct queries and topics.
+
+Example:
+
+Input:
+
+Content: (Insert your actual content here)
+Keyword: Healthy Eating
+Output: (The model will generate the following based on your content and the keyword)
+
+Related Queries:
+
+Rising Related Queries (10): (This section will have 10 examples, like the ones below)
+10 easy healthy meals for busy people 2024
+how to start a healthy eating plan for beginners
+healthy meal prep tips and tricks
+best grocery shopping list for healthy eating
+are there any risks to healthy eating? (if applicable)
+
+Top Related Queries (10): (This section will have 10 examples, like the ones below)
+benefits of healthy eating
+healthy eating tips to lose weight
+healthy recipes for weight loss
+what is a healthy diet?
+how to eat healthy on a budget
+
+Related Topics:
+
+Rising Related Topics (10): (This section will have 10 examples, like the ones below)
+intermittent fasting for weight loss
+the gut microbiome and healthy eating
+plant-based diets for beginners
+healthy meal delivery services
+the impact of processed foods on health
+
+Top Related Topics (10): (This section will have 10 examples, like the ones below)
+nutrition and healthy eating
+healthy lifestyle habits
+weight management
+chronic disease prevention
+healthy eating for children
+
+        """.format(content,keyword)
+
+
+    prompt_content_response = model.generate_content(post_prompt, safety_settings=safety_setting)
+
+    if prompt_content_response.candidates:
+        pre_post_content = prompt_content_response.candidates[0].content.parts[0].text
+    else:
+        pre_post_content = ""
+    # print("pre_post_content---------------", pre_post_content)
+
+    return pre_post_content
+
+
+
+def generate_content(Topic,short_content, merged_content,related_topics,related_query,category):
     
     for item in category:
         author_name =  select_author(item)
@@ -357,7 +456,7 @@ def generate_content(Topic,merged_content,related_topics,related_query,category)
     Analyze the above content  
     Tell me who is the [Target Audience]
     Give me an Outline: [Provide a basic outline with section headings]
-        """.format(merged_content[0])
+        """.format(short_content[0])
 
     messages = [
         {'role':'user',
@@ -493,6 +592,8 @@ def split_text(text, start_word, end_word):
             final_result = []
             text1 = extracted_text.splitlines(False)
             for t in text1:
+                if start_word == "Rising Related Queries" or start_word == "Top Related Queries" or start_word == "Rising Related Topics" or start_word == "Top Related Topics":
+                    t = t.strip()[3:]
                 result = clean_text(t)
                 if result != "":
                     # Add non-empty result to the final result
@@ -501,35 +602,52 @@ def split_text(text, start_word, end_word):
     else:
         return None
     
+# def clean_text(text):
+#     # Split the text into words
+
+#     words = re.findall(r'\b\w+\b', text)
+    
+#     # Find the index of the first word
+#     start_index = next((i for i, word in enumerate(words) if word.strip()), None)
+    
+#     # Find the index of the last word
+#     end_index = next((len(words) - 1 - i for i, word in enumerate(reversed(words)) if word.strip()), None)
+    
+#         # Check if start_index and end_index are None
+#     if start_index is None or end_index is None:
+#         return ""
+    
+#     # Extract the substring between the first and last words
+#     result = ' '.join(words[start_index:end_index + 1]).strip()
+    
+#     # Check if result is None
+#     if result is None:
+#         return ""
+
+
+#     # Extract the substring between the first and last words
+#     result = ' '.join(words[start_index:end_index + 1]).strip()
+    
+#     if text.strip().endswith("."):
+#         # Add a full stop after the last word
+#         result += "."
+    
+#     return result
+
 def clean_text(text):
-    # Split the text into words
+    pattern = r"\b[a-zA-Z0-9_']+\b"  # Updated pattern to capture all word characters
+    words = re.finditer(pattern, text)
 
-    words = re.findall(r'\b\w+\b', text)
-    
-    # Find the index of the first word
-    start_index = next((i for i, word in enumerate(words) if word.strip()), None)
-    
-    # Find the index of the last word
-    end_index = next((len(words) - 1 - i for i, word in enumerate(reversed(words)) if word.strip()), None)
-    
-        # Check if start_index and end_index are None
-    if start_index is None or end_index is None:
-        return ""
-    
-    # Extract the substring between the first and last words
-    result = ' '.join(words[start_index:end_index + 1]).strip()
-    
-    # Check if result is None
-    if result is None:
-        return ""
+    # Extract clean words (non-empty)
+    clean_words = []
+    for word in words:
+        clean_word = word.group().strip()
+        if clean_word:
+            clean_words.append(clean_word)
 
-
-    # Extract the substring between the first and last words
-    result = ' '.join(words[start_index:end_index + 1]).strip()
-    
+    # Join cleaned words and add period (optional)
+    result = ' '.join(clean_words)
     if text.strip().endswith("."):
-        # Add a full stop after the last word
         result += "."
-    
-    return result
 
+    return result

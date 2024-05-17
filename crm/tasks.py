@@ -1,6 +1,6 @@
 import os, json,requests
 from crm.models import Scrape, Post, TwitterPost, Trending
-from crm.fun_gemini import generate_image_prompt, generate_content_info, generate_content, split_text, generate_content_cta,generate_meta_info
+from crm.fun_gemini import generate_image_prompt, generate_content_info, generate_content, split_text, generate_content_cta,generate_meta_info, generate_short_content, generate_trend_topics
 from crm.fun_horde import generate_image_api
 
 ##############  Celery  #######################
@@ -29,99 +29,112 @@ from newspaper import Config
 
 ##############  Loguru  #######################
 from loguru import logger
-# logger.add("file_{time}.log",level="TRACE", rotation="10 MB")
-logger.add("logs/testing.log",level="TRACE", rotation="10 MB")
+logger.add("file_{time}.log",level="TRACE", rotation="10 MB")
+# logger.add("logs/testing.log",level="TRACE", rotation="10 MB")
 ########################### Gemini Tasks ######################################################
-# #Create scrape_url Task every 1 min
-schedule, created = IntervalSchedule.objects.get_or_create(every=100, period=IntervalSchedule.SECONDS )
+#Create scrape_url Task every 1 min
+schedule60, created60 = IntervalSchedule.objects.get_or_create(every=60, period=IntervalSchedule.SECONDS )
+schedule4, created4 = IntervalSchedule.objects.get_or_create(every=200, period=IntervalSchedule.SECONDS )
 
 #Schedule the periodic task programmatically
 
 PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'generate_content_info_task_periodic',
-    task = 'crm.tasks.generate_content_info_task',
+    interval = schedule60,
+    name = 'generate_short_content_task_periodic',
+    task = 'crm.tasks.generate_short_content_task',
 )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'generate_content_task_periodic',
-    task = 'crm.tasks.generate_content_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'generate_realated_trend_task_periodic',
+#     task = 'crm.tasks.generate_realated_trend_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'generate_meta_info_task_periodic',
-    task = 'crm.tasks.generate_meta_info_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'generate_content_info_task_periodic',
+#     task = 'crm.tasks.generate_content_info_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'generate_image_prompt_task_periodic',
-    task = 'crm.tasks.generate_image_prompt_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule4,
+#     name = 'generate_content_task_periodic',
+#     task = 'crm.tasks.generate_content_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'generate_twitter_post_task_periodic',
-    task = 'crm.tasks.generate_twitter_post_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'generate_meta_info_task_periodic',
+#     task = 'crm.tasks.generate_meta_info_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'fetch_api_website_task_periodic',
-    task = 'crm.tasks.fetch_api_website',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'generate_image_prompt_task_periodic',
+#     task = 'crm.tasks.generate_image_prompt_task',
+# )
 
-# ########################### Twitter Tasks ######################################################
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'generate_twitter_post_task_periodic',
+#     task = 'crm.tasks.generate_twitter_post_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'publish_twitter_post_task_periodic',
-    task = 'crm.tasks.publish_twitter_post_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'fetch_api_website_task_periodic',
+#     task = 'crm.tasks.fetch_api_website',
+# )
 
-# ########################### Horde Tasks ######################################################
+# # ########################### Twitter Tasks ######################################################
 
-# # #Create scrape_url Task every 10 min
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule,
+#     name = 'publish_twitter_post_task_periodic',
+#     task = 'crm.tasks.publish_twitter_post_task',
+# )
+
+# # ########################### Horde Tasks ######################################################
+
+# # # #Create scrape_url Task every 10 min
 schedule1, created1 = IntervalSchedule.objects.get_or_create(every=360, period=IntervalSchedule.SECONDS )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule1,
-    name = 'generate_image_task_periodic',
-    task = 'crm.tasks.generate_image_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule1,
+#     name = 'generate_image_task_periodic',
+#     task = 'crm.tasks.generate_image_task',
+# )
 
 ########################### PyTrend Tasks ######################################################
 # # #Create scrape_url Task every 30 min
-schedule2, created2 = IntervalSchedule.objects.get_or_create(every=1800, period=IntervalSchedule.SECONDS )
-schedule3, created3 = IntervalSchedule.objects.get_or_create(every=900, period=IntervalSchedule.SECONDS )
+# schedule2, created2 = IntervalSchedule.objects.get_or_create(every=1800, period=IntervalSchedule.SECONDS )
+# schedule3, created3 = IntervalSchedule.objects.get_or_create(every=900, period=IntervalSchedule.SECONDS )
 
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule2,
-    name = 'fetch_trends_task_periodic',
-    task = 'crm.tasks.fetch_trends_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule2,
+#     name = 'fetch_trends_task_periodic',
+#     task = 'crm.tasks.fetch_trends_task',
+# )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule3,
-    name = 'fetch_trends_realtime_task_periodic',
-    task = 'crm.tasks.fetch_trends_realtime_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule3,
+#     name = 'fetch_trends_realtime_task_periodic',
+#     task = 'crm.tasks.fetch_trends_realtime_task',
+# )
 
 ########################### GNews Tasks ######################################################
-
-PeriodicTask.objects.get_or_create(
-    interval = schedule,
-    name = 'fetch_article_data_task_periodic',
-    task = 'crm.tasks.fetch_article_data_task',
-)
+# schedule120, created120 = IntervalSchedule.objects.get_or_create(every=120, period=IntervalSchedule.SECONDS )
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule120,
+#     name = 'fetch_article_data_task_periodic',
+#     task = 'crm.tasks.fetch_article_data_task',
+# )
 
 
 ################################## Gemini Settings ####################################
-
-genai.configure(api_key="AIzaSyBJaCAFmsYpMcO7OTNEJV6I-Ci9O7-X03Q")
+# genai.configure(api_key="AIzaSyBJaCAFmsYpMcO7OTNEJV6I-Ci9O7-X03Q")
+genai.configure(api_key="AIzaSyAZLlvQ2yyZxQ6WqfZ0uTBKIhVxU0c-Ml8")
 model = genai.GenerativeModel('gemini-pro')
 
 safety_setting={
@@ -149,19 +162,23 @@ def fetch_trends_task():
         logger.warning("View Trending List",trending_list)
         
         topic_list = [item for sublist in trending_list for item in sublist]
-        i = 0
+        # i = 0
         for item in topic_list:
             logger.warning("For Loop Topic List")
             if not Trending.objects.filter(topic = item).exists():
                 i = i + 1
-                pytrends.build_payload([item], cat=0, timeframe='today 5-y', geo='US', gprop='')
+                # pytrends.build_payload([item], cat=0, timeframe='today 5-y', geo='US', gprop='')
 
-                related_topics = pytrends.related_topics()
-                related_query = pytrends.related_queries()
+                # related_topics = pytrends.related_topics()
+                # related_query = pytrends.related_queries()
 
-                related_topics_rising, related_topics_top = get_related_topic(related_topics,item)
-                related_queries_rising, related_queries_top = get_related_query(related_query,item)
-                
+                # related_topics_rising, related_topics_top = get_related_topic(related_topics,item)
+                # related_queries_rising, related_queries_top = get_related_query(related_query,item)
+                related_topics_rising = []
+                related_topics_top = []
+                related_queries_rising = []
+                related_queries_top = []
+
                 trending_object = Trending(topic = item,
                                         related_topics_rising = json.dumps(related_topics_rising),
                                         related_topics_top = json.dumps(related_topics_top),
@@ -170,9 +187,9 @@ def fetch_trends_task():
                                         source = "Daily Trends", status = "Saved")
                 trending_object.save()
                 logger.warning(f'Table Saved for topic {item}')
-                if i > 2:
-                    logger.warning(f'For Loop Topic List Count - {i}')
-                    break
+                # if i > 2:
+                #     logger.warning(f'For Loop Topic List Count - {i}')
+                #     break
         logger.warning("Fetch Trends Task Ended")
         return None
 
@@ -200,16 +217,19 @@ def fetch_trends_realtime_task():
             logger.warning("For Loop Topic List")
             for t in item:
                 logger.warning("For Loop Topic List > Item")
-                if not Trending.objects.filter(topic = item).exists():
-                    i = i+1
-                    pytrends.build_payload([t], cat=0, timeframe='now 1-d', geo='US', gprop='')
+                if not Trending.objects.filter(topic = t).exists():
+                    # i = i+1
+                    # pytrends.build_payload([t], cat=0, timeframe='now 1-d', geo='US', gprop='')
 
-                    related_topics = pytrends.related_topics()
-                    related_query = pytrends.related_queries()
+                    # related_topics = pytrends.related_topics()
+                    # related_query = pytrends.related_queries()
 
-                    related_topics_rising, related_topics_top = get_related_topic(related_topics,t)
-                    related_queries_rising, related_queries_top = get_related_query(related_query,t)
-                    
+                    # related_topics_rising, related_topics_top = get_related_topic(related_topics,t)
+                    # related_queries_rising, related_queries_top = get_related_query(related_query,t)
+                    related_topics_rising = []
+                    related_topics_top = []
+                    related_queries_rising = []
+                    related_queries_top = []
                     trending_object = Trending(topic = t,
                                             related_topics_rising = json.dumps(related_topics_rising),
                                             related_topics_top = json.dumps(related_topics_top),
@@ -218,9 +238,9 @@ def fetch_trends_realtime_task():
                                             source = "Real Time Trends", status = "Saved")
                     trending_object.save()
                     logger.warning(f'Table Saved for topic {t}')
-            if i > 3:
-                logger.warning(f'For Loop Topic List Count {i}')
-                break
+            # if i > 3:
+            #     logger.warning(f'For Loop Topic List Count {i}')
+            #     break
         logger.warning("Fetch Trends Real Time Task Ended")
         return None
 
@@ -236,7 +256,9 @@ def fetch_article_data_task():
         if Trending.objects.filter(status = "Saved").exists():
             trending_object = Trending.objects.filter(status = "Saved").order_by('id').first()
             logger.warning(f'Get first item of Trending with status Saved,trending_object')
-            if not Scrape.objects.filter(trending_id = trending_object.id).exists():
+            if Scrape.objects.filter(trending_id = trending_object.id).exists():
+                logger.warning("Trending item already exists")
+            else:
                 google_news = GNews()
                 json_resp = google_news.get_news(trending_object.topic)
 
@@ -267,13 +289,14 @@ def fetch_article_data_task():
                             print("contenarticle.textt", article.text)
                             print("imagimges", img)
                             print("uurl_pathrl", url_path)
+                            print()
                             title.append(article.title)
                             text.append(article.text)
                             images.append(img)
                             url.append(url_path)
                             
                             items = items + 1
-                            if items == 5:
+                            if items == 10:
                                 logger.warning(f'For loop status break {items}')
                                 break
 
@@ -291,9 +314,11 @@ def fetch_article_data_task():
                 print("images", images)
                 print("url", url)
 
-                if title and content and images and url:
+                if title and content and url:
                     logger.warning("Scrape Table items not empty")
-                    if not Scrape.objects.filter(trending_id = trending_object.id).exists():
+                    if Scrape.objects.filter(trending_id = trending_object.id).exists():
+                        logger.warning("Scrape Item already exists")
+                    else:
                         scrape_object = Scrape( trending_id = trending_object.id,
                                             title = title,
                                             content = content,
@@ -312,49 +337,96 @@ def fetch_article_data_task():
         logger.warning(f'Fetch Article Data exception {e}')
         return None
 
+
+
 @logger.catch
 @shared_task
-def generate_meta_info_task():
-    logger.warning("Generate Meta Task Started")
+def generate_short_content_task():
+    logger.warning("Generate Short Content Task Started")
     try:
-        if Post.objects.filter(status="Meta Ready"):
-            post_object = Post.objects.filter(status="Meta Ready").order_by('id').first()
-            trending_object = Trending.objects.get(id = post_object.post_id)
-            related_topics_rising = json.loads(trending_object.related_topics_rising)
-            related_topics_top = json.loads(trending_object.related_topics_top)
-            related_query_rising = json.loads(trending_object.related_query_rising)
-            related_query_top = json.loads(trending_object.related_query_top)
-            related_topics = related_topics_rising + related_topics_top
-            related_query= related_query_rising + related_query_top
-            meta = generate_meta_info(related_topics,related_query,post_object.content)
-            data = {'meta': meta, 'status' : 'Draft'}
+        if Scrape.objects.filter(status="Scraped"):
+            scrape_object = Scrape.objects.filter(status="Scraped").order_by('id').first()
+            print(scrape_object.trending_id)
+            short_content = generate_short_content(scrape_object.content)
+            
+            data = {'short_content': short_content, 'status' : 'Trends Ready'}
             for key, value in data.items():
-                if hasattr(post_object, key):
-                    setattr(post_object, key, value)
-            post_object.save()
+                if hasattr(scrape_object, key):
+                    setattr(scrape_object, key, value)
+            scrape_object.save()
                                         
-        logger.warning("Generate Meta Task Ended")
+        logger.warning("Generate Short Content Task Ended")
         return None
 
     except Exception as e:
-        logger.warning(f'Generate Meta Task Exception {e}')
+        logger.warning(f'Generate Short Content Task Exception {e}')
         return None
+
+@logger.catch
+@shared_task
+def generate_realated_trend_task():
+    logger.warning("Generate Related Trends Task Started")
+    try:
+        if Scrape.objects.filter(status="Trends Ready"):
+            scrape_object = Scrape.objects.filter(status="Trends Ready").order_by('id').first()
+            print("check1")
+            trending_object = Trending.objects.get(id=scrape_object.trending_id)
+            print("check2")
+            short_content = generate_trend_topics(scrape_object.content, trending_object.topic)
+            print("check3")
+            related_topics_rising = []
+            related_topics_top = []
+            related_queries_rising = []
+            related_queries_top = []
+            related_queries_rising = split_text(short_content, "Rising Related Queries", "Top Related Queries")
+            print("check4")
+            related_queries_top = split_text(short_content, "Top Related Queries", "Rising Related Topics")
+            related_topics_rising = split_text(short_content, "Rising Related Topics", "Top Related Topics")
+            related_queries_top = split_text(short_content, "Top Related Topics", None)
+            print("check5")
+            print("related_queries_rising",related_queries_rising)
+            print("related_queries_top",related_queries_top)
+            print("related_topics_rising",related_topics_rising)
+            print("related_queries_top",related_queries_top)
+
+            data = {'related_topics_rising' : json.dumps(related_topics_rising), 'related_topics_top' : json.dumps(related_topics_top), 'related_query_rising' : json.dumps(related_queries_rising),
+                                    'related_query_top' : json.dumps(related_queries_top), 'status' : 'Content Ready'}
+            for key, value in data.items():
+                if hasattr(trending_object, key):
+                    setattr(trending_object, key, value)
+            trending_object.save()
+            print("check6")
+            data = {'status' : 'Content Ready'}
+            for key, value in data.items():
+                if hasattr(scrape_object, key):
+                    setattr(scrape_object, key, value)
+            scrape_object.save()
+            print("check7")
+                                        
+        logger.warning("Generate Related Trends Task Ended")
+        return None
+
+    except Exception as e:
+        logger.warning(f'Generate Related Trends Task Exception {e}')
+        return None
+
 
 @logger.catch
 @shared_task
 def generate_content_info_task():
     logger.warning("Generate Content Info Task Started")
     try:
-        if Scrape.objects.filter(status="Scraped"):
-            scrape_object = Scrape.objects.filter(status="Scraped").order_by('id').first()
-
+        if Scrape.objects.filter(status="Content Ready"):
+            scrape_object = Scrape.objects.filter(status="Content Ready").order_by('id').first()
+            short_content = []
             content = []
+            short_content = [item for item in json.loads(scrape_object.title)] + [item for item in json.loads(scrape_object.short_content)]
             content = [item for item in json.loads(scrape_object.title)] + [item for item in json.loads(scrape_object.content)]
             category = []
             subcategory = []
             tags = []
 
-            generate_post_content_info = generate_content_info(content)
+            generate_post_content_info = generate_content_info(short_content)
             if generate_post_content_info == "":
                 scrape_object.status = "Content Blocked"
                 scrape_object.save()
@@ -362,8 +434,11 @@ def generate_content_info_task():
                 category = split_text(generate_post_content_info, "Category", "Sub Category")
                 subcategory = split_text(generate_post_content_info, "Sub Category", "Tags")
                 tags = split_text(generate_post_content_info, "Tags", None)
-            
-                if not Post.objects.filter(post_id = scrape_object.trending_id):
+                print("check 45454")
+                if Post.objects.filter(post_id = scrape_object.trending_id).exists():
+                    logger.warning("Post Item already exists")
+                else:
+                    print("check 45450004")
                     post_object = Post(post_id = scrape_object.trending_id,
                                         title = "NoNE",
                                         subtitle = "NoNE",
@@ -396,11 +471,12 @@ def generate_content_task():
         if Post.objects.filter(status="Pre Content"):
             post_object = Post.objects.filter(status= "Pre Content").order_by('id').first()
             topics_object = Trending.objects.get(id= post_object.post_id)
+            scrape_object = Scrape.objects.get(trending_id = post_object.post_id)
             related_topic = json.loads(topics_object.related_topics_rising) + json.loads(topics_object.related_topics_top)
             related_query = json.loads(topics_object.related_query_rising) + json.loads(topics_object.related_query_top)
             content = json.loads(post_object.content)
 
-            generate_post_content, author_name = generate_content(topics_object.topic,content, related_topic, related_query, json.loads(post_object.category))
+            generate_post_content, author_name = generate_content(topics_object.topic,scrape_object.short_content, content, related_topic, related_query, json.loads(post_object.category))
             questions_list=[]
             questions_list = generate_content_cta(generate_post_content)
             cleaned_heading = []
@@ -482,6 +558,35 @@ def generate_image_task():
     #     # Handle any exceptions that may occur
         logger.warning(f'Generate Image Task Exception {e}')
         return None
+
+@logger.catch
+@shared_task
+def generate_meta_info_task():
+    logger.warning("Generate Meta Task Started")
+    try:
+        if Post.objects.filter(status="Meta Ready"):
+            post_object = Post.objects.filter(status="Meta Ready").order_by('id').first()
+            trending_object = Trending.objects.get(id = post_object.post_id)
+            related_topics_rising = json.loads(trending_object.related_topics_rising)
+            related_topics_top = json.loads(trending_object.related_topics_top)
+            related_query_rising = json.loads(trending_object.related_query_rising)
+            related_query_top = json.loads(trending_object.related_query_top)
+            related_topics = related_topics_rising + related_topics_top
+            related_query= related_query_rising + related_query_top
+            meta = generate_meta_info(related_topics,related_query,post_object.content)
+            data = {'meta': meta, 'status' : 'Draft'}
+            for key, value in data.items():
+                if hasattr(post_object, key):
+                    setattr(post_object, key, value)
+            post_object.save()
+                                        
+        logger.warning("Generate Meta Task Ended")
+        return None
+
+    except Exception as e:
+        logger.warning(f'Generate Meta Task Exception {e}')
+        return None
+
 
 @logger.catch
 @shared_task
@@ -610,43 +715,43 @@ def regenerate_image_task(id):
 ################################## Functions ####################################
 ########################################## Pytrends Function Starts #####################################################
 
-@logger.catch
-def get_related_query(related, data):
-    related_rising =[]
-    related_top=[]
-    try:
-        # Check if 'rising' key exists and has data
-        if 'rising' in related[data] and not related[data]['rising'].empty:
-            related_rising.extend(related[data]['rising']['query'])
+# @logger.catch
+# def get_related_query(related, data):
+#     related_rising =[]
+#     related_top=[]
+#     try:
+#         # Check if 'rising' key exists and has data
+#         if 'rising' in related[data] and not related[data]['rising'].empty:
+#             related_rising.extend(related[data]['rising']['query'])
 
-        # Check if 'top' key exists and has data
-        if 'top' in related[data] and not related[data]['top'].empty:
-            related_top.extend(related[data]['top']['query'])
+#         # Check if 'top' key exists and has data
+#         if 'top' in related[data] and not related[data]['top'].empty:
+#             related_top.extend(related[data]['top']['query'])
    
-    except Exception as e:
-        logger.warning(f'Get Related Query Exception {e}')
-        pass  # Skip if any error occurs
+#     except Exception as e:
+#         logger.warning(f'Get Related Query Exception {e}')
+#         pass  # Skip if any error occurs
     
-    return related_rising,related_top  
+#     return related_rising,related_top  
 
-@logger.catch
-def get_related_topic(related, data):
-    related_rising =[]
-    related_top=[]
-    try:
-        # Check if 'rising' key exists and has data
-        if 'rising' in related[data] and not related[data]['rising'].empty:
-            related_rising.extend(related[data]['rising']['topic_title'])
+# @logger.catch
+# def get_related_topic(related, data):
+#     related_rising =[]
+#     related_top=[]
+#     try:
+#         # Check if 'rising' key exists and has data
+#         if 'rising' in related[data] and not related[data]['rising'].empty:
+#             related_rising.extend(related[data]['rising']['topic_title'])
 
-        # Check if 'top' key exists and has data
-        if 'top' in related[data] and not related[data]['top'].empty:
-            related_top.extend(related[data]['top']['topic_title'])
+#         # Check if 'top' key exists and has data
+#         if 'top' in related[data] and not related[data]['top'].empty:
+#             related_top.extend(related[data]['top']['topic_title'])
    
-    except Exception as e:
-        logger.warning(f'Get Related Topic Exception {e}')
-        pass  # Skip if any error occurs
+#     except Exception as e:
+#         logger.warning(f'Get Related Topic Exception {e}')
+#         pass  # Skip if any error occurs
     
-    return related_rising,related_top  
+#     return related_rising,related_top  
 
 ########################################## Pytrends Function Ends #####################################################
 
@@ -657,7 +762,7 @@ def get_related_topic(related, data):
 def generate_twitter_post_task():
 
     try:
-        if Post.objects.filter(status = "Twitter Ready"):
+        if Post.objects.filter(status = "Twitter Ready").exists():
             post_object = Post.objects.filter(status = "Twitter Ready").order_by('id').first()
             
             Tweet_content = generate_twitter_post(post_object.conclusion)
@@ -683,7 +788,7 @@ def generate_twitter_post_task():
 @shared_task
 def publish_twitter_post_task():
     try:
-        if TwitterPost.objects.filter(status = "Tweet Saved"):
+        if TwitterPost.objects.filter(status = "Tweet Saved").exists():
             twitter_object = TwitterPost.objects.filter(status = "Tweet Saved").order_by('id').first()
             
             twitter_client = tweepy.Client(consumer_key = "n6WhBu3WFF3OU0qwEDwD1Zrza",

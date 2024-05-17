@@ -4,7 +4,9 @@ from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 genai.configure(api_key="AIzaSyDUvhzuC5-xrgN1pVXc9knhGlv30sLlw34")
 model = genai.GenerativeModel('gemini-pro')
-
+for m in genai.list_models():
+  if 'generateContent' in m.supported_generation_methods:
+    print(m.name)
 safety_setting={
     HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
     HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,

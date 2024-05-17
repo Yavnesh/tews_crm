@@ -10,6 +10,7 @@
 # To run redis (This command starts the Redis server in the foreground. To run it in the background, use the --daemonize yes option:)
 # redis-server 
 # redis-server -daemonize yes
+sudo service redis-server stop
 
 # To Run Celery server
 # celery -A tews_crm worker -l info
@@ -414,6 +415,7 @@ Deploying to oracle compute instance - https://www.youtube.com/watch?v=Kw0RHDkps
 
 1. open powershell > ssh -i c:/Users/yavne/Downloads/ssh-key.key ubuntu@129.154.245.226
 
+152.67.1.157
 2. sudo apt-get install nano cron rsyslog logrotate lsof 
 nano: A simple, easy-to-use text editor for the command line, often used for editing configuration files and scripts.
 cron: The cron daemon, which is responsible for executing scheduled tasks (cron jobs) at specified intervals. It allows users to automate repetitive tasks by running commands or scripts at predefined times.

@@ -1,0 +1,4 @@
+2024-05-17 13:32:38.210 | WARNING  | crm.tasks:generate_short_content_task:345 - Generate Short Content Task Started
+2024-05-17 13:32:42.582 | WARNING  | crm.tasks:generate_short_content_task:362 - Generate Short Content Task Exception 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+2024-05-17 13:33:37.160 | WARNING  | crm.tasks:generate_short_content_task:345 - Generate Short Content Task Started
+2024-05-17 13:33:40.117 | WARNING  | crm.tasks:generate_short_content_task:362 - Generate Short Content Task Exception 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting

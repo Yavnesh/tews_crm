@@ -6,6 +6,7 @@ class Scrape(models.Model):
     url = models.TextField(default='none')
     title = models.TextField(default='none')
     content = models.TextField(default='none')
+    short_content = models.TextField(default='none')
     images = models.TextField(default='none')
     status = models.CharField(max_length=30,default="Not Scraped")
     
