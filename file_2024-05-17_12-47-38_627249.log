@@ -1,6 +1,0 @@
-2024-05-17 12:48:40.073 | WARNING  | crm.tasks:generate_short_content_task:345 - Generate Short Content Task Started
-2024-05-17 12:48:44.026 | WARNING  | crm.tasks:generate_short_content_task:362 - Generate Short Content Task Exception 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
-2024-05-17 12:49:39.967 | WARNING  | crm.tasks:generate_short_content_task:345 - Generate Short Content Task Started
-2024-05-17 12:49:42.821 | WARNING  | crm.tasks:generate_short_content_task:362 - Generate Short Content Task Exception 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
-2024-05-17 12:49:50.189 | WARNING  | crm.tasks:fetch_article_data_task:254 - Fetch Article Data Task Started
-2024-05-17 12:49:50.204 | WARNING  | crm.tasks:fetch_article_data_task:258 - Get first item of Trending with status Saved,trending_object

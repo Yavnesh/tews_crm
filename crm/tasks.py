@@ -29,7 +29,7 @@ from newspaper import Config
 
 ##############  Loguru  #######################
 from loguru import logger
-logger.add("file_{time}.log",level="TRACE", rotation="10 MB")
+logger.add("logs/file_{time}.log",level="TRACE", rotation="10 MB")
 # logger.add("logs/testing.log",level="TRACE", rotation="10 MB")
 ########################### Gemini Tasks ######################################################
 #Create scrape_url Task every 1 min
@@ -74,11 +74,11 @@ PeriodicTask.objects.get_or_create(
     task = 'crm.tasks.generate_image_prompt_task',
 )
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule60,
-    name = 'generate_twitter_post_task_periodic',
-    task = 'crm.tasks.generate_twitter_post_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule60,
+#     name = 'generate_twitter_post_task_periodic',
+#     task = 'crm.tasks.generate_twitter_post_task',
+# )
 
 PeriodicTask.objects.get_or_create(
     interval = schedule60,
@@ -88,11 +88,11 @@ PeriodicTask.objects.get_or_create(
 
 # ########################### Twitter Tasks ######################################################
 
-PeriodicTask.objects.get_or_create(
-    interval = schedule60,
-    name = 'publish_twitter_post_task_periodic',
-    task = 'crm.tasks.publish_twitter_post_task',
-)
+# PeriodicTask.objects.get_or_create(
+#     interval = schedule60,
+#     name = 'publish_twitter_post_task_periodic',
+#     task = 'crm.tasks.publish_twitter_post_task',
+# )
 
 # ########################### Horde Tasks ######################################################
 
