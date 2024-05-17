@@ -1,0 +1,65 @@
+2024-05-17 17:40:49.704 | WARNING  | crm.tasks:generate_short_content_task:348 - Generate Short Content Task Started
+2024-05-17 17:40:49.719 | WARNING  | crm.tasks:generate_realated_trend_task:373 - Generate Related Trends Task Started
+2024-05-17 17:40:49.732 | WARNING  | crm.tasks:generate_content_info_task:422 - Generate Content Info Task Started
+2024-05-17 17:40:49.761 | WARNING  | crm.tasks:generate_realated_trend_task:411 - Generate Related Trends Task Ended
+2024-05-17 17:40:49.775 | WARNING  | crm.tasks:generate_content_task:474 - Generate Content Task Started
+2024-05-17 17:40:49.793 | WARNING  | crm.tasks:generate_content_info_task:468 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:40:49.861 | WARNING  | crm.tasks:generate_meta_info_task:570 - Generate Meta Task Started
+2024-05-17 17:40:49.869 | WARNING  | crm.tasks:generate_image_prompt_task:517 - Generate Image Prompt Task Started
+2024-05-17 17:40:49.876 | WARNING  | crm.tasks:generate_meta_info_task:588 - Generate Meta Task Ended
+2024-05-17 17:40:49.903 | WARNING  | crm.tasks:fetch_api_website:599 - API hit Website Started
+2024-05-17 17:40:49.927 | WARNING  | crm.tasks:fetch_article_data_task:254 - Fetch Article Data Task Started
+2024-05-17 17:40:49.950 | WARNING  | crm.tasks:fetch_article_data_task:258 - Get first item of Trending with status Saved,trending_object
+2024-05-17 17:40:51.788 | WARNING  | crm.tasks:fetch_api_website:608 - API hit successful!
+2024-05-17 17:40:51.799 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.804 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.809 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.813 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.818 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.824 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.827 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.831 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.838 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.842 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.849 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.854 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.859 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.865 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:40:51.870 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:01.104 | WARNING  | crm.tasks:generate_short_content_task:363 - Generate Short Content Task Ended
+2024-05-17 17:41:42.446 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:41:42.449 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:41:44.605 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:41:46.110 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:41:46.112 | WARNING  | crm.tasks:fetch_article_data_task:289 - For loop status break 20244
+2024-05-17 17:41:46.116 | WARNING  | crm.tasks:fetch_article_data_task:321 - Scrape Table items not empty
+2024-05-17 17:41:46.134 | WARNING  | crm.tasks:fetch_article_data_task:332 - Scrape Table Saved
+2024-05-17 17:41:46.148 | WARNING  | crm.tasks:fetch_article_data_task:335 - Trending table Status updated
+2024-05-17 17:41:46.150 | WARNING  | crm.tasks:fetch_article_data_task:336 - Fetch Article Data Task Completed
+2024-05-17 17:41:48.057 | WARNING  | crm.tasks:generate_short_content_task:348 - Generate Short Content Task Started
+2024-05-17 17:41:48.240 | WARNING  | crm.tasks:generate_realated_trend_task:373 - Generate Related Trends Task Started
+2024-05-17 17:41:48.278 | WARNING  | crm.tasks:generate_content_info_task:422 - Generate Content Info Task Started
+2024-05-17 17:41:48.322 | WARNING  | crm.tasks:generate_content_info_task:468 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:41:48.337 | WARNING  | crm.tasks:generate_content_task:474 - Generate Content Task Started
+2024-05-17 17:41:48.366 | WARNING  | crm.tasks:generate_meta_info_task:570 - Generate Meta Task Started
+2024-05-17 17:41:48.375 | WARNING  | crm.tasks:generate_meta_info_task:588 - Generate Meta Task Ended
+2024-05-17 17:41:48.379 | WARNING  | crm.tasks:generate_image_prompt_task:517 - Generate Image Prompt Task Started
+2024-05-17 17:41:48.412 | WARNING  | crm.tasks:fetch_api_website:599 - API hit Website Started
+2024-05-17 17:41:50.230 | WARNING  | crm.tasks:fetch_api_website:608 - API hit successful!
+2024-05-17 17:41:50.239 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.243 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.246 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.250 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.253 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.257 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.260 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.264 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.268 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.271 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.275 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.278 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.282 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.286 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:50.290 | WARNING  | crm.tasks:fetch_api_website:618 - API post does not exist
+2024-05-17 17:41:56.880 | WARNING  | crm.tasks:generate_realated_trend_task:411 - Generate Related Trends Task Ended
+2024-05-17 17:41:57.177 | WARNING  | crm.tasks:generate_short_content_task:363 - Generate Short Content Task Ended

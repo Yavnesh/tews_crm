@@ -1,0 +1,435 @@
+2024-05-17 17:06:59.927 | WARNING  | crm.tasks:generate_short_content_task:347 - Generate Short Content Task Started
+2024-05-17 17:06:59.945 | WARNING  | crm.tasks:generate_short_content_task:360 - Generate Short Content Task Ended
+2024-05-17 17:06:59.952 | WARNING  | crm.tasks:generate_realated_trend_task:370 - Generate Related Trends Task Started
+2024-05-17 17:06:59.959 | WARNING  | crm.tasks:generate_content_info_task:419 - Generate Content Info Task Started
+2024-05-17 17:06:59.983 | WARNING  | crm.tasks:generate_realated_trend_task:408 - Generate Related Trends Task Ended
+2024-05-17 17:07:00.001 | WARNING  | crm.tasks:generate_content_task:471 - Generate Content Task Started
+2024-05-17 17:07:00.011 | WARNING  | crm.tasks:generate_content_info_task:465 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:07:00.039 | WARNING  | crm.tasks:generate_meta_info_task:567 - Generate Meta Task Started
+2024-05-17 17:07:00.052 | WARNING  | crm.tasks:generate_image_prompt_task:514 - Generate Image Prompt Task Started
+2024-05-17 17:07:00.066 | WARNING  | crm.tasks:generate_meta_info_task:585 - Generate Meta Task Ended
+2024-05-17 17:07:00.100 | WARNING  | crm.tasks:fetch_api_website:596 - API hit Website Started
+2024-05-17 17:07:00.121 | WARNING  | crm.tasks:generate_image_task:536 - Generate Image Task Started
+2024-05-17 17:07:00.148 | WARNING  | crm.tasks:fetch_article_data_task:254 - Fetch Article Data Task Started
+2024-05-17 17:07:00.164 | WARNING  | crm.tasks:fetch_article_data_task:258 - Get first item of Trending with status Saved,trending_object
+2024-05-17 17:07:02.055 | WARNING  | crm.tasks:fetch_api_website:605 - API hit successful!
+2024-05-17 17:07:02.071 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.076 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.079 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.083 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.087 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.090 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.094 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.097 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.101 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.104 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.107 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.111 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.114 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.118 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:02.121 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:07:55.442 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:07:55.445 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:07:58.522 | WARNING  | crm.tasks:generate_short_content_task:347 - Generate Short Content Task Started
+2024-05-17 17:07:58.533 | WARNING  | crm.tasks:generate_short_content_task:360 - Generate Short Content Task Ended
+2024-05-17 17:07:58.741 | WARNING  | crm.tasks:generate_realated_trend_task:370 - Generate Related Trends Task Started
+2024-05-17 17:07:58.749 | WARNING  | crm.tasks:generate_realated_trend_task:408 - Generate Related Trends Task Ended
+2024-05-17 17:07:58.763 | WARNING  | crm.tasks:generate_content_info_task:419 - Generate Content Info Task Started
+2024-05-17 17:07:58.775 | WARNING  | crm.tasks:generate_content_info_task:465 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:07:58.791 | WARNING  | crm.tasks:generate_content_task:471 - Generate Content Task Started
+2024-05-17 17:07:58.814 | WARNING  | crm.tasks:generate_meta_info_task:567 - Generate Meta Task Started
+2024-05-17 17:07:58.833 | WARNING  | crm.tasks:generate_meta_info_task:585 - Generate Meta Task Ended
+2024-05-17 17:07:58.859 | WARNING  | crm.tasks:generate_image_prompt_task:514 - Generate Image Prompt Task Started
+2024-05-17 17:07:58.897 | WARNING  | crm.tasks:fetch_api_website:596 - API hit Website Started
+2024-05-17 17:07:59.170 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:07:59.625 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:07:59.630 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:07:59.636 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:08:00.397 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:08:00.820 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:08:00.825 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:08:00.829 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:08:00.944 | WARNING  | crm.tasks:fetch_api_website:605 - API hit successful!
+2024-05-17 17:08:00.960 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:00.965 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:00.976 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:00.981 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:00.985 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:00.990 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:00.999 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:01.005 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:01.010 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:01.015 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:01.020 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:01.025 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:01.032 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:01.037 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:01.043 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:08:01.491 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:08:01.495 | WARNING  | crm.tasks:fetch_article_data_task:306 - Article Parse exception Article `download()` failed with 429 Client Error: Unknown Error for url: https://www.wbtw.com/news/pee-dee/florence-county/second-woman-arrested-in-bomb-threat-at-florence-county-beauty-school/ on URL https://news.google.com/rss/articles/CBMieGh0dHBzOi8vd3d3LndidHcuY29tL25ld3MvcGVlLWRlZS9mbG9yZW5jZS1jb3VudHkvc2Vjb25kLXdvbWFuLWFycmVzdGVkLWluLWJvbWItdGhyZWF0LWF0LWZsb3JlbmNlLWNvdW50eS1iZWF1dHktc2Nob29sL9IBfGh0dHBzOi8vd3d3LndidHcuY29tL25ld3MvcGVlLWRlZS9mbG9yZW5jZS1jb3VudHkvc2Vjb25kLXdvbWFuLWFycmVzdGVkLWluLWJvbWItdGhyZWF0LWF0LWZsb3JlbmNlLWNvdW50eS1iZWF1dHktc2Nob29sL2FtcC8?oc=5&hl=en-IN&gl=IN&ceid=IN:en
+2024-05-17 17:08:01.497 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:08:01.499 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:08:02.491 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:08:02.877 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:08:02.881 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:08:02.884 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:08:03.525 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:08:03.529 | WARNING  | crm.tasks:fetch_article_data_task:306 - Article Parse exception Article `download()` failed with 429 Client Error: Unknown Error for url: https://kdvr.com/news/local/jeffco-sheriffs-office-investigates-bomb-threat-at-west-jefferson-middle-school/ on URL https://news.google.com/rss/articles/CBMibGh0dHBzOi8va2R2ci5jb20vbmV3cy9sb2NhbC9qZWZmY28tc2hlcmlmZnMtb2ZmaWNlLWludmVzdGlnYXRlcy1ib21iLXRocmVhdC1hdC13ZXN0LWplZmZlcnNvbi1taWRkbGUtc2Nob29sL9IBcGh0dHBzOi8va2R2ci5jb20vbmV3cy9sb2NhbC9qZWZmY28tc2hlcmlmZnMtb2ZmaWNlLWludmVzdGlnYXRlcy1ib21iLXRocmVhdC1hdC13ZXN0LWplZmZlcnNvbi1taWRkbGUtc2Nob29sL2FtcC8?oc=5&hl=en-IN&gl=IN&ceid=IN:en
+2024-05-17 17:08:03.532 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:08:03.534 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:08:09.134 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:08:09.138 | WARNING  | crm.tasks:fetch_article_data_task:306 - Article Parse exception Article `download()` failed with 429 Client Error: Unknown Error for url: https://www.wsav.com/crime-safety/publix-at-twelve-oaks-evacuated-due-to-bomb-threat/ on URL https://news.google.com/rss/articles/CBMiVWh0dHBzOi8vd3d3LndzYXYuY29tL2NyaW1lLXNhZmV0eS9wdWJsaXgtYXQtdHdlbHZlLW9ha3MtZXZhY3VhdGVkLWR1ZS10by1ib21iLXRocmVhdC_SAVlodHRwczovL3d3dy53c2F2LmNvbS9jcmltZS1zYWZldHkvcHVibGl4LWF0LXR3ZWx2ZS1vYWtzLWV2YWN1YXRlZC1kdWUtdG8tYm9tYi10aHJlYXQvYW1wLw?oc=5&hl=en-IN&gl=IN&ceid=IN:en
+2024-05-17 17:08:09.140 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:08:09.141 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:08:10.215 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:08:10.591 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:08:10.596 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:08:10.600 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:08:11.282 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:08:11.775 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:08:11.779 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:08:11.782 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:08:12.857 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:08:13.547 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:08:13.554 | WARNING  | crm.tasks:fetch_article_data_task:303 - For loop status break 10146
+2024-05-17 17:08:13.562 | WARNING  | crm.tasks:fetch_article_data_task:320 - Scrape Table items not empty
+2024-05-17 17:08:13.591 | WARNING  | crm.tasks:fetch_article_data_task:331 - Scrape Table Saved
+2024-05-17 17:08:13.605 | WARNING  | crm.tasks:fetch_article_data_task:334 - Trending table Status updated
+2024-05-17 17:08:13.607 | WARNING  | crm.tasks:fetch_article_data_task:335 - Fetch Article Data Task Completed
+2024-05-17 17:08:58.525 | WARNING  | crm.tasks:generate_short_content_task:347 - Generate Short Content Task Started
+2024-05-17 17:08:58.742 | WARNING  | crm.tasks:generate_realated_trend_task:370 - Generate Related Trends Task Started
+2024-05-17 17:08:58.750 | WARNING  | crm.tasks:generate_realated_trend_task:408 - Generate Related Trends Task Ended
+2024-05-17 17:08:58.766 | WARNING  | crm.tasks:generate_content_info_task:419 - Generate Content Info Task Started
+2024-05-17 17:08:58.780 | WARNING  | crm.tasks:generate_content_info_task:465 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:08:58.789 | WARNING  | crm.tasks:generate_content_task:471 - Generate Content Task Started
+2024-05-17 17:08:58.815 | WARNING  | crm.tasks:generate_meta_info_task:567 - Generate Meta Task Started
+2024-05-17 17:08:58.823 | WARNING  | crm.tasks:generate_meta_info_task:585 - Generate Meta Task Ended
+2024-05-17 17:08:58.839 | WARNING  | crm.tasks:generate_image_prompt_task:514 - Generate Image Prompt Task Started
+2024-05-17 17:08:58.874 | WARNING  | crm.tasks:fetch_api_website:596 - API hit Website Started
+2024-05-17 17:08:58.906 | WARNING  | crm.tasks:fetch_article_data_task:254 - Fetch Article Data Task Started
+2024-05-17 17:08:58.918 | WARNING  | crm.tasks:fetch_article_data_task:258 - Get first item of Trending with status Saved,trending_object
+2024-05-17 17:09:00.741 | WARNING  | crm.tasks:fetch_api_website:605 - API hit successful!
+2024-05-17 17:09:00.750 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.760 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.766 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.771 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.776 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.781 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.786 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.791 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.796 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.801 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.806 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.811 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.821 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.827 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:00.831 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:09:11.803 | WARNING  | crm.tasks:generate_short_content_task:360 - Generate Short Content Task Ended
+2024-05-17 17:09:50.881 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:09:50.883 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:09:51.990 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:09:52.003 | WARNING  | crm.tasks:fetch_article_data_task:306 - Article Parse exception Article `download()` failed with 403 Client Error: Forbidden for url: https://www.greenfieldreporter.com/2024/05/16/threat-at-greenfield-intermediate-school-causes-district-to-lock-down-gis-and-harris-elementary/ on URL https://news.google.com/rss/articles/CBMijgFodHRwczovL3d3dy5ncmVlbmZpZWxkcmVwb3J0ZXIuY29tLzIwMjQvMDUvMTYvdGhyZWF0LWF0LWdyZWVuZmllbGQtaW50ZXJtZWRpYXRlLXNjaG9vbC1jYXVzZXMtZGlzdHJpY3QtdG8tbG9jay1kb3duLWdpcy1hbmQtaGFycmlzLWVsZW1lbnRhcnkv0gEA?oc=5&hl=en-IN&gl=IN&ceid=IN:en
+2024-05-17 17:09:52.005 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:09:52.007 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:09:52.677 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:09:52.686 | WARNING  | crm.tasks:fetch_article_data_task:306 - Article Parse exception Article `download()` failed with 429 Client Error: Unknown Error for url: https://www.wfla.com/news/hillsborough-county/its-a-threat-tampa-man-said-he-would-plant-a-bomb-in-u-s-reps-office-doj-says/ on URL https://news.google.com/rss/articles/CBMifGh0dHBzOi8vd3d3LndmbGEuY29tL25ld3MvaGlsbHNib3JvdWdoLWNvdW50eS9pdHMtYS10aHJlYXQtdGFtcGEtbWFuLXNhaWQtaGUtd291bGQtcGxhbnQtYS1ib21iLWluLXUtcy1yZXBzLW9mZmljZS1kb2otc2F5cy_SAYABaHR0cHM6Ly93d3cud2ZsYS5jb20vbmV3cy9oaWxsc2Jvcm91Z2gtY291bnR5L2l0cy1hLXRocmVhdC10YW1wYS1tYW4tc2FpZC1oZS13b3VsZC1wbGFudC1hLWJvbWItaW4tdS1zLXJlcHMtb2ZmaWNlLWRvai1zYXlzL2FtcC8?oc=5&hl=en-IN&gl=IN&ceid=IN:en
+2024-05-17 17:09:52.688 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:09:52.691 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:09:58.530 | WARNING  | crm.tasks:generate_short_content_task:347 - Generate Short Content Task Started
+2024-05-17 17:09:58.541 | WARNING  | crm.tasks:generate_short_content_task:360 - Generate Short Content Task Ended
+2024-05-17 17:09:58.810 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:09:59.073 | WARNING  | crm.tasks:generate_realated_trend_task:370 - Generate Related Trends Task Started
+2024-05-17 17:09:59.095 | WARNING  | crm.tasks:generate_content_info_task:419 - Generate Content Info Task Started
+2024-05-17 17:09:59.116 | WARNING  | crm.tasks:generate_content_task:471 - Generate Content Task Started
+2024-05-17 17:09:59.137 | WARNING  | crm.tasks:generate_content_info_task:465 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:09:59.208 | WARNING  | crm.tasks:generate_meta_info_task:567 - Generate Meta Task Started
+2024-05-17 17:09:59.211 | WARNING  | crm.tasks:generate_image_prompt_task:514 - Generate Image Prompt Task Started
+2024-05-17 17:09:59.240 | WARNING  | crm.tasks:generate_meta_info_task:585 - Generate Meta Task Ended
+2024-05-17 17:09:59.261 | WARNING  | crm.tasks:fetch_api_website:596 - API hit Website Started
+2024-05-17 17:09:59.403 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:09:59.411 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:09:59.415 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:10:01.245 | WARNING  | crm.tasks:fetch_api_website:605 - API hit successful!
+2024-05-17 17:10:01.253 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.257 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.261 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.264 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.267 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.272 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.277 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.282 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.287 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.292 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.297 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.300 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.304 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.308 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:01.311 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:10:04.777 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:10:05.317 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:10:05.321 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:10:05.324 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:10:06.577 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:10:07.059 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:10:07.063 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:10:07.067 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:10:09.710 | WARNING  | crm.tasks:generate_realated_trend_task:408 - Generate Related Trends Task Ended
+2024-05-17 17:10:11.628 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:10:12.268 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:10:12.272 | WARNING  | crm.tasks:fetch_article_data_task:303 - For loop status break 10429
+2024-05-17 17:10:12.276 | WARNING  | crm.tasks:fetch_article_data_task:320 - Scrape Table items not empty
+2024-05-17 17:10:12.294 | WARNING  | crm.tasks:fetch_article_data_task:331 - Scrape Table Saved
+2024-05-17 17:10:12.308 | WARNING  | crm.tasks:fetch_article_data_task:334 - Trending table Status updated
+2024-05-17 17:10:12.310 | WARNING  | crm.tasks:fetch_article_data_task:335 - Fetch Article Data Task Completed
+2024-05-17 17:10:58.525 | WARNING  | crm.tasks:generate_short_content_task:347 - Generate Short Content Task Started
+2024-05-17 17:10:58.910 | WARNING  | crm.tasks:fetch_article_data_task:254 - Fetch Article Data Task Started
+2024-05-17 17:10:58.919 | WARNING  | crm.tasks:fetch_article_data_task:258 - Get first item of Trending with status Saved,trending_object
+2024-05-17 17:10:59.071 | WARNING  | crm.tasks:generate_realated_trend_task:370 - Generate Related Trends Task Started
+2024-05-17 17:10:59.077 | WARNING  | crm.tasks:generate_realated_trend_task:408 - Generate Related Trends Task Ended
+2024-05-17 17:10:59.099 | WARNING  | crm.tasks:generate_content_info_task:419 - Generate Content Info Task Started
+2024-05-17 17:10:59.116 | WARNING  | crm.tasks:generate_content_task:471 - Generate Content Task Started
+2024-05-17 17:10:59.113 | WARNING  | crm.tasks:generate_content_info_task:465 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:10:59.144 | WARNING  | crm.tasks:generate_meta_info_task:567 - Generate Meta Task Started
+2024-05-17 17:10:59.149 | WARNING  | crm.tasks:generate_image_prompt_task:514 - Generate Image Prompt Task Started
+2024-05-17 17:10:59.155 | WARNING  | crm.tasks:generate_meta_info_task:585 - Generate Meta Task Ended
+2024-05-17 17:10:59.186 | WARNING  | crm.tasks:fetch_api_website:596 - API hit Website Started
+2024-05-17 17:11:01.001 | WARNING  | crm.tasks:fetch_api_website:605 - API hit successful!
+2024-05-17 17:11:01.010 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.016 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.021 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.026 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.030 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.034 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.039 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.044 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.048 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.052 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.057 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.061 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.064 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.067 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:01.071 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:11:07.415 | WARNING  | crm.tasks:generate_short_content_task:360 - Generate Short Content Task Ended
+2024-05-17 17:11:52.013 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:11:52.016 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:11:52.734 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:11:53.129 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:11:53.133 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:11:53.137 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:11:54.391 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:11:54.628 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:11:54.632 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:11:54.635 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:11:55.250 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:11:55.255 | WARNING  | crm.tasks:fetch_article_data_task:306 - Article Parse exception Article `download()` failed with 429 Client Error: Unknown Error for url: https://www.wbtw.com/news/pee-dee/florence-county/second-woman-arrested-in-bomb-threat-at-florence-county-beauty-school/ on URL https://news.google.com/rss/articles/CBMieGh0dHBzOi8vd3d3LndidHcuY29tL25ld3MvcGVlLWRlZS9mbG9yZW5jZS1jb3VudHkvc2Vjb25kLXdvbWFuLWFycmVzdGVkLWluLWJvbWItdGhyZWF0LWF0LWZsb3JlbmNlLWNvdW50eS1iZWF1dHktc2Nob29sL9IBfGh0dHBzOi8vd3d3LndidHcuY29tL25ld3MvcGVlLWRlZS9mbG9yZW5jZS1jb3VudHkvc2Vjb25kLXdvbWFuLWFycmVzdGVkLWluLWJvbWItdGhyZWF0LWF0LWZsb3JlbmNlLWNvdW50eS1iZWF1dHktc2Nob29sL2FtcC8?oc=5&hl=en-IN&gl=IN&ceid=IN:en
+2024-05-17 17:11:55.257 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:11:55.258 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:11:56.475 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:11:56.743 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:11:56.747 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:11:56.750 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:11:57.657 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:11:57.661 | WARNING  | crm.tasks:fetch_article_data_task:306 - Article Parse exception Article `download()` failed with 429 Client Error: Unknown Error for url: https://www.wbtw.com/news/pee-dee/florence-county/man-killed-after-being-hit-by-train-in-florence/ on URL https://news.google.com/rss/articles/CBMiYmh0dHBzOi8vd3d3LndidHcuY29tL25ld3MvcGVlLWRlZS9mbG9yZW5jZS1jb3VudHkvbWFuLWtpbGxlZC1hZnRlci1iZWluZy1oaXQtYnktdHJhaW4taW4tZmxvcmVuY2Uv0gFmaHR0cHM6Ly93d3cud2J0dy5jb20vbmV3cy9wZWUtZGVlL2Zsb3JlbmNlLWNvdW50eS9tYW4ta2lsbGVkLWFmdGVyLWJlaW5nLWhpdC1ieS10cmFpbi1pbi1mbG9yZW5jZS9hbXAv?oc=5&hl=en-IN&gl=IN&ceid=IN:en
+2024-05-17 17:11:57.662 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:11:57.664 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:11:58.375 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:11:58.537 | WARNING  | crm.tasks:generate_short_content_task:347 - Generate Short Content Task Started
+2024-05-17 17:11:58.544 | WARNING  | crm.tasks:generate_short_content_task:360 - Generate Short Content Task Ended
+2024-05-17 17:11:58.793 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:11:58.797 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:11:58.800 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:11:58.881 | WARNING  | crm.tasks:generate_image_task:536 - Generate Image Task Started
+2024-05-17 17:11:59.073 | WARNING  | crm.tasks:generate_realated_trend_task:370 - Generate Related Trends Task Started
+2024-05-17 17:11:59.092 | WARNING  | crm.tasks:generate_content_info_task:419 - Generate Content Info Task Started
+2024-05-17 17:11:59.102 | WARNING  | crm.tasks:generate_content_info_task:465 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:11:59.111 | WARNING  | crm.tasks:generate_content_task:471 - Generate Content Task Started
+2024-05-17 17:11:59.131 | WARNING  | crm.tasks:generate_meta_info_task:567 - Generate Meta Task Started
+2024-05-17 17:11:59.148 | WARNING  | crm.tasks:generate_meta_info_task:585 - Generate Meta Task Ended
+2024-05-17 17:11:59.152 | WARNING  | crm.tasks:generate_image_prompt_task:514 - Generate Image Prompt Task Started
+2024-05-17 17:11:59.193 | WARNING  | crm.tasks:fetch_api_website:596 - API hit Website Started
+2024-05-17 17:11:59.741 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:11:59.748 | WARNING  | crm.tasks:fetch_article_data_task:306 - Article Parse exception Article `download()` failed with 429 Client Error: Unknown Error for url: https://www.wbtw.com/news/pee-dee/florence-county/person-dies-in-crash-after-leading-florence-county-deputies-on-chase-authorities-say/ on URL https://news.google.com/rss/articles/CBMihwFodHRwczovL3d3dy53YnR3LmNvbS9uZXdzL3BlZS1kZWUvZmxvcmVuY2UtY291bnR5L3BlcnNvbi1kaWVzLWluLWNyYXNoLWFmdGVyLWxlYWRpbmctZmxvcmVuY2UtY291bnR5LWRlcHV0aWVzLW9uLWNoYXNlLWF1dGhvcml0aWVzLXNheS_SAYsBaHR0cHM6Ly93d3cud2J0dy5jb20vbmV3cy9wZWUtZGVlL2Zsb3JlbmNlLWNvdW50eS9wZXJzb24tZGllcy1pbi1jcmFzaC1hZnRlci1sZWFkaW5nLWZsb3JlbmNlLWNvdW50eS1kZXB1dGllcy1vbi1jaGFzZS1hdXRob3JpdGllcy1zYXkvYW1wLw?oc=5&hl=en-IN&gl=IN&ceid=IN:en
+2024-05-17 17:11:59.750 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:11:59.753 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:12:00.970 | WARNING  | crm.tasks:fetch_api_website:605 - API hit successful!
+2024-05-17 17:12:00.978 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:00.982 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:00.985 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:00.989 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:00.992 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:00.996 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:01.000 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:01.003 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:01.007 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:01.011 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:01.014 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:01.017 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:01.021 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:01.024 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:01.027 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:12:04.926 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:12:05.651 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:12:05.655 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:12:05.659 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:12:06.699 | WARNING  | crm.tasks:generate_realated_trend_task:408 - Generate Related Trends Task Ended
+2024-05-17 17:12:07.392 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:12:07.564 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:12:07.567 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:12:07.570 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:12:12.659 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:12:13.085 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:12:13.089 | WARNING  | crm.tasks:fetch_article_data_task:303 - For loop status break 14562
+2024-05-17 17:12:13.093 | WARNING  | crm.tasks:fetch_article_data_task:320 - Scrape Table items not empty
+2024-05-17 17:12:13.116 | WARNING  | crm.tasks:fetch_article_data_task:331 - Scrape Table Saved
+2024-05-17 17:12:13.130 | WARNING  | crm.tasks:fetch_article_data_task:334 - Trending table Status updated
+2024-05-17 17:12:13.132 | WARNING  | crm.tasks:fetch_article_data_task:335 - Fetch Article Data Task Completed
+2024-05-17 17:12:58.542 | WARNING  | crm.tasks:generate_short_content_task:347 - Generate Short Content Task Started
+2024-05-17 17:12:58.913 | WARNING  | crm.tasks:fetch_article_data_task:254 - Fetch Article Data Task Started
+2024-05-17 17:12:58.926 | WARNING  | crm.tasks:fetch_article_data_task:258 - Get first item of Trending with status Saved,trending_object
+2024-05-17 17:12:59.398 | WARNING  | crm.tasks:generate_realated_trend_task:370 - Generate Related Trends Task Started
+2024-05-17 17:12:59.405 | WARNING  | crm.tasks:generate_realated_trend_task:408 - Generate Related Trends Task Ended
+2024-05-17 17:12:59.410 | WARNING  | crm.tasks:generate_content_info_task:419 - Generate Content Info Task Started
+2024-05-17 17:12:59.424 | WARNING  | crm.tasks:generate_content_task:471 - Generate Content Task Started
+2024-05-17 17:12:59.432 | WARNING  | crm.tasks:generate_content_info_task:465 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:12:59.451 | WARNING  | crm.tasks:generate_meta_info_task:567 - Generate Meta Task Started
+2024-05-17 17:12:59.467 | WARNING  | crm.tasks:generate_meta_info_task:585 - Generate Meta Task Ended
+2024-05-17 17:12:59.476 | WARNING  | crm.tasks:generate_image_prompt_task:514 - Generate Image Prompt Task Started
+2024-05-17 17:12:59.524 | WARNING  | crm.tasks:fetch_api_website:596 - API hit Website Started
+2024-05-17 17:13:01.496 | WARNING  | crm.tasks:fetch_api_website:605 - API hit successful!
+2024-05-17 17:13:01.505 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.511 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.516 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.522 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.528 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.534 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.540 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.544 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.547 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.551 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.556 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.561 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.565 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.570 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:01.577 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:13:35.846 | WARNING  | crm.tasks:generate_short_content_task:360 - Generate Short Content Task Ended
+2024-05-17 17:13:56.181 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:13:56.183 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:13:58.550 | WARNING  | crm.tasks:generate_short_content_task:347 - Generate Short Content Task Started
+2024-05-17 17:13:58.562 | WARNING  | crm.tasks:generate_short_content_task:360 - Generate Short Content Task Ended
+2024-05-17 17:13:59.403 | WARNING  | crm.tasks:generate_realated_trend_task:370 - Generate Related Trends Task Started
+2024-05-17 17:13:59.423 | WARNING  | crm.tasks:generate_content_info_task:419 - Generate Content Info Task Started
+2024-05-17 17:13:59.434 | WARNING  | crm.tasks:generate_content_info_task:465 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:13:59.451 | WARNING  | crm.tasks:generate_content_task:471 - Generate Content Task Started
+2024-05-17 17:13:59.475 | WARNING  | crm.tasks:generate_meta_info_task:567 - Generate Meta Task Started
+2024-05-17 17:13:59.483 | WARNING  | crm.tasks:generate_meta_info_task:585 - Generate Meta Task Ended
+2024-05-17 17:13:59.492 | WARNING  | crm.tasks:generate_image_prompt_task:514 - Generate Image Prompt Task Started
+2024-05-17 17:13:59.529 | WARNING  | crm.tasks:fetch_api_website:596 - API hit Website Started
+2024-05-17 17:14:01.374 | WARNING  | crm.tasks:fetch_api_website:605 - API hit successful!
+2024-05-17 17:14:01.381 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.385 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.388 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.391 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.395 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.398 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.401 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.405 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.408 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.411 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.415 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.418 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.421 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.425 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:01.428 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:14:05.341 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:14:05.845 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:14:05.849 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:14:05.853 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:14:06.893 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:14:06.898 | WARNING  | crm.tasks:fetch_article_data_task:306 - Article Parse exception Article `download()` failed with 403 Client Error: Forbidden for url: https://www.sportskeeda.com/football/real-sociedad-vs-valencia-prediction-preview-team-news-more-la-liga-2023-24 on URL https://news.google.com/rss/articles/CBMicGh0dHBzOi8vd3d3LnNwb3J0c2tlZWRhLmNvbS9mb290YmFsbC9yZWFsLXNvY2llZGFkLXZzLXZhbGVuY2lhLXByZWRpY3Rpb24tcHJldmlldy10ZWFtLW5ld3MtbW9yZS1sYS1saWdhLTIwMjMtMjTSAQA?oc=5&hl=en-IN&gl=IN&ceid=IN:en
+2024-05-17 17:14:06.899 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:14:06.901 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:14:08.501 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:14:08.989 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:14:08.993 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:14:08.996 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:14:11.777 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:14:12.333 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:14:12.337 | WARNING  | crm.tasks:fetch_article_data_task:303 - For loop status break 13541
+2024-05-17 17:14:12.341 | WARNING  | crm.tasks:fetch_article_data_task:320 - Scrape Table items not empty
+2024-05-17 17:14:12.361 | WARNING  | crm.tasks:fetch_article_data_task:331 - Scrape Table Saved
+2024-05-17 17:14:12.374 | WARNING  | crm.tasks:fetch_article_data_task:334 - Trending table Status updated
+2024-05-17 17:14:12.376 | WARNING  | crm.tasks:fetch_article_data_task:335 - Fetch Article Data Task Completed
+2024-05-17 17:14:16.291 | WARNING  | crm.tasks:generate_realated_trend_task:408 - Generate Related Trends Task Ended
+2024-05-17 17:14:58.555 | WARNING  | crm.tasks:generate_short_content_task:347 - Generate Short Content Task Started
+2024-05-17 17:14:58.909 | WARNING  | crm.tasks:fetch_article_data_task:254 - Fetch Article Data Task Started
+2024-05-17 17:14:58.918 | WARNING  | crm.tasks:fetch_article_data_task:258 - Get first item of Trending with status Saved,trending_object
+2024-05-17 17:14:59.402 | WARNING  | crm.tasks:generate_realated_trend_task:370 - Generate Related Trends Task Started
+2024-05-17 17:14:59.410 | WARNING  | crm.tasks:generate_realated_trend_task:408 - Generate Related Trends Task Ended
+2024-05-17 17:14:59.431 | WARNING  | crm.tasks:generate_content_info_task:419 - Generate Content Info Task Started
+2024-05-17 17:14:59.446 | WARNING  | crm.tasks:generate_content_info_task:465 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:14:59.445 | WARNING  | crm.tasks:generate_content_task:471 - Generate Content Task Started
+2024-05-17 17:14:59.475 | WARNING  | crm.tasks:generate_meta_info_task:567 - Generate Meta Task Started
+2024-05-17 17:14:59.500 | WARNING  | crm.tasks:generate_image_prompt_task:514 - Generate Image Prompt Task Started
+2024-05-17 17:14:59.498 | WARNING  | crm.tasks:generate_meta_info_task:585 - Generate Meta Task Ended
+2024-05-17 17:14:59.543 | WARNING  | crm.tasks:fetch_api_website:596 - API hit Website Started
+2024-05-17 17:15:01.337 | WARNING  | crm.tasks:fetch_api_website:605 - API hit successful!
+2024-05-17 17:15:01.345 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.349 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.352 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.355 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.359 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.363 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.367 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.370 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.387 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.391 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.395 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.398 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.401 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.405 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:01.408 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:15:12.456 | WARNING  | crm.tasks:generate_short_content_task:360 - Generate Short Content Task Ended
+2024-05-17 17:15:53.139 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:15:53.143 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:15:54.902 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:15:55.690 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:15:55.694 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:15:55.699 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:15:57.428 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:15:58.186 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:15:58.190 | WARNING  | crm.tasks:fetch_article_data_task:274 - For loop in Gnews
+2024-05-17 17:15:58.196 | WARNING  | crm.tasks:fetch_article_data_task:278 - Article Download Starts
+2024-05-17 17:15:58.552 | WARNING  | crm.tasks:generate_short_content_task:347 - Generate Short Content Task Started
+2024-05-17 17:15:58.559 | WARNING  | crm.tasks:generate_short_content_task:360 - Generate Short Content Task Ended
+2024-05-17 17:15:59.642 | WARNING  | crm.tasks:generate_realated_trend_task:370 - Generate Related Trends Task Started
+2024-05-17 17:15:59.656 | WARNING  | crm.tasks:generate_content_info_task:419 - Generate Content Info Task Started
+2024-05-17 17:15:59.672 | WARNING  | crm.tasks:generate_content_task:471 - Generate Content Task Started
+2024-05-17 17:15:59.684 | WARNING  | crm.tasks:generate_content_info_task:465 - Generate Content Info Task Exception Expecting value: line 1 column 1 (char 0)
+2024-05-17 17:15:59.710 | WARNING  | crm.tasks:generate_meta_info_task:567 - Generate Meta Task Started
+2024-05-17 17:15:59.715 | WARNING  | crm.tasks:generate_image_prompt_task:514 - Generate Image Prompt Task Started
+2024-05-17 17:15:59.734 | WARNING  | crm.tasks:generate_meta_info_task:585 - Generate Meta Task Ended
+2024-05-17 17:15:59.758 | WARNING  | crm.tasks:fetch_api_website:596 - API hit Website Started
+2024-05-17 17:16:01.522 | WARNING  | crm.tasks:fetch_api_website:605 - API hit successful!
+2024-05-17 17:16:01.528 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.531 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.535 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.538 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.542 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.545 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.549 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.553 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.557 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.561 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.564 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.568 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.572 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.576 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:01.579 | WARNING  | crm.tasks:fetch_api_website:615 - API post does not exist
+2024-05-17 17:16:02.267 | WARNING  | crm.tasks:fetch_article_data_task:280 - Article Download Successful
+2024-05-17 17:16:03.072 | WARNING  | crm.tasks:fetch_article_data_task:283 - Article parse Successful
+2024-05-17 17:16:03.075 | WARNING  | crm.tasks:fetch_article_data_task:303 - For loop status break 9011
+2024-05-17 17:16:03.079 | WARNING  | crm.tasks:fetch_article_data_task:320 - Scrape Table items not empty
+2024-05-17 17:16:03.099 | WARNING  | crm.tasks:fetch_article_data_task:331 - Scrape Table Saved
+2024-05-17 17:16:03.112 | WARNING  | crm.tasks:fetch_article_data_task:334 - Trending table Status updated
+2024-05-17 17:16:03.114 | WARNING  | crm.tasks:fetch_article_data_task:335 - Fetch Article Data Task Completed
+2024-05-17 17:16:11.164 | WARNING  | crm.tasks:generate_realated_trend_task:408 - Generate Related Trends Task Ended

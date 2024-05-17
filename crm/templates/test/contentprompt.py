@@ -2,7 +2,7 @@ import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 
-genai.configure(api_key="AIzaSyDUvhzuC5-xrgN1pVXc9knhGlv30sLlw34")
+genai.configure(api_key="AIzaSyDmNszyVZrJ-2q2jwVwSsn7Opt0KhjTlGU")
 model = genai.GenerativeModel('gemini-pro')
 for m in genai.list_models():
   if 'generateContent' in m.supported_generation_methods:

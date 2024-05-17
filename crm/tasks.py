@@ -34,102 +34,102 @@ logger.add("file_{time}.log",level="TRACE", rotation="10 MB")
 ########################### Gemini Tasks ######################################################
 #Create scrape_url Task every 1 min
 schedule60, created60 = IntervalSchedule.objects.get_or_create(every=60, period=IntervalSchedule.SECONDS )
-schedule4, created4 = IntervalSchedule.objects.get_or_create(every=200, period=IntervalSchedule.SECONDS )
+schedule30, created30 = IntervalSchedule.objects.get_or_create(every=30, period=IntervalSchedule.SECONDS )
 
 #Schedule the periodic task programmatically
 
 PeriodicTask.objects.get_or_create(
-    interval = schedule60,
+    interval = schedule30,
     name = 'generate_short_content_task_periodic',
     task = 'crm.tasks.generate_short_content_task',
 )
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule,
-#     name = 'generate_realated_trend_task_periodic',
-#     task = 'crm.tasks.generate_realated_trend_task',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule30,
+    name = 'generate_realated_trend_task_periodic',
+    task = 'crm.tasks.generate_realated_trend_task',
+)
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule,
-#     name = 'generate_content_info_task_periodic',
-#     task = 'crm.tasks.generate_content_info_task',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule30,
+    name = 'generate_content_info_task_periodic',
+    task = 'crm.tasks.generate_content_info_task',
+)
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule4,
-#     name = 'generate_content_task_periodic',
-#     task = 'crm.tasks.generate_content_task',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule60,
+    name = 'generate_content_task_periodic',
+    task = 'crm.tasks.generate_content_task',
+)
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule,
-#     name = 'generate_meta_info_task_periodic',
-#     task = 'crm.tasks.generate_meta_info_task',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule30,
+    name = 'generate_meta_info_task_periodic',
+    task = 'crm.tasks.generate_meta_info_task',
+)
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule,
-#     name = 'generate_image_prompt_task_periodic',
-#     task = 'crm.tasks.generate_image_prompt_task',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule30,
+    name = 'generate_image_prompt_task_periodic',
+    task = 'crm.tasks.generate_image_prompt_task',
+)
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule,
-#     name = 'generate_twitter_post_task_periodic',
-#     task = 'crm.tasks.generate_twitter_post_task',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule60,
+    name = 'generate_twitter_post_task_periodic',
+    task = 'crm.tasks.generate_twitter_post_task',
+)
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule,
-#     name = 'fetch_api_website_task_periodic',
-#     task = 'crm.tasks.fetch_api_website',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule60,
+    name = 'fetch_api_website_task_periodic',
+    task = 'crm.tasks.fetch_api_website',
+)
 
-# # ########################### Twitter Tasks ######################################################
+# ########################### Twitter Tasks ######################################################
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule,
-#     name = 'publish_twitter_post_task_periodic',
-#     task = 'crm.tasks.publish_twitter_post_task',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule60,
+    name = 'publish_twitter_post_task_periodic',
+    task = 'crm.tasks.publish_twitter_post_task',
+)
 
-# # ########################### Horde Tasks ######################################################
+# ########################### Horde Tasks ######################################################
 
-# # # #Create scrape_url Task every 10 min
-schedule1, created1 = IntervalSchedule.objects.get_or_create(every=360, period=IntervalSchedule.SECONDS )
+# # #Create scrape_url Task every 10 min
+schedule90, created90 = IntervalSchedule.objects.get_or_create(every=90, period=IntervalSchedule.SECONDS )
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule1,
-#     name = 'generate_image_task_periodic',
-#     task = 'crm.tasks.generate_image_task',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule90,
+    name = 'generate_image_task_periodic',
+    task = 'crm.tasks.generate_image_task',
+)
 
 ########################### PyTrend Tasks ######################################################
 # # #Create scrape_url Task every 30 min
-# schedule2, created2 = IntervalSchedule.objects.get_or_create(every=1800, period=IntervalSchedule.SECONDS )
-# schedule3, created3 = IntervalSchedule.objects.get_or_create(every=900, period=IntervalSchedule.SECONDS )
+schedule1800, created1800 = IntervalSchedule.objects.get_or_create(every=1800, period=IntervalSchedule.SECONDS )
+schedule900, created900 = IntervalSchedule.objects.get_or_create(every=900, period=IntervalSchedule.SECONDS )
 
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule2,
-#     name = 'fetch_trends_task_periodic',
-#     task = 'crm.tasks.fetch_trends_task',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule1800,
+    name = 'fetch_trends_task_periodic',
+    task = 'crm.tasks.fetch_trends_task',
+)
 
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule3,
-#     name = 'fetch_trends_realtime_task_periodic',
-#     task = 'crm.tasks.fetch_trends_realtime_task',
-# )
+PeriodicTask.objects.get_or_create(
+    interval = schedule900,
+    name = 'fetch_trends_realtime_task_periodic',
+    task = 'crm.tasks.fetch_trends_realtime_task',
+)
 
 ########################### GNews Tasks ######################################################
-# schedule120, created120 = IntervalSchedule.objects.get_or_create(every=120, period=IntervalSchedule.SECONDS )
-# PeriodicTask.objects.get_or_create(
-#     interval = schedule120,
-#     name = 'fetch_article_data_task_periodic',
-#     task = 'crm.tasks.fetch_article_data_task',
-# )
+schedule120, created120 = IntervalSchedule.objects.get_or_create(every=120, period=IntervalSchedule.SECONDS )
+PeriodicTask.objects.get_or_create(
+    interval = schedule90,
+    name = 'fetch_article_data_task_periodic',
+    task = 'crm.tasks.fetch_article_data_task',
+)
 
 
 ################################## Gemini Settings ####################################
@@ -166,7 +166,7 @@ def fetch_trends_task():
         for item in topic_list:
             logger.warning("For Loop Topic List")
             if not Trending.objects.filter(topic = item).exists():
-                i = i + 1
+                # i = i + 1
                 # pytrends.build_payload([item], cat=0, timeframe='today 5-y', geo='US', gprop='')
 
                 # related_topics = pytrends.related_topics()
@@ -212,7 +212,7 @@ def fetch_trends_realtime_task():
         topic_list = TrendingList['entityNames'].tolist()
         logger.warning("View Trending List",topic_list)
         
-        i = 0
+        # i = 0
         for item in topic_list:
             logger.warning("For Loop Topic List")
             for t in item:
@@ -261,7 +261,7 @@ def fetch_article_data_task():
             else:
                 google_news = GNews()
                 json_resp = google_news.get_news(trending_object.topic)
-
+                chr_count = 0
                 items = 0
                 title = []
                 text = []
@@ -284,7 +284,10 @@ def fetch_article_data_task():
                             img = []
                             for item in article.images:
                                 img.append(str(item))
-
+                            chr_count = chr_count + len(article.text)
+                            if chr_count>50000:
+                                logger.warning(f'For loop status break {chr_count}')
+                                break
                             print("titarticle.titlele", article.title)
                             print("contenarticle.textt", article.text)
                             print("imagimges", img)
@@ -299,7 +302,7 @@ def fetch_article_data_task():
                             if items == 10:
                                 logger.warning(f'For loop status break {items}')
                                 break
-
+                            
                         except Exception as e:
                             logger.warning(f'Article Parse exception {e}')
                     except Exception as e:
@@ -319,17 +322,21 @@ def fetch_article_data_task():
                     if Scrape.objects.filter(trending_id = trending_object.id).exists():
                         logger.warning("Scrape Item already exists")
                     else:
-                        scrape_object = Scrape( trending_id = trending_object.id,
-                                            title = title,
-                                            content = content,
-                                            images = images,
-                                            url = url,
-                                            status = "Scraped")
-                        scrape_object.save()
-                        logger.warning("Scrape Table Saved")
-                        trending_object.status = "Scraped"
-                        trending_object.save()
-                        logger.warning("Trending table Status updated")
+                        if chr_count>10000:
+                            scrape_object = Scrape( trending_id = trending_object.id,
+                                                title = title,
+                                                content = content,
+                                                images = images,
+                                                url = url,
+                                                status = "Scraped")
+                            scrape_object.save()
+                            logger.warning("Scrape Table Saved")
+                            trending_object.status = "Scraped"
+                            trending_object.save()
+                            logger.warning("Trending table Status updated")
+                        else:
+                            trending_object.status = "Blocked"
+                            trending_object.save()
         logger.warning("Fetch Article Data Task Completed")
         return None
 
@@ -348,8 +355,10 @@ def generate_short_content_task():
             scrape_object = Scrape.objects.filter(status="Scraped").order_by('id').first()
             print(scrape_object.trending_id)
             short_content = generate_short_content(scrape_object.content)
-            
-            data = {'short_content': short_content, 'status' : 'Trends Ready'}
+            text = []
+            text.append(short_content)
+            content = json.dumps(text)
+            data = {'short_content': content, 'status' : 'Trends Ready'}
             for key, value in data.items():
                 if hasattr(scrape_object, key):
                     setattr(scrape_object, key, value)
@@ -382,26 +391,40 @@ def generate_realated_trend_task():
             print("check4")
             related_queries_top = split_text(short_content, "Top Related Queries", "Rising Related Topics")
             related_topics_rising = split_text(short_content, "Rising Related Topics", "Top Related Topics")
-            related_queries_top = split_text(short_content, "Top Related Topics", None)
+            related_topics_top = split_text(short_content, "Top Related Topics", None)
             print("check5")
             print("related_queries_rising",related_queries_rising)
             print("related_queries_top",related_queries_top)
             print("related_topics_rising",related_topics_rising)
-            print("related_queries_top",related_queries_top)
-
-            data = {'related_topics_rising' : json.dumps(related_topics_rising), 'related_topics_top' : json.dumps(related_topics_top), 'related_query_rising' : json.dumps(related_queries_rising),
-                                    'related_query_top' : json.dumps(related_queries_top), 'status' : 'Content Ready'}
-            for key, value in data.items():
-                if hasattr(trending_object, key):
-                    setattr(trending_object, key, value)
-            trending_object.save()
-            print("check6")
-            data = {'status' : 'Content Ready'}
-            for key, value in data.items():
-                if hasattr(scrape_object, key):
-                    setattr(scrape_object, key, value)
-            scrape_object.save()
-            print("check7")
+            print("related_queries_top",related_topics_top)
+            if related_queries_rising or related_queries_top or related_topics_rising or related_topics_top:
+                data = {'related_topics_rising' : json.dumps(related_topics_rising), 'related_topics_top' : json.dumps(related_topics_top), 'related_query_rising' : json.dumps(related_queries_rising),
+                                        'related_query_top' : json.dumps(related_queries_top), 'status' : 'Content Ready'}
+                for key, value in data.items():
+                    if hasattr(trending_object, key):
+                        setattr(trending_object, key, value)
+                trending_object.save()
+                print("check6")
+                data = {'status' : 'Content Ready'}
+                for key, value in data.items():
+                    if hasattr(scrape_object, key):
+                        setattr(scrape_object, key, value)
+                scrape_object.save()
+                print("check7")
+            else:
+                data = {'related_topics_rising' : json.dumps(related_topics_rising), 'related_topics_top' : json.dumps(related_topics_top), 'related_query_rising' : json.dumps(related_queries_rising),
+                                        'related_query_top' : json.dumps(related_queries_top), 'status' : 'Blocked'}
+                for key, value in data.items():
+                    if hasattr(trending_object, key):
+                        setattr(trending_object, key, value)
+                trending_object.save()
+                print("check6")
+                data = {'status' : 'Blocked'}
+                for key, value in data.items():
+                    if hasattr(scrape_object, key):
+                        setattr(scrape_object, key, value)
+                scrape_object.save()
+                print("check7")
                                         
         logger.warning("Generate Related Trends Task Ended")
         return None
@@ -420,7 +443,9 @@ def generate_content_info_task():
             scrape_object = Scrape.objects.filter(status="Content Ready").order_by('id').first()
             short_content = []
             content = []
+            logger.warning("Gchecking error d")
             short_content = [item for item in json.loads(scrape_object.title)] + [item for item in json.loads(scrape_object.short_content)]
+            logger.warning("check error 12 ed")
             content = [item for item in json.loads(scrape_object.title)] + [item for item in json.loads(scrape_object.content)]
             category = []
             subcategory = []
@@ -516,7 +541,7 @@ def generate_image_prompt_task():
             image_prompt = []
             image_prompt_content = [item for item in json.loads(post_object.content)] + [item for item in json.loads(post_object.conclusion)]
             image_prompt = generate_image_prompt(image_prompt_content)
-            data = {'image_prompt': json.dumps(image_prompt), 'status' : 'ImageGenReady'}
+            data = {'image_prompt': image_prompt, 'status' : 'ImageGenReady'}
 
             for key, value in data.items():
                 if hasattr(post_object, key):
@@ -536,10 +561,11 @@ def generate_image_task():
         if Post.objects.filter(status = "ImageGenReady"):
             post_object = Post.objects.filter(status = "ImageGenReady").order_by('id').first()
             logger.warning("Generate Image Task Working")
-            
-            crm_path, image_path, base64_image = asyncio.run(generate_image_api(json.loads(post_object.image_prompt), post_object.id))
+            logger.warning("Gener345r6t5fe4def5rorking")
+            crm_path, image_path, base64_image = asyncio.run(generate_image_api(post_object.image_prompt, post_object.id))
+            logger.warning("efrgthyuj654567orking")
             image_data = []
-            image_data.append(json.loads(post_object.image_prompt))
+            image_data.append(post_object.image_prompt)
             image_data.append(str(crm_path))
             image_data.append(str(image_path))
             image_data.append(base64_image)
@@ -814,7 +840,7 @@ def publish_twitter_post_task():
 def generate_twitter_post(merged_content):
     logger.warning("Generate_twitter post started")
     
-    genai.configure(api_key="AIzaSyDUvhzuC5-xrgN1pVXc9knhGlv30sLlw34")
+    genai.configure(api_key="AIzaSyAZLlvQ2yyZxQ6WqfZ0uTBKIhVxU0c-Ml8")
     model = genai.GenerativeModel('gemini-pro')
 
     post_prompt = """

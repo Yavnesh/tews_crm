@@ -2,7 +2,7 @@ import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import re
 
-genai.configure(api_key="AIzaSyDUvhzuC5-xrgN1pVXc9knhGlv30sLlw34")
+genai.configure(api_key="AIzaSyAZLlvQ2yyZxQ6WqfZ0uTBKIhVxU0c-Ml8")
 model = genai.GenerativeModel('gemini-pro')
 
 safety_setting={
@@ -27,7 +27,7 @@ def generate_image_prompt(merged_content):
         The target audience is of US location and the target audience loves to read articles and blog posts and are compelled to open a article by looking at the image.
 
         Note : The ideas must be very simple to portrait that even a 10 year old can draw the scene.
-
+        Note : Image should not contain any text until it is a proper word in oxford dictonary.
             """.format(merged_content)
 
     messages = [
