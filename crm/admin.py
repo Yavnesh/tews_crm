@@ -17,7 +17,7 @@ class TwitterPostAdmin(admin.ModelAdmin):
     list_per_page = 50
 
 class TrendingAdmin(admin.ModelAdmin):
-    list_display = ('id', 'topic', 'status')
+    list_display = ('id', 'topic', 'status', 'source')
     search_fields = ('topic', 'status')
     list_per_page = 50
 

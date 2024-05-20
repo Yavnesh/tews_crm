@@ -1,6 +1,7 @@
-
-from pathlib import Path
 import os
+from pathlib import Path
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -167,13 +168,40 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 #     'crm.tasks',
 # )
 
-# Google Gemini Credentials
 
-Gemini_API_key = "AIzaSyDUvhzuC5-xrgN1pVXc9knhGlv30sLlw34"
+
+
+##############  Load environment variables  #######################
+
+# Load environment variables from .env file
+# env_path = Path('.') / '.env'
+# Load environment variables from a .env file if available
+# load_dotenv(dotenv_path=env_path)
+
+
+# TWITTER_CONSUMER_KEY = os.getenv("TWITTER_CONSUMER_KEY")
+# TWITTER_CONSUMER_SECRET = os.getenv("TWITTER_CONSUMER_SECRET")
+# TWITTER_ACCESS_TOKEN = os.getenv("TWITTER_ACCESS_TOKEN")
+# TWITTER_ACCESS_TOKEN_SECRET = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
+# GEMINI_API_KEY_1 = os.getenv("GEMINI_API_KEY_1")
+# GEMINI_API_KEY_2 = os.getenv("GEMINI_API_KEY_2")
+# GEMINI_API_KEY_3 = os.getenv("GEMINI_API_KEY_3")
+# STABLE_HORDE_API_KEY = os.getenv("STABLE_HORDE_API_KEY")
+
 
 # Twitter Credentials
 
-TWITTER_API_Key = "n6WhBu3WFF3OU0qwEDwD1Zrza"
-TWITTER_API_Key_Secret = "kjvqKWucaPNfFAFhT8y1HdbDFr00uiIHqU1uQ6gPCsCh6MznJ8"
-TWITTER_Access_Token = "1784831051531243520-26iFIKDBpzzoA2HDlWJbkR8Pg02Vfd"
-TWITTER_Access_Token_Secret = "zPkbMIlhnaE16bFpI2eTtORB8N4DhjFjG9J3dLHta1nzn"
+TWITTER_CONSUMER_KEY="n6WhBu3WFF3OU0qwEDwD1Zrza"
+TWITTER_CONSUMER_SECRET="kjvqKWucaPNfFAFhT8y1HdbDFr00uiIHqU1uQ6gPCsCh6MznJ8"
+TWITTER_ACCESS_TOKEN="1784831051531243520-GlRNKbdW59CgM2hm91MJUn5JyaY2t2"
+TWITTER_ACCESS_TOKEN_SECRET="ZWrMnCCUyouuWxYkxEGW3rws3pL8SACvR7jW8Pl1EZEVx"
+
+# Google Gemini Credentials
+
+GEMINI_API_KEY_1="AIzaSyBJaCAFmsYpMcO7OTNEJV6I-Ci9O7-X03Q"
+GEMINI_API_KEY_2="AIzaSyAZLlvQ2yyZxQ6WqfZ0uTBKIhVxU0c-Ml8"
+GEMINI_API_KEY_3="AIzaSyDmNszyVZrJ-2q2jwVwSsn7Opt0KhjTlGU"
+
+# Horde Credentials
+
+STABLE_HORDE_API_KEY="7LGsqLjIsFMXtsnwbgobTA"

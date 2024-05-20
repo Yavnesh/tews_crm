@@ -415,6 +415,12 @@ Deploying to oracle compute instance - https://www.youtube.com/watch?v=Kw0RHDkps
 
 1. open powershell > ssh -i c:/Users/yavne/Downloads/ssh-key.key ubuntu@129.154.245.226
 
+to delete
+rm -r tews_crm
+
+
+git clone https://github.com/Yavnesh/tews_crm.git
+
 152.67.1.157
 2. sudo apt-get install nano cron rsyslog logrotate lsof 
 nano: A simple, easy-to-use text editor for the command line, often used for editing configuration files and scripts.

@@ -3,6 +3,8 @@ from pathlib import Path
 import json
 import aiohttp
 import base64
+from loguru import logger
+from tews_crm.settings import STABLE_HORDE_API_KEY
 
 # Replace with your actual API details
 API_POST_URL = "https://stablehorde.net/api/v2/generate/async"
@@ -11,9 +13,7 @@ RESULT_URL = "https://stablehorde.net/api/v2/generate/status/{job_id}"
 
 
 async def generate_image_api(image_prompt, id):
-    # Replace with your actual API key
-    api_key = "7LGsqLjIsFMXtsnwbgobTA"
-
+    logger.warning("Starting Generate Image API")
     # Example request body (customize parameters as needed)
     body = {
         "prompt": image_prompt,
@@ -39,7 +39,7 @@ async def generate_image_api(image_prompt, id):
 
     # Optional headers
     headers = {
-        "apikey": f"{api_key}",
+        "apikey": f"{STABLE_HORDE_API_KEY}",
         # "Client-Agent": "your_client_name/version"  # Replace with your client info
     }
 
@@ -50,8 +50,10 @@ async def generate_image_api(image_prompt, id):
                 response.raise_for_status()  # Raise exception for non-200 status codes
                 data = await response.json()
                 request_id = data.get("id")
+                logger.warning(f'Request submitted. Request ID: {request_id}')
                 print(f"Request submitted. Request ID: {request_id}")
         except (aiohttp.ClientError, json.JSONDecodeError) as e:
+            logger.warning(f"Error sending request: {e}")
             print(f"Error sending request: {e}")
             return
 
@@ -65,10 +67,12 @@ async def generate_image_api(image_prompt, id):
                     # print(data)
                     status = data.get("done")
                     if status:
+                        logger.warning(f"Job status: {status}")
                         print(f"Job status: {status}")
                         break  # Job is finished
                     
             except (aiohttp.ClientError, json.JSONDecodeError) as e:
+                logger.warning(f"Error checking job status: {e}")
                 print(f"Error checking job status: {e}")
             await asyncio.sleep(10)  # Sleep for 10 seconds between checks
 
@@ -84,6 +88,7 @@ async def generate_image_api(image_prompt, id):
                     for generation in data["generations"]:
                         image_url = generation["img"]
                         image_id = generation["id"]
+                        logger.warning(f"Image ID: {image_id}")
                         print(f"Image ID: {image_id}")
 
                     image_bytes = None
@@ -93,6 +98,7 @@ async def generate_image_api(image_prompt, id):
                         # print(f"URL: {image_bytes}")
 
                     if image_bytes is None:
+                        logger.warning(f"Error: Could not download image.")
                         print("Error: Could not download image.")
                         return
 
@@ -105,6 +111,7 @@ async def generate_image_api(image_prompt, id):
                         image_file.write(image_bytes)
 
                     base64_image = base64.b64encode(filepath_to_write_to.read_bytes()).decode()
+                    logger.warning(f"Image downloaded to {type(filepath_to_write_to)}!")
                     print(f"Image downloaded to {type(filepath_to_write_to)}!")
                     crm_path = Path("crm/img/posts") / f"{image_id}_img_{id}.webp"
  
@@ -113,6 +120,9 @@ async def generate_image_api(image_prompt, id):
                         break  # Job is finished
                 
             except (aiohttp.ClientError, json.JSONDecodeError) as e:
+                logger.warning(f"Error fetching results: {e}")
                 print(f"Error fetching results: {e}")
+    
+    logger.warning("Ending Generate Image API")
     return crm_path, filepath_to_write_to, base64_image
         
