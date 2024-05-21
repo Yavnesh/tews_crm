@@ -102,31 +102,34 @@ def fetch_trends_task():
 @shared_task
 def fetch_trends_realtime_task():
     logger.warning("Fetch Trends Real Time Task Started")
-#     try:
-#         pytrends = TrendReq(hl='en-US', tz=360)
-#         logger.warning("Connected to pytrends")
+    try:
+        pytrends = TrendReq(hl='en-US', tz=360)
+        logger.warning("Connected to pytrends")
 
-#         trending_list = pytrends.realtime_trending_searches(pn='US')['entityNames'].tolist()
-        
-#         for item in trending_list:
-#             logger.warning("Processing topic: %s", item)
-#             result = " ".join(item)
-#             if not Trending.objects.filter(topic=result).exists():
-#                 trending_object = Trending(
-#                     topic=result,
-#                     related_topics_rising=json.dumps([]),
-#                     related_topics_top=json.dumps([]),
-#                     related_query_rising=json.dumps([]),
-#                     related_query_top=json.dumps([]),
-#                     source="Real Time Trends", 
-#                     status="Saved"
-#                 )
-#                 trending_object.save()
-#                 logger.warning(f'Table Saved for topic {result}')
+        trending_list = pytrends.realtime_trending_searches(pn='US')['entityNames'].tolist()
+        i = 0
+        for item in trending_list:
+            i = i +1
+            logger.warning(f"Processing topic: {item}")
+            result = " ".join(item)
+            if not Trending.objects.filter(topic=result).exists():
+                if i > 3:
+                    break
+                trending_object = Trending(
+                    topic=result,
+                    related_topics_rising=json.dumps([]),
+                    related_topics_top=json.dumps([]),
+                    related_query_rising=json.dumps([]),
+                    related_query_top=json.dumps([]),
+                    source="Real Time Trends", 
+                    status="Saved"
+                )
+                trending_object.save()
+                logger.warning(f'Table Saved for topic {result}')
 
-    #     logger.warning("Fetch Trends Real Time Task Ended")
-    # except Exception as e:
-    #     logger.warning(f'Exception in fetch_trends_realtime_task: {e}')
+        logger.warning("Fetch Trends Real Time Task Ended")
+    except Exception as e:
+        logger.warning(f'Exception in fetch_trends_realtime_task: {e}')
 
 @logger.catch
 @shared_task
@@ -545,15 +548,11 @@ def fetch_api_website():
                 logger.warning("post_id is missing in the API response item")
                 continue
 
-            post_object, created = Post.objects.get_or_create(post_id=post_id)
-            if created:
-                logger.info(f"Created new Post with post_id {post_id}")
-            else:
-                logger.info(f"Post with post_id {post_id} already exists")
-
-            post_object.status = "Sent"
-            post_object.save()
-            logger.info(f"Post {post_id} status updated to 'Sent'")
+            post_object = Post.objects.filter(post_id=post_id)
+            if post_object: 
+                post_object.status = "Sent"
+                post_object.save()
+                logger.info(f"Post {post_id} status updated to 'Sent'")
         
     except requests.exceptions.RequestException as e:
         logger.error(f"Request failed: {e}")
