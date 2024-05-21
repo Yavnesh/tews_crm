@@ -4,3 +4,4 @@ logs/
 *.md
 .cache
 envcrm
+db.sqlite3

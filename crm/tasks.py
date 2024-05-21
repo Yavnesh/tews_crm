@@ -253,8 +253,12 @@ def generate_realated_trend_task():
             related_topics_top = split_text(short_content, "Top Related Topics", None)
             
             if related_queries_rising or related_queries_top or related_topics_rising or related_topics_top:
-                data = {'related_topics_rising' : json.dumps(related_topics_rising), 'related_topics_top' : json.dumps(related_topics_top), 'related_query_rising' : json.dumps(related_queries_rising),
-                                        'related_query_top' : json.dumps(related_queries_top), 'status' : 'Content Ready'}
+                data = {
+                    'related_topics_rising' : json.dumps(related_topics_rising) if related_topics_rising != "null" else json.dumps([]),
+                    'related_topics_top' : json.dumps(related_topics_top) if related_topics_top != "null" else json.dumps([]),
+                    'related_query_rising' : json.dumps(related_queries_rising) if related_queries_rising != "null" else json.dumps([]),
+                    'related_query_top' : json.dumps(related_queries_top) if related_queries_top != "null" else json.dumps([]),
+                    'status' : 'Content Ready'}
                 for key, value in data.items():
                     if hasattr(trending_object, key):
                         setattr(trending_object, key, value)
@@ -343,58 +347,6 @@ def generate_content_info_task():
         return None
 
 
-# @logger.catch
-# @shared_task
-# def generate_content_info_task():
-#     logger.warning("Generate Content Info Task Started")
-#     try:
-#         scrape_object = Scrape.objects.filter(status="Content Ready").order_by('id').first()
-#         # repetition_count(scrape_object)
-#         if scrape_object is None:
-#             logger.info("No 'Content Ready' scrape objects found.")
-#             return None
-
-#         short_content = json.loads(scrape_object.title) + json.loads(scrape_object.short_content)
-#         content = json.loads(scrape_object.title) + json.loads(scrape_object.content)
-        
-#         generate_post_content_info = generate_content_info(short_content)
-        
-#         if generate_post_content_info == "":
-#             scrape_object.status = "Content Blocked"
-#         else:
-#             category = split_text(generate_post_content_info, "Category", "Sub Category")
-#             subcategory = split_text(generate_post_content_info, "Sub Category", "Tags")
-#             tags = split_text(generate_post_content_info, "Tags", None)
-            
-#             if Post.objects.filter(post_id=scrape_object.trending_id).exists():
-#                 logger.warning("Post item already exists")
-#             else:
-#                 post_object = Post(
-#                     post_id=scrape_object.trending_id,
-#                     title="NoNE",
-#                     subtitle="NoNE",
-#                     meta="NoNE",
-#                     content=json.dumps(content),
-#                     conclusion="NoNE",
-#                     category=json.dumps(category),
-#                     subcategory=json.dumps(subcategory),
-#                     tags=json.dumps(tags),
-#                     author="NoNE",
-#                     status="Pre Content",
-#                     image_prompt="NoNE",
-#                     image_path="NoNE",
-#                     image_data="NoNE"
-#                 )
-#                 post_object.save()
-#                 scrape_object.status = "Joined"
-        
-#         scrape_object.save()
-#         logger.warning("Generate Content Info Task Ended")
-#         return None
-#     except Exception as e:
-#         logger.exception(f"Generate Content Info Task Exception: {e}")
-#         return None
-
 @logger.catch
 @shared_task
 def generate_content_task():
@@ -409,27 +361,6 @@ def generate_content_task():
         topics_object = Trending.objects.get(id=post_object.post_id)
         scrape_object = Scrape.objects.get(trending_id=post_object.post_id)
 
-        # # Load JSON data and return an empty list if data is None or empty.
-        # if related_topics_rising is None or related_topics_rising == "":
-        #     related_topics_rising = []
-        # else:
-        #     related_topics_rising = json.loads(related_topics_rising)
-        # if related_topics_top is None or related_topics_top == "":
-        #     related_topics_top = []
-        # else:
-        #     related_topics_top = json.loads(related_topics_top)
-        # if related_query_rising is None or related_query_rising == "":
-        #     related_query_rising = []
-        # else:
-        #     related_query_rising = json.loads(related_query_rising)
-        # if related_query_top is None or related_query_top == "":
-        #     related_query_top = []
-        # else:
-        #     related_query_top = json.loads(related_query_top)
-
-        # related_topic = related_topics_rising + related_topics_top
-        # related_query = related_query_rising + related_query_top
-
         related_topic = json.loads(topics_object.related_topics_rising) + json.loads(topics_object.related_topics_top)
         related_query = json.loads(topics_object.related_query_rising) + json.loads(topics_object.related_query_top)
         
@@ -443,39 +374,40 @@ def generate_content_task():
             related_query,
             json.loads(post_object.category)
         )
+        if generate_post_content != "":
+            questions_list = generate_content_cta(generate_post_content)
 
-        questions_list = generate_content_cta(generate_post_content)
+            cleaned_heading = split_text(generate_post_content, "Heading", "Introduction")
+            cleaned_subheading = split_text(generate_post_content, "Introduction", "Body")
+            cleaned_content = split_text(generate_post_content, "Body", "Conclusion")
+            cleaned_conclusion = split_text(generate_post_content, "Conclusion", None)
 
-        cleaned_heading = split_text(generate_post_content, "Heading", "Introduction")
-        cleaned_subheading = split_text(generate_post_content, "Introduction", "Body")
-        cleaned_content = split_text(generate_post_content, "Body", "Conclusion")
-        cleaned_conclusion = split_text(generate_post_content, "Conclusion", None)
-
-        if not all([cleaned_heading, cleaned_subheading, cleaned_content, cleaned_conclusion]):
-            data = {
-                'title': 'none',
-                'subtitle': 'none',
-                'content': 'none',
-                'conclusion': 'none',
-                'author': author_name,
-                'status': 'Content Issue'
-            }
+            if not all([cleaned_heading, cleaned_subheading, cleaned_content, cleaned_conclusion]):
+                data = {
+                    'title': 'none',
+                    'subtitle': 'none',
+                    'content': 'none',
+                    'conclusion': 'none',
+                    'author': author_name,
+                    'status': 'Content Issue'
+                }
+            else:
+                data = {
+                    'title': json.dumps(cleaned_heading),
+                    'subtitle': json.dumps(cleaned_subheading),
+                    'content': json.dumps(cleaned_content),
+                    'conclusion': json.dumps(cleaned_conclusion),
+                    'author': author_name,
+                    'status': 'Post Content',
+                    'survey': questions_list
+                }
+            for key, value in data.items():
+                if hasattr(post_object, key):
+                    setattr(post_object, key, value)
+            post_object.save()
         else:
-            data = {
-                'title': json.dumps(cleaned_heading),
-                'subtitle': json.dumps(cleaned_subheading),
-                'content': json.dumps(cleaned_content),
-                'conclusion': json.dumps(cleaned_conclusion),
-                'author': author_name,
-                'status': 'Post Content',
-                'survey': questions_list
-            }
-
-        for key, value in data.items():
-            if hasattr(post_object, key):
-                setattr(post_object, key, value)
-
-        post_object.save()
+            post_object.status = "Blocked"
+            post_object.save()
         logger.warning("Generate Content Task Ended")
     except Exception as e:
         logger.error(f'Generate Content Task Exception: {e}', exc_info=True)

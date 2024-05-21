@@ -166,8 +166,16 @@ def generate_response_single(prompt):
 
 def extract_pre_post_content(response):
     if response.candidates:
-        return response.candidates[0].content.parts[0].text
-    return ""
+        try:
+            return response.candidates[0].content.parts[0].text
+        except (IndexError, AttributeError) as e:
+            # Handle unexpected structure or missing attributes in the response
+            print(f"Error accessing candidate parts: {e}")
+            return ""
+    else:
+        if hasattr(response, 'prompt_feedback'):
+            # Log or handle the prompt feedback to understand why no candidates were returned
+            print(f"Prompt feedback: {response.prompt}")
 
 def select_author(category):
     
