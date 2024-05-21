@@ -29,7 +29,7 @@ class PostGetAPI(ListAPIView):
     # permission_classes = [IsAuthenticated]  # Require authentication
 
     def get(self, request, format = None):
-        postapi = Post.objects.filter(status='Draft')
+        postapi = Post.objects.filter(status='Draft').order_by('id')[:10]
         serializer = PostSerializer(postapi, many = True)
         data_list = list(serializer.data)
         return Response(data_list)

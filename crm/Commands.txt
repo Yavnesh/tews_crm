@@ -413,7 +413,7 @@ Deploying to oracle compute instance - https://www.youtube.com/watch?v=Kw0RHDkps
 
 ######################################################################
 
-1. open powershell > ssh -i c:/Users/yavne/Downloads/ssh-key.key ubuntu@129.154.245.226
+1. open powershell > ssh -i c:/Users/yavne/Downloads/ssh-key.key ubuntu@152.67.1.157
 
 to delete
 rm -r tews_crm
@@ -451,3 +451,11 @@ lsof: Stands for "list open files." It is a command-line utility that lists info
 11. cd repo
 
 12. sudo docker-compose up --build
+
+
+
+
+1. open powershell > ssh -i Downloads/ssh-key.key ubuntu@152.67.1.157
+
+to delete
+rm -r tews_crm

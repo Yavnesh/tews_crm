@@ -1,3 +1,23 @@
 Issues to be resolved
 
 1. Turning off and on periodic tasks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Some common issues 
+1. The `response.parts` quick accessor only works for a single candidate, but none were returned. Check the `response.prompt_feedback` to see if the prompt was blocked.

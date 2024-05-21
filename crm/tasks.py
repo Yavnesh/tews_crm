@@ -102,31 +102,31 @@ def fetch_trends_task():
 @shared_task
 def fetch_trends_realtime_task():
     logger.warning("Fetch Trends Real Time Task Started")
-    try:
-        pytrends = TrendReq(hl='en-US', tz=360)
-        logger.warning("Connected to pytrends")
+#     try:
+#         pytrends = TrendReq(hl='en-US', tz=360)
+#         logger.warning("Connected to pytrends")
 
-        trending_list = pytrends.realtime_trending_searches(pn='US')['entityNames'].tolist()
+#         trending_list = pytrends.realtime_trending_searches(pn='US')['entityNames'].tolist()
         
-        for item in trending_list:
-            logger.warning("Processing topic: %s", item)
-            result = " ".join(item)
-            if not Trending.objects.filter(topic=result).exists():
-                trending_object = Trending(
-                    topic=result,
-                    related_topics_rising=json.dumps([]),
-                    related_topics_top=json.dumps([]),
-                    related_query_rising=json.dumps([]),
-                    related_query_top=json.dumps([]),
-                    source="Real Time Trends", 
-                    status="Saved"
-                )
-                trending_object.save()
-                logger.warning(f'Table Saved for topic {result}')
+#         for item in trending_list:
+#             logger.warning("Processing topic: %s", item)
+#             result = " ".join(item)
+#             if not Trending.objects.filter(topic=result).exists():
+#                 trending_object = Trending(
+#                     topic=result,
+#                     related_topics_rising=json.dumps([]),
+#                     related_topics_top=json.dumps([]),
+#                     related_query_rising=json.dumps([]),
+#                     related_query_top=json.dumps([]),
+#                     source="Real Time Trends", 
+#                     status="Saved"
+#                 )
+#                 trending_object.save()
+#                 logger.warning(f'Table Saved for topic {result}')
 
-        logger.warning("Fetch Trends Real Time Task Ended")
-    except Exception as e:
-        logger.warning(f'Exception in fetch_trends_realtime_task: {e}')
+    #     logger.warning("Fetch Trends Real Time Task Ended")
+    # except Exception as e:
+    #     logger.warning(f'Exception in fetch_trends_realtime_task: {e}')
 
 @logger.catch
 @shared_task
@@ -453,6 +453,8 @@ def generate_image_task():
     logger.info("Generate Image Task Started")
     try:
         post_object = Post.objects.filter(status="ImageGenReady").order_by('id').first()
+        post_object.status = "In Process"
+        post_object.save()
         # repetition_count(post_object)
         if post_object:
             logger.info(f"Processing post with ID: {post_object.id}")
@@ -496,15 +498,10 @@ def generate_meta_info_task():
             # Fetch the related trending object
             trending_object = Trending.objects.get(id=post_object.post_id)
 
-            # Parse the related topics and queries from JSON
-            related_topics_rising = json.loads(trending_object.related_topics_rising)
-            related_topics_top = json.loads(trending_object.related_topics_top)
-            related_query_rising = json.loads(trending_object.related_query_rising)
-            related_query_top = json.loads(trending_object.related_query_top)
-
+            # Parse
             # Combine related topics and queries
-            related_topics = related_topics_rising + related_topics_top
-            related_query = related_query_rising + related_query_top
+            related_topics = json.loads(trending_object.related_topics_rising) + json.loads(trending_object.related_topics_top)
+            related_query = json.loads(trending_object.related_query_rising) + json.loads(trending_object.related_query_top)
 
             # Generate meta information
             meta = generate_meta_info(related_topics, related_query, post_object.content)
@@ -574,54 +571,65 @@ def regenerate_content_task(id):
     logger.warning("Regenerate Content Task Started")
     try:
         post_object = Post.objects.get(post_id = id)
-        scrape_object = Scrape.objects.get(trending_id = id)
-        logger.warning("Regenerate Content Task Working")
-        content = [item for item in scrape_object.title] #+ [item for item in scrape_object.content]
-        generate_post_content_info = generate_content_info(content)
-        category = []
-        subcategory = []
-        tags = []
-        category = split_text(generate_post_content_info, "Category", "Sub Category")
-        subcategory = split_text(generate_post_content_info, "Sub Category", "Tags")
-        tags = split_text(generate_post_content_info, "Tags", None)
-
-        topics_object = Trending.objects.get(id = post_object.post_id)
         
+        topics_object = Trending.objects.get(id= id)
+        scrape_object = Scrape.objects.get(trending_id = id)
+        
+        logger.warning("Regenerate Content Task Working")
+
         related_topic = json.loads(topics_object.related_topics_rising) + json.loads(topics_object.related_topics_top)
         related_query = json.loads(topics_object.related_query_rising) + json.loads(topics_object.related_query_top)
         
-        generate_post_content, author_name = generate_content(json.loads(topics_object.topic), content, related_topic, related_query, category)
-        questions_list = []
-        
-        questions_list = generate_content_cta(generate_post_content)
-        
-        cleaned_heading = []
-        cleaned_subheading = []
-        cleaned_content = []
-        cleaned_conclusion = []
-        cleaned_heading = split_text(generate_post_content, "Heading", "Introduction")
-        cleaned_subheading = split_text(generate_post_content, "Introduction", "Body")
-        cleaned_content = split_text(generate_post_content, "Body", "Conclusion")
-        cleaned_conclusion = split_text(generate_post_content, "Conclusion", None)
-        
-        if cleaned_heading == "" or cleaned_subheading == "" or cleaned_content == "" or cleaned_conclusion == "":
-            data = {'category': category, 'subcategory' : subcategory, 'tags' : tags, 'title': 'none', 'subtitle': 'none', 'content': 'none', 'conclusion': 'none', 'author': author_name, 'status' : 'Content Issue'}
+        content = json.loads(post_object.content)
+
+        generate_post_content, author_name = generate_content(
+            topics_object.topic,
+            scrape_object.short_content,
+            content,
+            related_topic,
+            related_query,
+            json.loads(post_object.category)
+        )
+        if generate_post_content != "":
+            questions_list = generate_content_cta(generate_post_content)
+
+            cleaned_heading = split_text(generate_post_content, "Heading", "Introduction")
+            cleaned_subheading = split_text(generate_post_content, "Introduction", "Body")
+            cleaned_content = split_text(generate_post_content, "Body", "Conclusion")
+            cleaned_conclusion = split_text(generate_post_content, "Conclusion", None)
+
+            if not all([cleaned_heading, cleaned_subheading, cleaned_content, cleaned_conclusion]):
+                data = {
+                    'title': 'none',
+                    'subtitle': 'none',
+                    'content': 'none',
+                    'conclusion': 'none',
+                    'author': author_name,
+                    'status': 'Content Issue'
+                }
+            else:
+                data = {
+                    'title': json.dumps(cleaned_heading),
+                    'subtitle': json.dumps(cleaned_subheading),
+                    'content': json.dumps(cleaned_content),
+                    'conclusion': json.dumps(cleaned_conclusion),
+                    'author': author_name,
+                    'status': 'Draft',
+                    'survey': questions_list
+                }
             for key, value in data.items():
                 if hasattr(post_object, key):
                     setattr(post_object, key, value)
             post_object.save()
         else:
-            data = {'category': json.dumps(category), 'subcategory' : json.dumps(subcategory), 'tags' : json.dumps(tags), 'title': json.dumps(cleaned_heading), 'subtitle': json.dumps(cleaned_subheading), 'content': json.dumps(cleaned_content), 'conclusion': json.dumps(cleaned_conclusion), 'author': author_name, 'status' : 'Content Regenerated', 'survey' : json.dumps(questions_list)}
-            for key, value in data.items():
-                if hasattr(post_object, key):
-                    setattr(post_object, key, value)
+            post_object.status = "Blocked"
             post_object.save()
-
+        logger.warning("Re Generate Content Task Ended")
         return None
     except Exception as e:
     #     # Handle any exceptions that may occur
         logger.warning(f'Regenerate Content Task Working {e}')
-        return None
+
      
 @logger.catch
 @shared_task    
@@ -629,18 +637,19 @@ def regenerate_image_task(id):
     logger.warning("Regenerate Image Task Working")
     try:
         post_object = Post.objects.get(post_id=id)
-
-        image_prompt_content = [item for item in json.loads(post_object.content)] + [item for item in json.loads(post_object.conclusion)]
-        image_prompt = []
+        
+        image_prompt_content = (
+                [item for item in json.loads(post_object.content)] +
+                [item for item in json.loads(post_object.conclusion)]
+            )
+        
         image_prompt = generate_image_prompt(image_prompt_content)
-        
-        crm_path, image_path, base64_image = asyncio.run(generate_image_api(json.loads(post_object.image_prompt), post_object.id))
-        image_data = []
-        image_data.append(image_prompt)
-        image_data.append(str(crm_path))
-        image_data.append(str(image_path))
-        image_data.append(base64_image)
-        
+        post_object.image_prompt = image_prompt
+                
+        crm_path, image_path, base64_image = asyncio.run(generate_image_api(post_object.image_prompt, post_object.id))
+
+        image_data = [post_object.image_prompt, str(crm_path), str(image_path), base64_image]
+            
         all_image_datas = []
         
         all_image_datas = json.loads(post_object.all_image_data)
@@ -648,18 +657,16 @@ def regenerate_image_task(id):
         all_image_data = json.dumps(all_image_datas)
         
 
-        data = {'image_crm' : crm_path, 'image_path' : image_path, 'all_image_data' : json.dumps(all_image_data), 'image_data' : base64_image,'status' : 'Draft'}
+        data = {'image_crm' : crm_path, 'image_path' : image_path, 'all_image_data' : all_image_data, 'image_data' : base64_image,'status' : 'Draft'}
 
         for key, value in data.items():
             if hasattr(post_object, key):
                 setattr(post_object, key, value)
         post_object.save()
         logger.warning("Regenerate Image Task Ended")
-        return None
     except Exception as e:
     #     # Handle any exceptions that may occur
         logger.warning(f'Regenerate Image Task Exception {e}')
-        return None
 
 ################################## Functions ####################################
 

@@ -44,6 +44,7 @@ def crm_dashboard(request):
         'content_issue': Post.objects.filter(status='Content Issue').count(),
         'post_content': Post.objects.filter(status='Post Content').count(),
         'image_gen_ready': Post.objects.filter(status='ImageGenReady').count(),
+        'image_in_process': Post.objects.filter(status='In Process').count(),
         'meta_ready': Post.objects.filter(status='Meta Ready').count(),
         'draft': Post.objects.filter(status='Draft').count(),
         'sent': Post.objects.filter(status='Sent').count(),
@@ -62,8 +63,9 @@ def crm_dashboard(request):
         'fetch_trends_task_periodic': PeriodicTask.objects.get(name='fetch_trends_task_periodic').enabled,
         'fetch_trends_realtime_task_periodic': PeriodicTask.objects.get(name='fetch_trends_realtime_task_periodic').enabled,
         'fetch_article_data_task_periodic': PeriodicTask.objects.get(name='fetch_article_data_task_periodic').enabled,
-        
+        'turn_off_all': PeriodicTask.objects.get(name='celery.backend_cleanup').enabled,
     }
+    # PeriodicTask.objects.get(name='fetch_trends_realtime_task_periodic').enabled = False
     # trending_topic_count = Trending.objects.filter(status='Draft').count()
     context = {'title': 'Index', 'success': "this is success", 'task_object': task_object, 'post_details': post_details, 'scrape_details': scrape_details, 'trending_details': trending_details,}
     logger.warning("THis is jaust a check ")
@@ -79,6 +81,28 @@ def view_topics(request):
     return render(request, "dashboard/viewtopic.html", context)
 
 @csrf_exempt
+def add_topics(request):
+    context = {'title': 'Topic', 'success': "this is success"}
+    return render(request, "dashboard/add_topics.html", context)
+
+@csrf_exempt
+def save_topics(request):
+    if request.method == 'POST':
+        topics_input = request.POST.get('value')
+        try:
+            topics_list = eval(topics_input)  # Convert string representation of list to actual list
+            if isinstance(topics_list, list):
+                for topic_name in topics_list:
+                    if not Trending.objects.filter(topic=topic_name):
+                        Trending.objects.create(topic=topic_name,status="Saved",source="Manual")
+            context = {'title': 'Topic', 'success': 'this is success'}
+            return JsonResponse(context)
+              # Redirect to a success page or another view
+        except (SyntaxError, ValueError):
+            # Handle the case where eval fails to parse the input correctly
+            pass
+
+@csrf_exempt
 def view_scrape(request):
     #View function for rendering scraped posts.
     id_value = request.GET.get('id')
@@ -92,8 +116,12 @@ def view_post(request):
     #View function for rendering scraped posts.
     id_value = request.GET.get('id')
     all_posts = Post.objects.get(id=id_value)
+    previous_post = Post.objects.filter(id__lt=id_value).order_by('-id').first()
+    previous_id = previous_post.id
+    next_post = Post.objects.filter(id__gt=id_value).order_by('id').first()
+    next_id = next_post.id
     # print("--------all scraped ----------",all_scraped, id_value)
-    context = {'title': 'Posts', 'success': "this is success", 'all_posts': all_posts}
+    context = {'title': 'Posts', 'success': "this is success", 'all_posts': all_posts, 'previous_id': previous_id, 'next_id': next_id}
     return render(request, "dashboard/viewpost.html", context)
 
 @csrf_exempt
@@ -148,35 +176,27 @@ def trend(request):
     # return render(request, "dashboard/index.html")
 
 @csrf_exempt
-def previous_post(request):
-    if request.method == 'POST':
-        id_value = request.POST.get('value')
-        all_posts = Post.objects.get(post_id = id_value)
-        id_value = int(all_posts.id)
-        id_value = id_value + 1
-        all_posts = Post.objects.get(id = id_value)
-        context = {'title': 'Posts', 'success': "this is success", 'all_posts': all_posts}
-    return render(request, "dashboard/viewpost.html", context)
-
-@csrf_exempt
-def next_post(request):
-    if request.method == 'POST':
-        id_value = request.POST.get('value')
-        all_posts = Post.objects.get(post_id = id_value)
-        id_value = int(all_posts.id)
-        id_value = id_value + 1
-        all_posts = Post.objects.get(id = id_value)
-        context = {'title': 'Posts', 'success': "this is success", 'all_posts': all_posts}
-    return render(request, "dashboard/viewpost.html", context)
-
-@csrf_exempt
 def toggle_task(request):
     if request.method == 'POST':
         task_name = request.POST.get('value')
         try:
-            task = PeriodicTask.objects.get(name=task_name)
-            task.enabled = not task.enabled
-            task.save()
-            return JsonResponse({'status': 'success', 'message': f'Task {"resumed" if task.enabled else "paused"} successfully.', 'enabled': task.enabled})
+            if task_name == "turn_off_all":
+                task = PeriodicTask.objects.get(name="celery.backend_cleanup")
+                if task.enabled == False:
+                    tasks = PeriodicTask.objects.all()
+                    for item in tasks:
+                        item.enabled = True
+                        item.save()
+                else:
+                    tasks = PeriodicTask.objects.all()
+                    for item in tasks:
+                        item.enabled = False
+                        item.save()
+                return JsonResponse({'status': 'success', 'message': f'All Tasks {"resumed" if task.enabled else "paused"} successfully.', 'enabled': task.enabled})
+            else:
+                task = PeriodicTask.objects.get(name=task_name)
+                task.enabled = not task.enabled
+                task.save()
+                return JsonResponse({'status': 'success', 'message': f'Task {"resumed" if task.enabled else "paused"} successfully.', 'enabled': task.enabled})
         except PeriodicTask.DoesNotExist:
             return JsonResponse({'status': 'error', 'message': 'Task does not exist.'})

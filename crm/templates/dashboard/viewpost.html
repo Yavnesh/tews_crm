@@ -161,12 +161,15 @@
     <hr class="dark horizontal">
     <div class="text-center">
       <button type="button" class="btn btn-sm bg-gradient-primary mb-0 previous_post" id="{{ all_posts.post_id }}" data-value="{{ all_posts.post_id }}">
-      Previous Post
+        <a class="nav-link text-white" href="/view_post/?id={{ previous_id }}">
+          Previous Post
+        </a>
       <i class="bi bi-download"></i>
       </button>
       <button type="button" class="btn btn-sm bg-gradient-primary mb-0 next_post" id="{{ all_posts.post_id }}" data-value="{{ all_posts.post_id }}">
-        Next Post
-        <i class="bi bi-download"></i>
+        <a class="nav-link text-white" href="/view_post/?id={{ next_id }}">
+          Next Post
+        </a>
       </button>
     </div>
     </div>
@@ -251,59 +254,6 @@
 
                 success: function (data, status, xhr) {
                   $('regenerate_image').prop('disabled', true);
-                },
-                complete: function () {
-                  // Hide 
-                },
-            });
-        
-      });
-
-
-      $('.previous_post').click(function(event){
-          console.log("<------previous_post-button clicked -------->");
-          event.preventDefault();
-
-        var buttonId = $(this).data('value');
-        console.log("<------scrape-button buttonId -------->",buttonId);
-          var formData = new FormData();
-          formData.append("value", buttonId)
-        $.ajax({
-                type: 'POST',
-                url: '/previous_post/',
-                data: formData, // Send the ID of the button in the POST request
-                cache: false,
-                processData: false, // essential
-                contentType: false, // essential, application/pdf doesn't work.
-
-                success: function (data, status, xhr) {
-                  $('previous_post').prop('disabled', true);
-                },
-                complete: function () {
-                  // Hide 
-                },
-            });
-        
-      });
-
-      $('.next_post').click(function(event){
-          console.log("<------next_post-button clicked -------->");
-          event.preventDefault();
-
-        var buttonId = $(this).data('value');
-        console.log("<------scrape-button buttonId -------->",buttonId);
-          var formData = new FormData();
-          formData.append("value", buttonId)
-        $.ajax({
-                type: 'POST',
-                url: '/next_post/',
-                data: formData, // Send the ID of the button in the POST request
-                cache: false,
-                processData: false, // essential
-                contentType: false, // essential, application/pdf doesn't work.
-
-                success: function (data, status, xhr) {
-                  $('previous_post').prop('disabled', true);
                 },
                 complete: function () {
                   // Hide 

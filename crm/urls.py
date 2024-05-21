@@ -16,11 +16,11 @@ urlpatterns = [
     path('regenerate_image/', views.regenerate_image, name='regenerate_image'),
     path('scrape/', views.scrape, name='scrape'),
     path('posts/', views.posts, name='posts'),
-    path('previous_post/', views.previous_post, name='previous_post'),
-    path('next_post/', views.next_post, name='next_post'),
+    # path('previous_post/', views.previous_post, name='previous_post'),
+    path('save_topics/', views.save_topics, name='save_topics'),
 
     path('toggle_task/', views.toggle_task, name='toggle_task'),
-    # path('resume_task/', views.resume_task, name='resume_task'),
+    path('add_topics/', views.add_topics, name='add_topics'),
     # url(r'^student/dashboard/$', views.dashboard, name='Dashboard'),
     # url(r'^student/classroom/$', views.classroom, name='Classroom'),
 ]
