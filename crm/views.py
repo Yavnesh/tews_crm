@@ -29,6 +29,13 @@ def crm_dashboard(request):
         'realtime_ready': Trending.objects.filter(source='Real Time Trends', status='Content Ready').count(),
         'realtime_scraped': Trending.objects.filter(source='Real Time Trends', status='Scraped').count(),
         'realtime_saved': Trending.objects.filter(source='Real Time Trends', status='Saved').count(),
+
+
+        'manual_total': Trending.objects.filter(source='Manual Trends').count(),
+        'manual_blocked': Trending.objects.filter(source='Manual Trends', status='Blocked').count(),
+        'manual_ready': Trending.objects.filter(source='Manual Trends', status='Content Ready').count(),
+        'manual_scraped': Trending.objects.filter(source='Manual Trends', status='Scraped').count(),
+        'manual_saved': Trending.objects.filter(source='Manual Trends', status='Saved').count(),
     }
     scrape_details = {
         'total': Scrape.objects.all().count(),
@@ -94,7 +101,7 @@ def save_topics(request):
             if isinstance(topics_list, list):
                 for topic_name in topics_list:
                     if not Trending.objects.filter(topic=topic_name):
-                        Trending.objects.create(topic=topic_name,status="Saved",source="Manual")
+                        Trending.objects.create(topic=topic_name,status="Saved",source="Manual Trends")
             context = {'title': 'Topic', 'success': 'this is success'}
             return JsonResponse(context)
               # Redirect to a success page or another view
