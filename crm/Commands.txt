@@ -459,3 +459,9 @@ lsof: Stands for "list open files." It is a command-line utility that lists info
 
 to delete
 rm -r tews_crm
+
+
+check firewall command
+sudo ufw status
+
+ssh -i Downloads/ssh-key.key ubuntu@144.24.120.69

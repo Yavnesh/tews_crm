@@ -218,6 +218,9 @@ def split_text(text, start_word, end_word):
         # Get the text between the start and end words
         extracted_text = match.group(1).strip()
         # print("extracted_text,,,,,,,,,,,,,,,,,",extracted_text)
+        # if start_word == "Image Prompt 1:" or start_word == "Image Prompt 2:" or start_word == "Image Prompt 3:":
+        #     return match
+        # el
         if start_word == "Tags":
             items = [item.strip().replace(":", "").replace("*", "").replace("#", "") for item in extracted_text.split(',')]
             tags = []
@@ -269,7 +272,7 @@ def generate_image_prompt_one(merged_content):
             b) Visual Style and Setting: Try to understand the overall tone and setting described in the article. Is it a realistic scene, a fantasy world, or something more abstract?
             c) Action and Details: Pay attention to any actions or specific details that would be visually interesting in an image.
 
-        For the above article, think of 5 very simple ideas to describe a scene for image generation.
+        For the above article, think of 10 very simple ideas to describe a scene for image generation.
         Make sure the ideas are very relevant to the content of article, Artice reading Audience is attracted to the scene, loves the image ideas and are compelled to click on that image. 
         The intended purpose is to show these image ideas on cover photo of the article i shared with you.
         The target audience is of US location and the target audience loves to read articles and blog posts and are compelled to open a article by looking at the image.
@@ -390,9 +393,15 @@ def generate_image_prompt_three():
 
 def generate_image_prompt_four():
     prompt = """
-        Select the top ranked image prompt which can be used. 
+        Select the top 3 ranked image prompt which can be used. 
         Please refine the prompt to get very clear and professional cover photo.
         Also Make sure that the decription of the prompt is so crystal clear and full of information that it does not generate any image which is distorted or unclear to the audience.
+        Give me 3 Image prompt
+        Output format -
+        Image Prompt 1: Image prompt one
+        Image Prompt 2: Image prompt two
+        Image Prompt 3: Image prompt three
+        
                 """
     return prompt
 
@@ -632,6 +641,7 @@ def generate_content_prompt_three():
         4. If any additional details are there from previous output then if they are relavant then add that to the article in body section
 
         5. Give me result in 4 parts - heading, intro, body, conclusion.
+        Note : Body section should not start with a subheading, there must be atleast 2-3 lines before any subheading.
         Follow this Format
         Heading : the heading goes here 
         Introduction : here goes introduction 

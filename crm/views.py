@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from crm.models import Scrape, Post, Trending
 from django.http import JsonResponse
 from crm.tasks import regenerate_content_task, regenerate_image_task, fetch_trends_realtime_task
-import requests
+import requests, json
 from django_celery_beat.models import PeriodicTask
 ##############  Loguru  #######################
 from loguru import logger
@@ -121,14 +121,26 @@ def view_scrape(request):
 @csrf_exempt
 def view_post(request):
     #View function for rendering scraped posts.
+    first_post = Post.objects.all().order_by('id').first()
+    last_post = Post.objects.all().order_by('-id').first()
     id_value = request.GET.get('id')
+    if id_value==None:
+        id_value = last_post.id
+    if str(first_post.id) == str(id_value):
+        previous_post = Post.objects.all().order_by('-id').first()
+    else:
+        previous_post = Post.objects.filter(id__lt=id_value).order_by('-id').first()
+    if str(last_post.id) == str(id_value):
+        next_post = Post.objects.all().order_by('id').first()
+    else:
+        next_post = Post.objects.filter(id__gt=id_value).order_by('id').first()
     all_posts = Post.objects.get(id=id_value)
-    previous_post = Post.objects.filter(id__lt=id_value).order_by('-id').first()
+    all_images = json.loads(Post.objects.get(id=id_value).image_crm)
     previous_id = previous_post.id
-    next_post = Post.objects.filter(id__gt=id_value).order_by('id').first()
     next_id = next_post.id
+    
     # print("--------all scraped ----------",all_scraped, id_value)
-    context = {'title': 'Posts', 'success': "this is success", 'all_posts': all_posts, 'previous_id': previous_id, 'next_id': next_id}
+    context = {'title': 'Posts', 'success': "this is success", 'all_images': all_images, 'all_posts': all_posts, 'previous_id': previous_id, 'next_id': next_id}
     return render(request, "dashboard/viewpost.html", context)
 
 @csrf_exempt
@@ -165,12 +177,16 @@ def regenerate_content(request):
 @csrf_exempt
 def regenerate_image(request):
     if request.method == 'POST':
+        count = request.POST.get('id')
         id_value = request.POST.get('value')
+        print(count,id_value)
         print(id_value,"id76767676")
-        regenerate_image_task.apply_async(args=[id_value])
-        all_posts = Post.objects.get(post_id=id_value)
-        context = {'title': 'Index', 'success': "this is success", 'all_posts': all_posts}
-    return render(request, "dashboard/viewpost.html", context)
+        all_posts = Post.objects.get(id=count)
+        regenerate_image_task(count, id_value)
+        # regenerate_image_task.apply_async(args=[count, id_value])
+        
+    #     context = {'title': 'Index', 'success': "this is success", 'all_posts': all_posts, 'id' : count}
+    # return JsonResponse({'title': 'Index', 'success': "this is success", 'all_posts': all_posts, 'id' : count})
 
 @csrf_exempt
 def trend(request):

@@ -1,7 +1,7 @@
 import os, json,requests
 from crm.models import Scrape, Post, TwitterPost, Trending
 from crm.clients.genai_client import generate_image_prompt, generate_content_info, generate_content, split_text, generate_content_cta,generate_meta_info, generate_short_content, generate_trend_topics, generate_twitter_post
-from crm.clients.horde_client import generate_image_api
+from crm.clients.horde_client import generate_image_api, regenerate_image_api
 from crm.clients.twitter_client import get_twitter_client
 ##############  Celery  #######################
 from celery import shared_task
@@ -335,9 +335,10 @@ def generate_content_info_task():
                     tags=json.dumps(tags),
                     author="NoNE",
                     status="Pre Content",
-                    image_prompt="NoNE",
-                    image_path="NoNE",
-                    image_data="NoNE"
+                    image_prompt=[],
+                    image_path=[],
+                    image_data=[],
+                    all_image_data=[]
                 )
                 post_object.save()
                 scrape_object.status = "Joined"
@@ -438,10 +439,24 @@ def generate_image_prompt_task():
                 [item for item in json.loads(post_object.content)] +
                 [item for item in json.loads(post_object.conclusion)]
             )
+            image_prompts = []
             image_prompt = generate_image_prompt(image_prompt_content)
-            post_object.image_prompt = image_prompt
-            post_object.status = 'ImageGenReady'
-            post_object.save()
+            print("image_prompt",image_prompt)
+            image_prompt1 = split_text(image_prompt, "Image Prompt 1:", "Image Prompt 2:")
+            image_prompt2 = split_text(image_prompt, "Image Prompt 2:", "Image Prompt 3:")
+            image_prompt3 = split_text(image_prompt, "Image Prompt 3:", None)
+            print("Check images")
+            image_prompts.append(image_prompt1)
+            image_prompts.append(image_prompt2)
+            image_prompts.append(image_prompt3)
+            print("Check image prompts")
+            if image_prompt1!="null" and image_prompt2!="null" and image_prompt3!="null": 
+                post_object.image_prompt = json.dumps(image_prompts)
+                post_object.status = 'ImageGenReady'
+                post_object.save()
+            else:
+                post_object.status = 'Content Issue'
+                post_object.save()
             logger.warning("Generate Image Prompt Task Completed")
         else:
             logger.info("No Post object with status 'Post Content' found.")
@@ -455,35 +470,17 @@ def generate_image_task():
     """Generate an image for a post with status 'ImageGenReady'."""
     logger.info("Generate Image Task Started")
     try:
-        post_object = Post.objects.filter(status="ImageGenReady").order_by('id').first()
-        post_object.status = "In Process"
-        post_object.save()
-        # repetition_count(post_object)
-        if post_object:
-            logger.info(f"Processing post with ID: {post_object.id}")
-
-            crm_path, image_path, base64_image = asyncio.run(generate_image_api(post_object.image_prompt, post_object.id))
-
-            image_data = [post_object.image_prompt, str(crm_path), str(image_path), base64_image]
-            all_image_datas = [image_data]
-            all_image_data = json.dumps(all_image_datas)
-
-            data = {
-                'image_crm': crm_path,
-                'image_path': image_path,
-                'all_image_data': all_image_data,
-                'image_data': base64_image,
-                'status': 'Meta Ready'
-            }
-
-            for key, value in data.items():
-                if hasattr(post_object, key):
-                    setattr(post_object, key, value)
-            post_object.save()
-            
-            logger.info("Generate Image Task Ended")
+        if Post.objects.filter(status="ImageGenReady2").order_by('id').first():
+            ImageGenReady_selection("ImageGenReady2")
         else:
-            logger.warning("No post found with status 'ImageGenReady'")
+            if Post.objects.filter(status="ImageGenReady1").order_by('id').first():
+                ImageGenReady_selection("ImageGenReady1")
+            else:
+                if Post.objects.filter(status="ImageGenReady").order_by('id').first():
+                    ImageGenReady_selection("ImageGenReady")
+                else:
+                    logger.warning("No post found with status 'ImageGenReady'")
+        logger.info("Generate Image Task Ended")    
     except Exception as e:
         logger.error(f"Generate Image Task Exception: {e}")
 
@@ -632,36 +629,39 @@ def regenerate_content_task(id):
      
 @logger.catch
 @shared_task    
-def regenerate_image_task(id):
+def regenerate_image_task(id,count):
     logger.warning("Regenerate Image Task Working")
     try:
-        post_object = Post.objects.get(post_id=id)
-        
-        image_prompt_content = (
-                [item for item in json.loads(post_object.content)] +
-                [item for item in json.loads(post_object.conclusion)]
-            )
-        
-        image_prompt = generate_image_prompt(image_prompt_content)
-        post_object.image_prompt = image_prompt
-                
-        crm_path, image_path, base64_image = asyncio.run(generate_image_api(post_object.image_prompt, post_object.id))
-
-        image_data = [post_object.image_prompt, str(crm_path), str(image_path), base64_image]
+        print(id,"asdfghj",count)
+        post_object = Post.objects.get(id=id)
+        image_prompt = json.loads(post_object.image_prompt)
+        image_data = json.loads(post_object.image_data)
+        crm_path = json.loads(post_object.image_crm)
+        image_path = json.loads(post_object.image_path)
+        recrm_path, reimage_path, rebase64_image, recensored = asyncio.run(regenerate_image_api(image_prompt[count], post_object.id, image_data[count]))
+        if not recensored:
+            crm_path[count] = recrm_path
+            image_path[count] = reimage_path
+            image_data[count] = rebase64_image
+            image_datas = [image_prompt[count], str(recrm_path), str(reimage_path), rebase64_image]
+            all_image_datas = json.loads(post_object.all_image_data)
+            all_image_datas[count] = image_datas
             
-        all_image_datas = []
-        
-        all_image_datas = json.loads(post_object.all_image_data)
-        all_image_datas.append(image_data)
-        all_image_data = json.dumps(all_image_datas)
-        
-
-        data = {'image_crm' : crm_path, 'image_path' : image_path, 'all_image_data' : all_image_data, 'image_data' : base64_image,'status' : 'Draft'}
-
-        for key, value in data.items():
-            if hasattr(post_object, key):
-                setattr(post_object, key, value)
+            data = {
+                        'image_crm': json.dumps(crm_path),
+                        'image_path': json.dumps(image_path),
+                        'all_image_data': json.dumps(all_image_datas),
+                        'image_data': json.dumps(image_data),
+                        'status': "Draft"
+                    }
+            for key, value in data.items():
+                if hasattr(post_object, key):
+                    setattr(post_object, key, value)
+        else:
+            post_object.status = "Content Issue"
         post_object.save()
+
+
         logger.warning("Regenerate Image Task Ended")
     except Exception as e:
     #     # Handle any exceptions that may occur
@@ -677,6 +677,60 @@ def regenerate_image_task(id):
 #         rep = rep + 1
 #         object.rep_count = rep
 #     object.save()
+
+def ImageGenReady_selection(status):
+    if status=="ImageGenReady":
+        post_object = Post.objects.filter(status="ImageGenReady").order_by('id').first()
+        post_object.status = "In Process ImageGenReady"
+        status_save = "ImageGenReady1"
+        image_prompts = json.loads(post_object.image_prompt)
+        image_prompt = image_prompts[0]
+        img_count = 0
+    elif status=="ImageGenReady1":
+        post_object = Post.objects.filter(status="ImageGenReady1").order_by('id').first()
+        post_object.status = "In Process ImageGenReady1"
+        status_save = "ImageGenReady2"
+        image_prompts = json.loads(post_object.image_prompt)
+        image_prompt = image_prompts[1]
+        img_count = 1
+    elif status=="ImageGenReady2":
+        post_object = Post.objects.filter(status="ImageGenReady2").order_by('id').first()
+        post_object.status = "In Process ImageGenReady2"
+        status_save = "Meta Ready"
+        image_prompts = json.loads(post_object.image_prompt)
+        image_prompt = image_prompts[2]
+        img_count = 2
+    post_object.save()
+    print("im",image_prompt)
+    logger.info(f"Processing post with ID: {post_object.id} and current status : {post_object.status} and to be status : {status_save}")
+
+    crm_path, image_path, base64_image, censored = asyncio.run(generate_image_api(image_prompt, post_object.id))
+    if not censored:
+        crm_paths = json.loads(post_object.image_crm)
+        crm_paths.append(str(crm_path))
+        image_paths = json.loads(post_object.image_path)
+        image_paths.append(str(image_path))
+        base64_images = json.loads(post_object.image_data)
+        base64_images.append(base64_image)
+
+        image_data = [image_prompt[0], str(crm_path), str(image_path), base64_image]
+        all_image_datas = json.loads(post_object.all_image_data)
+        all_image_datas.append(image_data)
+        
+        data = {
+                    'image_crm': json.dumps(crm_paths),
+                    'image_path': json.dumps(image_paths),
+                    'all_image_data': json.dumps(all_image_datas),
+                    'image_data': json.dumps(base64_images),
+                    'status': status_save
+                }
+        for key, value in data.items():
+            if hasattr(post_object, key):
+                setattr(post_object, key, value)
+    else:
+        post_object.status = "Content Issue"
+    post_object.save()
+
 
 ##################################  Twitter Post Functions ####################################
 
